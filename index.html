@@ -92,6 +92,27 @@ td.primary { color:var(--text); font-weight:500; }
 .modal-body { padding:22px; }
 .modal-footer { padding:14px 22px; border-top:1px solid var(--border); display:flex; gap:8px; justify-content:flex-end; }
 ::-webkit-scrollbar { width:3px; } ::-webkit-scrollbar-track { background:transparent; } ::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+.chat-wrap { display:flex; gap:16px; height:calc(100vh - 52px - 96px); }
+.chat-agents-list { width:180px; flex-shrink:0; overflow-y:auto; }
+.chat-agent-btn { width:100%; text-align:left; padding:9px 12px; background:var(--surface); border:1px solid var(--border); border-radius:8px; color:var(--text2); cursor:pointer; margin-bottom:6px; font-size:11px; transition:all 0.15s; display:flex; align-items:center; gap:8px; }
+.chat-agent-btn:hover { border-color:var(--accent); color:var(--text); }
+.chat-agent-btn.active { border-color:var(--accent); color:var(--accent); background:rgba(0,212,255,0.05); }
+.chat-main { flex:1; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.chat-hdr { padding:12px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.chat-hdr-name { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; }
+.chat-msgs { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+.cmsg-u { align-self:flex-end; max-width:75%; }
+.cmsg-a { align-self:flex-start; max-width:75%; }
+.cmsg-bubble-u { background:var(--accent); color:var(--bg); border-radius:12px 12px 2px 12px; padding:10px 14px; font-size:13px; line-height:1.5; }
+.cmsg-bubble-a { background:var(--surface2); border:1px solid var(--border); border-radius:12px 12px 12px 2px; padding:10px 14px; font-size:13px; line-height:1.5; color:var(--text); }
+.cmsg-time { font-size:9px; color:var(--text3); margin-top:3px; }
+.chat-input-row { padding:12px 16px; border-top:1px solid var(--border); display:flex; gap:8px; flex-shrink:0; }
+.chat-textarea { flex:1; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:9px 14px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px; outline:none; resize:none; height:40px; }
+.chat-textarea:focus { border-color:var(--accent); }
+.chat-send-btn { padding:9px 18px; background:var(--accent); border:none; border-radius:8px; color:var(--bg); font-weight:700; cursor:pointer; font-size:12px; font-family:'Syne',sans-serif; }
+.chat-send-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.chat-typing { align-self:flex-start; background:var(--surface2); border:1px solid var(--border); border-radius:12px; padding:8px 14px; font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; }
+.api-key-banner { background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--accent4); margin-bottom:12px; }
 .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
 .agent-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
 .agent-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px; }
@@ -159,6 +180,8 @@ td.primary { color:var(--text); font-weight:500; }
       <div class="sidebar-item" onclick="showPage('tasks',this)"><span class="sidebar-icon">✅</span>Task</div>
       <div class="sidebar-section">Sistema</div>
       <div class="sidebar-item" onclick="showPage('config',this)"><span class="sidebar-icon">⚙️</span>Configurazione</div>
+      <div class="sidebar-section">AI</div>
+      <div class="sidebar-item" onclick="showPage('chat',this)"><span class="sidebar-icon">💬</span>AI Chat</div>
     </div>
     <div class="content">
 
@@ -252,6 +275,28 @@ td.primary { color:var(--text); font-weight:500; }
           <div class="config-item"><div><div class="config-label">Nuova Password CEO</div><div class="config-sub">Cambia la password di accesso</div></div><input class="config-input" id="cfg-pass" type="password" placeholder="••••••••" oninput="saveConfig()"></div>
           <div style="margin-top:20px"><button class="btn btn-primary" onclick="reloadData();showNotif('✅ Salvato — dati ricaricati')">Salva e Ricarica</button></div>
         </div></div>
+      </div>
+
+      <div class="page" id="page-chat">
+        <div style="margin-bottom:14px;font-family:'Syne',sans-serif;font-size:18px;font-weight:800">💬 Chat con i tuoi Agenti AI</div>
+        <div id="chat-api-banner" class="api-key-banner" style="display:none">⚠️ Configura la <strong>ANTHROPIC_API_KEY</strong> nelle variabili d'ambiente Vercel per attivare gli agenti AI.</div>
+        <div class="chat-wrap">
+          <div class="chat-agents-list" id="chat-agents-list"></div>
+          <div class="chat-main">
+            <div class="chat-hdr">
+              <span id="chat-hdr-icon" style="font-size:20px">🎯</span>
+              <div>
+                <div class="chat-hdr-name" id="chat-hdr-name">Matteo — Prospecting</div>
+                <div style="font-size:10px;color:var(--text3)">Powered by Claude AI · claude-opus-4-6</div>
+              </div>
+            </div>
+            <div class="chat-msgs" id="chat-msgs"></div>
+            <div class="chat-input-row">
+              <textarea class="chat-textarea" id="chat-input" placeholder="Scrivi un messaggio..." onkeydown="chatKeydown(event)"></textarea>
+              <button class="chat-send-btn" id="chat-send-btn" onclick="sendChat()">Invia</button>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -377,6 +422,7 @@ function showPage(id, el) {
   if (id === 'quotes') loadQuotes();
   if (id === 'content') loadContent();
   if (id === 'tasks') loadTasks();
+  if (id === 'chat') initChat();
 }
 
 function openModal(id) { document.getElementById(id).classList.add('open'); }
@@ -498,6 +544,94 @@ async function addTask() {
 }
 
 function filterTable(id, v) { document.querySelectorAll(`#${id} tbody tr`).forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(v.toLowerCase())?'':'none';}); }
+
+// ── AI CHAT ──────────────────────────────────────────────────────────────────
+const CHAT_AGENTS = [
+  {id:'matteo', icon:'🎯', name:'Matteo — Prospecting', intro:'Ciao! Sono Matteo, il tuo agente di prospecting. Dimmi di quale settore o tipo di azienda sei interessato e trovo i prospect migliori per Creative Mess.'},
+  {id:'chiara', icon:'📧', name:'Chiara — Outreach',    intro:'Ciao! Sono Chiara. Vuoi che scriva una cold email o un messaggio LinkedIn per un prospect? Dimmi il nome dell\'azienda e il servizio da proporre.'},
+  {id:'andrea', icon:'📄', name:'Andrea — Preventivi',  intro:'Ciao! Sono Andrea. Descrivimi il progetto del cliente e ti preparo un preventivo dettagliato con prezzi e tempistiche.'},
+  {id:'federica',icon:'✍️',name:'Federica — Contenuti', intro:'Ciao! Sono Federica. Dimmi per quale cliente, che tipo di contenuto ti serve e il tono di voce. Ci penso io.'},
+  {id:'davide',  icon:'🔍', name:'Davide — SEO',         intro:'Ciao! Sono Davide. Hai domande su keyword, ottimizzazione on-page, SEO tecnico o local SEO? Dimmi.'},
+  {id:'alessia', icon:'📱', name:'Alessia — Ads',        intro:'Ciao! Sono Alessia. Parliamo di Google Ads, Meta Ads o LinkedIn Ads. Qual è la campagna che vuoi impostare?'},
+  {id:'giulia',  icon:'👥', name:'Giulia — Client Success', intro:'Ciao! Sono Giulia. Come posso aiutarti con i clienti attivi? Rinnovi, upsell, gestione problemi — sono qui.'},
+  {id:'riccardo',icon:'🧠', name:'Riccardo — Chief of Staff', intro:'Ciao! Sono Riccardo. Cosa vuoi ottimizzare nei processi interni di Creative Mess?'},
+  {id:'lorenzo', icon:'🔬', name:'Lorenzo — AI Innovation', intro:'Ciao! Sono Lorenzo. Parliamo di AI tools, automazioni, prompt engineering o come integrare l\'AI nei servizi dell\'agenzia.'},
+  {id:'ceo',     icon:'⚡', name:'Roberto — CEO',        intro:'Sono qui. Cosa ti serve a livello strategico per Creative Mess?'},
+];
+
+let chatAgent = 'matteo';
+let chatHistory = [];
+
+function initChat() {
+  const list = document.getElementById('chat-agents-list');
+  list.innerHTML = CHAT_AGENTS.map(a =>
+    `<button class="chat-agent-btn${a.id===chatAgent?' active':''}" onclick="selectChatAgent('${a.id}')">${a.icon} ${a.name.split('—')[0].trim()}</button>`
+  ).join('');
+  const ag = CHAT_AGENTS.find(a=>a.id===chatAgent);
+  renderChatIntro(ag);
+}
+
+function renderChatIntro(ag) {
+  document.getElementById('chat-hdr-icon').textContent = ag.icon;
+  document.getElementById('chat-hdr-name').textContent = ag.name;
+  const msgs = document.getElementById('chat-msgs');
+  msgs.innerHTML = `<div class="cmsg-a"><div class="cmsg-bubble-a">${ag.intro}</div></div>`;
+  chatHistory = [];
+}
+
+function selectChatAgent(id) {
+  chatAgent = id;
+  document.querySelectorAll('.chat-agent-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.chat-agent-btn').forEach(b => { if(b.textContent.trim().startsWith(CHAT_AGENTS.find(a=>a.id===id).icon)) b.classList.add('active'); });
+  const ag = CHAT_AGENTS.find(a=>a.id===id);
+  renderChatIntro(ag);
+}
+
+function chatKeydown(e) {
+  if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+}
+
+function chatTime() { return new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}); }
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  const msgs = document.getElementById('chat-msgs');
+  const btn = document.getElementById('chat-send-btn');
+
+  msgs.innerHTML += `<div class="cmsg-u"><div class="cmsg-bubble-u">${msg.replace(/</g,'&lt;')}</div><div class="cmsg-time" style="text-align:right">${chatTime()}</div></div>`;
+  input.value = '';
+  btn.disabled = true;
+  msgs.innerHTML += `<div class="chat-typing" id="chat-typing">⊙ Sto scrivendo...</div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+
+  chatHistory.push({role:'user', content:msg});
+
+  try {
+    const res = await fetch('/api/ai', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({agent:chatAgent, message:msg, history:chatHistory.slice(0,-1).slice(-8)})
+    });
+    const data = await res.json();
+    document.getElementById('chat-typing')?.remove();
+
+    if (data.reply) {
+      chatHistory.push({role:'assistant', content:data.reply});
+      msgs.innerHTML += `<div class="cmsg-a"><div class="cmsg-bubble-a">${data.reply.replace(/</g,'&lt;').replace(/\n/g,'<br>')}</div><div class="cmsg-time">${chatTime()}</div></div>`;
+    } else {
+      msgs.innerHTML += `<div class="cmsg-a"><div class="cmsg-bubble-a" style="color:var(--danger)">Errore: ${data.error||'risposta non disponibile'}</div></div>`;
+      document.getElementById('chat-api-banner').style.display='block';
+    }
+  } catch(e) {
+    document.getElementById('chat-typing')?.remove();
+    msgs.innerHTML += `<div class="cmsg-a"><div class="cmsg-bubble-a" style="color:var(--danger)">Errore di connessione all\'API.</div></div>`;
+    document.getElementById('chat-api-banner').style.display='block';
+  }
+  btn.disabled = false;
+  msgs.scrollTop = msgs.scrollHeight;
+}
 </script>
 </body>
 </html>
