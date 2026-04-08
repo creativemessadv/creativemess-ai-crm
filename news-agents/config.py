@@ -29,11 +29,11 @@ AI_FEEDS = [
 # ─── IMPOSTAZIONI EMAIL ──────────────────────────────────────────────────────
 
 EMAIL_CONFIG = {
-    "smtp_host": "smtp.gmail.com",
+    "smtp_host": "smtp.zoho.eu",   # oppure smtp.zoho.com se il tuo account non è .eu
     "smtp_port": 587,
     # Impostati via variabili d'ambiente nel file .env
-    # EMAIL_USER=tua@email.com
-    # EMAIL_PASSWORD=password_app_gmail
+    # EMAIL_USER=tua@zoho.com  (o tua@creativemessadv.it se dominio custom su Zoho)
+    # EMAIL_PASSWORD=la-tua-password-zoho
     # EMAIL_RECIPIENT=roberto@creativemessadv.it
 }
 
