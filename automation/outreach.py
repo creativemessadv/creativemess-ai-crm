@@ -148,6 +148,7 @@ def add_lead_to_campaign(campaign_id, email, nome, subject, body, fu_subject, fu
             headers=instantly_headers(),
             timeout=15
         )
+        print(f"   API response: {r.status_code} {r.text[:150]}")
         return r.status_code in (200, 201)
     except Exception as e:
         print(f"   ❌ Errore add lead: {e}")
