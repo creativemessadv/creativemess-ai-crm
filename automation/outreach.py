@@ -74,20 +74,9 @@ def get_or_create_campaign():
     except Exception as e:
         print(f"   ⚠️  Errore ricerca campagna: {e}")
 
-    # Crea nuova campagna con sequenza 3 step
+    # Crea campagna minimale — schedule configurabile da Instantly UI
     payload = {
         'name': CAMPAIGN_NAME,
-        'campaign_schedule': {
-            'schedules': [{
-                'name': 'Italia Orario Lavorativo',
-                'timing': {'from': '08:00', 'to': '18:00'},
-                'days': {
-                    '0': True, '1': True, '2': True,
-                    '3': True, '4': True, '5': False, '6': False
-                },
-                'timezone': 'UTC'
-            }]
-        },
         'sequences': [{
             'steps': [
                 {
@@ -100,16 +89,14 @@ def get_or_create_campaign():
                 },
                 {
                     'type': 'email',
-                    'delay': 3,   # follow-up dopo 3 giorni
+                    'delay': 3,
                     'variants': [{
                         'subject': '{{followup_subject}}',
                         'body':    '{{followup_body}}'
                     }]
                 }
             ]
-        }],
-        'email_gap': 5,    # minuti tra un invio e l'altro
-        'daily_limit': 50  # Instantly gestisce il warming
+        }]
     }
 
     try:
