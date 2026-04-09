@@ -8,8 +8,8 @@ from anthropic import Anthropic
 
 ANTHROPIC_KEY = os.getenv('ANTHROPIC_API_KEY', '')
 BREVO_KEY     = os.getenv('BREVO_API_KEY', '')
-FROM_EMAIL    = os.getenv('FROM_EMAIL', 'roberto@creativemessadv.it')
-FROM_NAME     = os.getenv('FROM_NAME', 'Roberto Salvatori — Creative Mess ADV')
+FROM_EMAIL    = os.getenv('FROM_EMAIL', 'chiara@creativemessadv.com')
+FROM_NAME     = os.getenv('FROM_NAME', 'Chiara Benedetti — Creative Mess ADV')
 DATA_DIR      = Path('data')
 SENT_LOG      = DATA_DIR / 'sent.json'
 

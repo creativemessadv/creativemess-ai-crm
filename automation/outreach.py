@@ -12,8 +12,8 @@ from anthropic import Anthropic
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 ANTHROPIC_KEY = os.getenv('ANTHROPIC_API_KEY', '')
 BREVO_KEY     = os.getenv('BREVO_API_KEY', '')
-FROM_EMAIL    = os.getenv('FROM_EMAIL', 'roberto@creativemessadv.it')
-FROM_NAME     = os.getenv('FROM_NAME', 'Roberto Salvatori — Creative Mess ADV')
+FROM_EMAIL    = os.getenv('FROM_EMAIL', 'chiara@creativemessadv.com')
+FROM_NAME     = os.getenv('FROM_NAME', 'Chiara Benedetti — Creative Mess ADV')
 DAILY_LIMIT   = int(os.getenv('DAILY_LIMIT', '20'))  # aumenta gradualmente
 DATA_DIR      = Path('data')
 SENT_LOG      = DATA_DIR / 'sent.json'
@@ -30,7 +30,7 @@ Regole FONDAMENTALI:
 - Personalizza sempre sul settore dell'azienda
 - CTA unica: proponi una chiamata di 15 minuti
 - NON usare: "spero questa email ti trovi bene", "mi permetto di contattarla", ecc.
-- Firma: Roberto Salvatori, Creative Mess ADV
+- Firma: Chiara Benedetti, Creative Mess ADV
 Rispondi SOLO con il testo email nel formato:
 OGGETTO: [oggetto]
 ---
