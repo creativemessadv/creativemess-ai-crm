@@ -588,7 +588,7 @@ function renderMonthlyTargets() {
   let cum = 0;
   document.getElementById('monthly-targets').innerHTML = months.map((m,i) => {
     cum += targets[i];
-    return '<tr><td class="pr">' + m + ' 2025</td><td style="color:var(--ac4);font-family:'DM Mono',monospace">€' + targets[i].toLocaleString('it-IT') + '</td><td style="color:var(--t2);font-family:'DM Mono',monospace">€' + cum.toLocaleString('it-IT') + '</td></tr>';
+    return '<tr><td class="pr">' + m + ' 2025</td><td style="color:var(--ac4);font-family:monospace">€' + targets[i].toLocaleString('it-IT') + '</td><td style="color:var(--t2);font-family:monospace">€' + cum.toLocaleString('it-IT') + '</td></tr>';
   }).join('');
 }
 
@@ -665,7 +665,7 @@ async function sendElena() {
   if (!msg) return;
   const out = document.getElementById('elena-msgs');
   input.value = '';
-  out.innerHTML = '<div style="color:var(--t3);font-size:11px;font-family:'DM Mono',monospace">Elena sta calcolando...</div>';
+  out.innerHTML = '<div style="color:var(--t3);font-size:11px;font-family:monospace">Elena sta calcolando...</div>';
   try {
     const reply = await askAgent('elena', msg, elenaHistory.slice(-6));
     elenaHistory.push({role:'user', content:msg}, {role:'assistant', content:reply});
@@ -800,7 +800,7 @@ async function loadDashboardData() {
   document.getElementById('s-monthly').textContent = CEX_REVENUE ? '€' + CEX_REVENUE.toLocaleString('it-IT') : '—';
   if (cl?.records?.length) {
     document.getElementById('dash-clients').innerHTML = '<table><thead><tr><th>Azienda</th><th>Servizi</th><th>Valore/mese</th><th>Status</th></tr></thead><tbody>' +
-      cl.records.slice(0,8).map(r => '<tr><td class="pr">' + (r.fields['Nome Azienda']||'—') + '</td><td>' + (r.fields.Servizi||'—') + '</td><td style="color:var(--ac3);font-family:'DM Mono',monospace">€' + (r.fields['Valore Mensile']||0).toLocaleString('it-IT') + '</td><td>' + badge(r.fields.Status) + '</td></tr>').join('') + '</tbody></table>';
+      cl.records.slice(0,8).map(r => '<tr><td class="pr">' + (r.fields['Nome Azienda']||'—') + '</td><td>' + (r.fields.Servizi||'—') + '</td><td style="color:var(--ac3);font-family:monospace">€' + (r.fields['Valore Mensile']||0).toLocaleString('it-IT') + '</td><td>' + badge(r.fields.Status) + '</td></tr>').join('') + '</tbody></table>';
   }
 }
 
@@ -812,7 +812,7 @@ async function loadProspects() {
   const b = document.getElementById('prospect-body');
   if (data?.records?.length) {
     b.innerHTML = data.records.map(r =>
-      '<tr><td class="pr">' + (r.fields.Azienda||'—') + '</td><td>' + (r.fields['Città']||'—') + '</td><td style="font-family:'DM Mono',monospace;font-size:10px">' + (r.fields.Email||'—') + '</td><td>' + (r.fields.Servizio||'—') + '</td><td>' + badge(r.fields.Status) + '</td></tr>'
+      '<tr><td class="pr">' + (r.fields.Azienda||'—') + '</td><td>' + (r.fields['Città']||'—') + '</td><td style="font-family:monospace;font-size:10px">' + (r.fields.Email||'—') + '</td><td>' + (r.fields.Servizio||'—') + '</td><td>' + badge(r.fields.Status) + '</td></tr>'
     ).join('');
     l.style.display = 'none'; t.style.display = 'table';
   } else { l.textContent = AT_TOKEN ? 'Nessun prospect — aggiungine uno' : 'Configura token Airtable in ⚙️'; }
@@ -827,7 +827,7 @@ async function loadPipeline() {
       const deals = data.records.filter(r => r.fields.Fase === ph);
       const tot = deals.reduce((s,r) => s + (parseFloat(r.fields['Valore Stimato'])||0), 0);
       return '<div class="kcol"><div class="kh">' + ph + '<span class="kcount">' + deals.length + '</span></div>' +
-        (tot ? '<div style="font-size:9px;color:var(--ac3);font-family:'DM Mono',monospace;margin-bottom:6px">€' + tot.toLocaleString('it-IT') + '</div>' : '') +
+        (tot ? '<div style="font-size:9px;color:var(--ac3);font-family:monospace;margin-bottom:6px">€' + tot.toLocaleString('it-IT') + '</div>' : '') +
         (deals.map(r => '<div class="kcard"><div class="kco">' + (r.fields['Nome Deal']||r.fields.Cliente||'—') + '</div><div class="kval">€' + (r.fields['Valore Stimato']||0).toLocaleString('it-IT') + '</div><div class="kmeta">' + (r.fields.Servizio||'') + '</div></div>').join('') || '<div style="font-size:10px;color:var(--t3);padding:4px">Vuoto</div>') +
         '</div>';
     }).join('');
@@ -841,7 +841,7 @@ async function loadClients() {
   const b = document.getElementById('clients-body');
   if (data?.records?.length) {
     b.innerHTML = data.records.map(r =>
-      '<tr><td class="pr">' + (r.fields['Nome Azienda']||'—') + '</td><td>' + (r.fields.Referente||'—') + '</td><td>' + (r.fields.Servizi||'—') + '</td><td style="color:var(--ac3);font-family:'DM Mono',monospace">€' + (r.fields['Valore Mensile']||0).toLocaleString('it-IT') + '</td><td>' + fd(r.fields['Data Rinnovo']) + '</td><td>' + badge(r.fields.Status) + '</td></tr>'
+      '<tr><td class="pr">' + (r.fields['Nome Azienda']||'—') + '</td><td>' + (r.fields.Referente||'—') + '</td><td>' + (r.fields.Servizi||'—') + '</td><td style="color:var(--ac3);font-family:monospace">€' + (r.fields['Valore Mensile']||0).toLocaleString('it-IT') + '</td><td>' + fd(r.fields['Data Rinnovo']) + '</td><td>' + badge(r.fields.Status) + '</td></tr>'
     ).join('');
     l.style.display = 'none'; t.style.display = 'table';
   } else { l.textContent = AT_TOKEN ? 'Nessun cliente' : 'Configura token Airtable in ⚙️'; }
@@ -854,7 +854,7 @@ async function loadQuotes() {
   const b = document.getElementById('quotes-body');
   if (data?.records?.length) {
     b.innerHTML = data.records.map(r =>
-      '<tr><td class="pr">' + (r.fields.Cliente||'—') + '</td><td>' + (r.fields.Servizio||'—') + '</td><td style="color:var(--ac3);font-family:'DM Mono',monospace">€' + (r.fields.Budget||0).toLocaleString('it-IT') + '</td><td>' + badge(r.fields.Status) + '</td><td>' + fd(r.fields['Data creazione']) + '</td></tr>'
+      '<tr><td class="pr">' + (r.fields.Cliente||'—') + '</td><td>' + (r.fields.Servizio||'—') + '</td><td style="color:var(--ac3);font-family:monospace">€' + (r.fields.Budget||0).toLocaleString('it-IT') + '</td><td>' + badge(r.fields.Status) + '</td><td>' + fd(r.fields['Data creazione']) + '</td></tr>'
     ).join('');
     l.style.display = 'none'; t.style.display = 'table';
   } else { l.textContent = AT_TOKEN ? 'Nessun preventivo' : 'Configura token Airtable in ⚙️'; }
