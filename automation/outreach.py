@@ -80,12 +80,11 @@ def get_or_create_campaign():
         'campaign_schedule': {
             'schedules': [{
                 'name': 'Italia Orario Lavorativo',
+                'timing': {'from': '08:00', 'to': '18:00'},
                 'days': {
                     '0': True, '1': True, '2': True,
                     '3': True, '4': True, '5': False, '6': False
                 },
-                'start_hour': '08:00',
-                'end_hour': '18:00',
                 'timezone': 'Europe/Rome'
             }]
         },
