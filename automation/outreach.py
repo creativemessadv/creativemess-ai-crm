@@ -85,7 +85,7 @@ def get_or_create_campaign():
                     '0': True, '1': True, '2': True,
                     '3': True, '4': True, '5': False, '6': False
                 },
-                'timezone': 'Europe/Rome'
+                'timezone': 'UTC'
             }]
         },
         'sequences': [{
