@@ -78,7 +78,8 @@ def run_apify_gmaps(settore, citta, max_results):
     run_url   = f'https://api.apify.com/v2/acts/{actor_id}/runs?token={APIFY_TOKEN}'
 
     payload = {
-        'searchStringsArray': [f'{settore} {citta}'],
+        'searchStringsArray': [settore],
+        'locationQuery': f'{citta}, Italy',
         'maxCrawledPlaces': max_results,
         'language': 'it',
         'countryCode': 'it',
