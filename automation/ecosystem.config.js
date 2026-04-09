@@ -4,7 +4,7 @@ module.exports = {
       name: 'outreach-daily',
       script: 'run_outreach.sh',
       interpreter: 'bash',
-      cwd: '/home/user/creativemess-ai-crm/automation',
+      cwd: '/root/agency/automation',
       cron_restart: '0 8 * * *',   // ogni giorno alle 08:00
       autorestart: false,
       watch: false,
@@ -14,7 +14,7 @@ module.exports = {
       name: 'followup-daily',
       script: 'run_followup.sh',
       interpreter: 'bash',
-      cwd: '/home/user/creativemess-ai-crm/automation',
+      cwd: '/root/agency/automation',
       cron_restart: '30 8 * * *',  // ogni giorno alle 08:30
       autorestart: false,
       watch: false,
@@ -24,7 +24,7 @@ module.exports = {
       name: 'scraper-weekly',
       script: 'run_scraper.sh',
       interpreter: 'bash',
-      cwd: '/home/user/creativemess-ai-crm/automation',
+      cwd: '/root/agency/automation',
       args: '--settore ristoranti --citta Milano --n 100',
       cron_restart: '0 7 * * 1',   // ogni lunedì alle 07:00
       autorestart: false,
