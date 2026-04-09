@@ -175,10 +175,7 @@ def send_email(subject, body_html, body_text):
 
     context = ssl.create_default_context()
     try:
-        with smtplib.SMTP('smtp.zoho.eu', 587, timeout=20) as server:
-            server.ehlo()
-            server.starttls(context=context)
-            server.ehlo()
+        with smtplib.SMTP_SSL('smtppro.zoho.eu', 465, context=context) as server:
             server.login(ZOHO_USER, ZOHO_PASS)
             server.sendmail(ZOHO_USER, ROBERTO_EMAIL, msg.as_string())
         print(f"✅ Email inviata a {ROBERTO_EMAIL}")
