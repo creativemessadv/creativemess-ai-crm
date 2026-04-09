@@ -15,6 +15,7 @@ ANTHROPIC_KEY   = os.getenv('ANTHROPIC_API_KEY', '')
 INSTANTLY_KEY   = os.getenv('INSTANTLY_API_KEY', '')
 DAILY_LIMIT     = int(os.getenv('DAILY_LIMIT', '30'))
 CAMPAIGN_NAME   = os.getenv('INSTANTLY_CAMPAIGN', 'Creative Mess — Outreach Italia')
+CAMPAIGN_ID     = os.getenv('INSTANTLY_CAMPAIGN_ID', '')  # se impostato, salta la ricerca/creazione
 DATA_DIR        = Path('data')
 SENT_LOG        = DATA_DIR / 'sent.json'
 INSTANTLY_BASE  = 'https://api.instantly.ai/api/v2'
@@ -58,6 +59,11 @@ def instantly_headers():
 
 def get_or_create_campaign():
     """Trova o crea la campagna su Instantly"""
+    # Usa ID fisso se configurato (campagna creata manualmente da UI)
+    if CAMPAIGN_ID:
+        print(f"   Campagna da .env: {CAMPAIGN_ID}")
+        return CAMPAIGN_ID
+
     # Cerca campagna esistente
     try:
         r = requests.get(
