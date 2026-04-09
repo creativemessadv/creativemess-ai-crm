@@ -11,16 +11,6 @@ module.exports = {
       env: { HTTP_PROXY: '', HTTPS_PROXY: '' }
     },
     {
-      name: 'followup-daily',
-      script: 'run_followup.sh',
-      interpreter: 'bash',
-      cwd: '/root/agency/automation',
-      cron_restart: '30 8 * * *',  // ogni giorno alle 08:30
-      autorestart: false,
-      watch: false,
-      env: { HTTP_PROXY: '', HTTPS_PROXY: '' }
-    },
-    {
       name: 'scraper-weekly',
       script: 'run_scraper.sh',
       interpreter: 'bash',
