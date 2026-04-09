@@ -5,17 +5,16 @@ Gira alle 13:00 (report mattina) e alle 19:00 (report pomeriggio).
 Il lunedì alle 07:00 genera il briefing strategico settimanale.
 """
 
-import os, json, subprocess, smtplib, ssl
+import os, json, subprocess, requests
 from datetime import datetime, date, timedelta
 from pathlib import Path
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 from anthropic import Anthropic
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 ANTHROPIC_KEY  = os.getenv('ANTHROPIC_API_KEY', '')
-ZOHO_USER      = os.getenv('REPORT_FROM_EMAIL', 'r.fontana@creativemessadv.it')
-ZOHO_PASS      = os.getenv('REPORT_ZOHO_PASS', '')
+BREVO_KEY      = os.getenv('BREVO_API_KEY', '')
+FROM_EMAIL     = 'r.fontana@creativemessadv.it'
+FROM_NAME      = 'Riccardo Fontana — CEO'
 ROBERTO_EMAIL  = os.getenv('ROBERTO_EMAIL', 'r.salvatori@creativemessadv.it')
 INSTANTLY_KEY  = os.getenv('INSTANTLY_API_KEY', '')
 DATA_DIR       = Path('data')
@@ -164,24 +163,32 @@ def get_targets():
 # ── EMAIL SENDING ─────────────────────────────────────────────────────────────
 
 def send_email(subject, body_html, body_text):
-    """Manda email via Zoho SMTP"""
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = subject
-    msg['From']    = f'Riccardo Fontana — CEO <{ZOHO_USER}>'
-    msg['To']      = ROBERTO_EMAIL
-
-    msg.attach(MIMEText(body_text, 'plain', 'utf-8'))
-    msg.attach(MIMEText(body_html, 'html', 'utf-8'))
-
-    context = ssl.create_default_context()
+    """Manda email via Brevo HTTP API (aggira blocco SMTP Hetzner)"""
+    if not BREVO_KEY:
+        print("❌ BREVO_API_KEY mancante")
+        return False
+    payload = {
+        'sender':      {'name': FROM_NAME, 'email': FROM_EMAIL},
+        'to':          [{'email': ROBERTO_EMAIL, 'name': 'Roberto Salvatori'}],
+        'subject':     subject,
+        'htmlContent': body_html,
+        'textContent': body_text
+    }
     try:
-        with smtplib.SMTP_SSL('smtppro.zoho.eu', 465, context=context) as server:
-            server.login(ZOHO_USER, ZOHO_PASS)
-            server.sendmail(ZOHO_USER, ROBERTO_EMAIL, msg.as_string())
-        print(f"✅ Email inviata a {ROBERTO_EMAIL}")
-        return True
+        r = requests.post(
+            'https://api.brevo.com/v3/smtp/email',
+            json=payload,
+            headers={'api-key': BREVO_KEY, 'Content-Type': 'application/json'},
+            timeout=15
+        )
+        if r.status_code in (200, 201):
+            print(f"✅ Email inviata a {ROBERTO_EMAIL}")
+            return True
+        else:
+            print(f"❌ Errore Brevo: {r.status_code} {r.text[:100]}")
+            return False
     except Exception as e:
-        print(f"❌ Errore invio email: {e}")
+        print(f"❌ Errore invio: {e}")
         return False
 
 def format_html(text):
@@ -294,8 +301,8 @@ if __name__ == '__main__':
     import sys
     if not ANTHROPIC_KEY:
         print("❌ ANTHROPIC_API_KEY mancante"); exit(1)
-    if not ZOHO_PASS:
-        print("❌ REPORT_ZOHO_PASS mancante"); exit(1)
+    if not BREVO_KEY:
+        print("❌ BREVO_API_KEY mancante"); exit(1)
 
     mode = sys.argv[1] if len(sys.argv) > 1 else 'mattina'
 
