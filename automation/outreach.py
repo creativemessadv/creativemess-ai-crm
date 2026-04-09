@@ -132,12 +132,10 @@ def add_lead_to_campaign(campaign_id, email, nome, subject, body, fu_subject, fu
     personalization = f"{body}\n\n---\nFOLLOW-UP:\n{fu_body}"
 
     payload = {
-        'api_key':       INSTANTLY_KEY,
-        'campaign_id':   campaign_id,
-        'email':         email,
-        'first_name':    first_name,
-        'last_name':     last_name,
-        'personalization': body.replace('\n', ' '),
+        'campaign_id': campaign_id,
+        'email':       email,
+        'first_name':  first_name,
+        'last_name':   last_name,
         'custom_variables': {
             'subject':          subject,
             'body':             body.replace('\n', '<br>'),
@@ -148,9 +146,9 @@ def add_lead_to_campaign(campaign_id, email, nome, subject, body, fu_subject, fu
 
     try:
         r = requests.post(
-            'https://api.instantly.ai/api/v1/lead/add',
+            f'{INSTANTLY_BASE}/leads',
             json=payload,
-            headers={'Content-Type': 'application/json'},
+            headers=instantly_headers(),
             timeout=15
         )
         print(f"   API response: {r.status_code} {r.text[:150]}")
