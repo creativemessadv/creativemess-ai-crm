@@ -145,13 +145,24 @@ def add_lead_to_campaign(campaign_id, email, nome, subject, body, fu_subject, fu
     }
 
     try:
+        # Prima crea il lead nel database globale
         r = requests.post(
             f'{INSTANTLY_BASE}/leads',
             json=payload,
             headers=instantly_headers(),
             timeout=15
         )
-        print(f"   API response: {r.status_code} {r.text[:150]}")
+        print(f"   Create lead: {r.status_code} {r.text[:80]}")
+
+        # Poi aggiungilo esplicitamente alla campagna
+        r2 = requests.post(
+            f'{INSTANTLY_BASE}/campaigns/{campaign_id}/leads',
+            json={'emails': [email]},
+            headers=instantly_headers(),
+            timeout=15
+        )
+        print(f"   Add to campaign: {r2.status_code} {r2.text[:80]}")
+
         return r.status_code in (200, 201)
     except Exception as e:
         print(f"   ❌ Errore add lead: {e}")
