@@ -1,5 +1,5 @@
 #!/bin/bash
 unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
-cd /home/user/creativemess-ai-crm/automation
-export $(cat .env | grep -v '^#' | xargs)
+cd /root/agency/automation
+set -a; source .env; set +a
 python3 outreach.py
