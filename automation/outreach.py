@@ -124,28 +124,33 @@ def get_or_create_campaign():
         return ''
 
 def add_lead_to_campaign(campaign_id, email, nome, subject, body, fu_subject, fu_body):
-    """Aggiunge un lead alla campagna Instantly"""
+    """Aggiunge un lead alla campagna Instantly via API v1 (campaign leads)"""
     first_name = nome.split()[0] if nome else ''
     last_name  = ' '.join(nome.split()[1:]) if len(nome.split()) > 1 else ''
 
+    # Il corpo email personalizzato diventa la personalizzazione
+    personalization = f"{body}\n\n---\nFOLLOW-UP:\n{fu_body}"
+
     payload = {
-        'campaign_id': campaign_id,
-        'email': email,
-        'first_name': first_name,
-        'last_name': last_name,
+        'api_key':       INSTANTLY_KEY,
+        'campaign_id':   campaign_id,
+        'email':         email,
+        'first_name':    first_name,
+        'last_name':     last_name,
+        'personalization': body.replace('\n', ' '),
         'custom_variables': {
-            'subject':         subject,
-            'body':            body.replace('\n', '<br>'),
+            'subject':          subject,
+            'body':             body.replace('\n', '<br>'),
             'followup_subject': fu_subject,
-            'followup_body':   fu_body.replace('\n', '<br>')
+            'followup_body':    fu_body.replace('\n', '<br>')
         }
     }
 
     try:
         r = requests.post(
-            f'{INSTANTLY_BASE}/leads',
+            'https://api.instantly.ai/api/v1/lead/add',
             json=payload,
-            headers=instantly_headers(),
+            headers={'Content-Type': 'application/json'},
             timeout=15
         )
         print(f"   API response: {r.status_code} {r.text[:150]}")
