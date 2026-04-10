@@ -92,9 +92,11 @@ def parse_email(text):
     lines = text.strip().split('\n')
     oggetto, corpo_lines, after = '', [], False
     for line in lines:
-        if line.startswith('OGGETTO:'):
-            oggetto = line.replace('OGGETTO:', '').strip()
-        elif line.strip() == '---':
+        # gestisce sia "OGGETTO:" che "**OGGETTO:**" (markdown di Claude)
+        clean = line.strip().lstrip('*').rstrip('*').strip()
+        if clean.startswith('OGGETTO:'):
+            oggetto = clean.replace('OGGETTO:', '').strip()
+        elif line.strip() in ('---', '—--', '———'):
             after = True
         elif after:
             corpo_lines.append(line)
