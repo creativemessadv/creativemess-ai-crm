@@ -74,41 +74,65 @@ def run_outscraper_gmaps(settore, citta, max_results):
 
     print(f"🗺️  Outscraper Google Maps: {settore} a {citta} (max {max_results})")
 
-    # Outscraper accetta max 500 per chiamata sincrona
-    batch_size = 500
-    all_items  = []
+    query   = f"{settore}, {citta}, Italy"
+    headers = {'X-API-KEY': OUTSCRAPER_KEY}
 
-    for offset in range(0, max_results, batch_size):
-        limit = min(batch_size, max_results - offset)
-        query = f"{settore}, {citta}, Italy"
+    # Per >199 risultati usa modalità asincrona con polling
+    use_async = max_results > 199
 
-        try:
-            r = requests.get(
-                'https://api.app.outscraper.com/maps/search-v2',
-                params={
-                    'query':    query,
-                    'limit':    limit,
-                    'language': 'it',
-                    'region':   'IT',
-                    'async':    'false',
-                },
-                headers={'X-API-KEY': OUTSCRAPER_KEY},
-                timeout=120
-            )
-            r.raise_for_status()
-            data = r.json()
+    try:
+        r = requests.get(
+            'https://api.app.outscraper.com/maps/search-v2',
+            params={
+                'query':    query,
+                'limit':    max_results,
+                'language': 'it',
+                'region':   'IT',
+                'async':    'true' if use_async else 'false',
+            },
+            headers=headers,
+            timeout=120
+        )
+        r.raise_for_status()
+        data = r.json()
 
-            # data['data'] è una lista di liste (una per ogni query)
+        if not use_async:
             results = data.get('data', [[]])[0] if data.get('data') else []
-            all_items.extend(results)
-            print(f"   Batch: {len(results)} risultati (totale: {len(all_items)})")
+            print(f"   ✅ {len(results)} risultati")
+            return results
 
-            if len(results) < limit:
-                break  # non ci sono altri risultati
+        # Modalità asincrona — polling finché non è pronto
+        task_id = data.get('id', '')
+        if not task_id:
+            print(f"❌ Task ID mancante: {data}")
+            return []
 
-        except Exception as e:
-            print(f"❌ Errore Outscraper: {e}")
-            break
+        print(f"   Task ID: {task_id} — aspetto risultati", end='', flush=True)
+        for _ in range(60):  # max 15 minuti
+            time.sleep(15)
+            print('.', end='', flush=True)
+            try:
+                poll = requests.get(
+                    f'https://api.app.outscraper.com/requests/{task_id}',
+                    headers=headers, timeout=30
+                ).json()
+                status = poll.get('status', '')
+                if status == 'Success':
+                    print(' ✅')
+                    results = poll.get('data', [[]])[0] if poll.get('data') else []
+                    print(f"   ✅ {len(results)} risultati scaricati")
+                    return results
+                elif status in ('Failed', 'Cancelled'):
+                    print(f' ❌ {status}')
+                    return []
+            except Exception:
+                pass
+        print(' ⏱️ timeout')
+        return []
+
+    except Exception as e:
+        print(f"❌ Errore Outscraper: {e}")
+        return []
 
     print(f"   ✅ Totale scaricati: {len(all_items)}")
     return all_items
