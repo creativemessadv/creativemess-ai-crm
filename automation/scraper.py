@@ -220,14 +220,37 @@ if __name__ == '__main__':
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--settore', default='ristoranti', help='Settore (es. ristoranti, dentisti)')
-    parser.add_argument('--citta',   default='Milano',     help='Città')
-    parser.add_argument('--n',       type=int, default=50, help='Numero massimo risultati')
+    parser.add_argument('--settore', default='', help='Settore (es. ristoranti, dentisti)')
+    parser.add_argument('--citta',   default='', help='Città')
+    parser.add_argument('--n',       type=int, default=100, help='Numero massimo risultati')
     parser.add_argument('--no-email-search', action='store_true', help='Salta crawl email dai siti')
+    parser.add_argument('--auto', action='store_true', help='Legge target da data/targets.json e avanza indice')
     args = parser.parse_args()
 
-    items   = run_apify_gmaps(args.settore, args.citta, args.n)
-    results = parse_apify_results(items, args.settore, args.citta)
+    settore, citta = args.settore, args.citta
+
+    if args.auto or (not settore and not citta):
+        targets_file = os.path.join(os.path.dirname(__file__), '..', 'data', 'targets.json')
+        targets_file = os.path.normpath(targets_file)
+        try:
+            with open(targets_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            targets = data['targets']
+            idx     = data.get('current_index', 0) % len(targets)
+            target  = targets[idx]
+            settore = target['settore']
+            citta   = target['citta']
+            # Avanza indice per il giorno dopo
+            data['current_index'] = (idx + 1) % len(targets)
+            with open(targets_file, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            print(f"🎯 Target del giorno: {settore} a {citta} (#{idx+1}/{len(targets)})")
+        except Exception as e:
+            print(f"❌ Errore lettura targets.json: {e}")
+            settore, citta = 'ristoranti', 'Milano'
+
+    items   = run_apify_gmaps(settore, citta, args.n)
+    results = parse_apify_results(items, settore, citta)
 
     if results and not args.no_email_search:
         results = find_missing_emails(results)
