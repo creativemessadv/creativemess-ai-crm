@@ -73,8 +73,8 @@ def run_apify_gmaps(settore, citta, max_results):
 
     print(f"🗺️  Avvio Apify Google Maps: {settore} a {citta} (max {max_results})")
 
-    # Actor: compass/crawler-google-places
-    actor_id = 'compass~crawler-google-places'
+    # Actor: microworlds/crawler-google-places ($1.50/1000 vs $145/1000 del compass)
+    actor_id = 'microworlds~crawler-google-places'
     run_url   = f'https://api.apify.com/v2/acts/{actor_id}/runs?token={APIFY_TOKEN}'
 
     payload = {
