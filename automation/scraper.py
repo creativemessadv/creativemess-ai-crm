@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Google Maps scraper via Apify — trova aziende italiane con email
+Google Maps scraper via Outscraper — trova aziende italiane con email
 Uso: python3 scraper.py --settore "ristoranti" --citta "Milano" --n 50
+Costo: $3 per 1.000 risultati (prezzo fisso per risultato, niente sorprese)
 """
 
 import requests
@@ -15,7 +16,7 @@ from datetime import datetime
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 
-APIFY_TOKEN  = os.getenv('APIFY_API_KEY', '')
+OUTSCRAPER_KEY = os.getenv('OUTSCRAPER_API_KEY', '')
 HEADERS_WEB  = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
                   '(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
@@ -65,91 +66,68 @@ def find_email_on_site(base_url):
             return e
     return all_emails[0] if all_emails else ''
 
-def run_apify_gmaps(settore, citta, max_results):
-    """Lancia Apify Google Maps Scraper e ritorna i risultati"""
-    if not APIFY_TOKEN:
-        print("❌ APIFY_API_KEY mancante nel .env")
+def run_outscraper_gmaps(settore, citta, max_results):
+    """Cerca aziende su Google Maps via Outscraper — $3 per 1.000 risultati"""
+    if not OUTSCRAPER_KEY:
+        print("❌ OUTSCRAPER_API_KEY mancante nel .env")
         return []
 
-    print(f"🗺️  Avvio Apify Google Maps: {settore} a {citta} (max {max_results})")
+    print(f"🗺️  Outscraper Google Maps: {settore} a {citta} (max {max_results})")
 
-    # Actor: microworlds/crawler-google-places ($1.50/1000 vs $145/1000 del compass)
-    actor_id = 'microworlds~crawler-google-places'
-    run_url   = f'https://api.apify.com/v2/acts/{actor_id}/runs?token={APIFY_TOKEN}'
+    # Outscraper accetta max 500 per chiamata sincrona
+    batch_size = 500
+    all_items  = []
 
-    payload = {
-        'searchStringsArray': [settore],
-        'locationQuery': f'{citta}, Italy',
-        'maxCrawledPlaces': max_results,
-        'language': 'it',
-        'countryCode': 'it',
-        'includeHistogram': False,
-        'includeOpeningHours': False,
-        'includePeopleAlsoSearch': False,
-        'maxImages': 0,
-        'maxReviews': 0,
-    }
+    for offset in range(0, max_results, batch_size):
+        limit = min(batch_size, max_results - offset)
+        query = f"{settore}, {citta}, Italy"
 
-    try:
-        r = requests.post(run_url, json=payload, timeout=30)
-        r.raise_for_status()
-        run_data  = r.json()
-        run_id    = run_data['data']['id']
-        dataset_id = run_data['data']['defaultDatasetId']
-        print(f"   Run ID: {run_id}")
-    except Exception as e:
-        print(f"❌ Errore avvio Apify: {e}")
-        return []
-
-    # Aspetta completamento (polling ogni 15s, max 10 min)
-    status_url = f'https://api.apify.com/v2/actor-runs/{run_id}?token={APIFY_TOKEN}'
-    print("   Aspetto risultati", end='', flush=True)
-    for _ in range(40):
-        time.sleep(15)
-        print('.', end='', flush=True)
         try:
-            s = requests.get(status_url, timeout=10).json()
-            status = s['data']['status']
-            if status == 'SUCCEEDED':
-                print(' ✅')
-                break
-            elif status in ('FAILED', 'ABORTED', 'TIMED-OUT'):
-                print(f' ❌ {status}')
-                return []
-        except Exception:
-            pass
-    else:
-        print(' ⏱️ timeout')
-        return []
+            r = requests.get(
+                'https://api.app.outscraper.com/maps/search-v2',
+                params={
+                    'query':    query,
+                    'limit':    limit,
+                    'language': 'it',
+                    'region':   'IT',
+                    'async':    'false',
+                },
+                headers={'X-API-KEY': OUTSCRAPER_KEY},
+                timeout=120
+            )
+            r.raise_for_status()
+            data = r.json()
 
-    # Scarica dataset
-    dataset_url = f'https://api.apify.com/v2/datasets/{dataset_id}/items?token={APIFY_TOKEN}&format=json'
-    try:
-        items = requests.get(dataset_url, timeout=30).json()
-    except Exception as e:
-        print(f"❌ Errore download dataset: {e}")
-        return []
+            # data['data'] è una lista di liste (una per ogni query)
+            results = data.get('data', [[]])[0] if data.get('data') else []
+            all_items.extend(results)
+            print(f"   Batch: {len(results)} risultati (totale: {len(all_items)})")
 
-    print(f"   Scaricati {len(items)} risultati")
-    return items
+            if len(results) < limit:
+                break  # non ci sono altri risultati
 
-def parse_apify_results(items, settore, citta):
-    """Converte output Apify nel formato prospect standard"""
+        except Exception as e:
+            print(f"❌ Errore Outscraper: {e}")
+            break
+
+    print(f"   ✅ Totale scaricati: {len(all_items)}")
+    return all_items
+
+def parse_outscraper_results(items, settore, citta):
+    """Converte output Outscraper nel formato prospect standard"""
     results = []
     for item in items:
         try:
-            nome     = item.get('title', '') or item.get('name', '')
+            nome = item.get('name', '')
             if not nome:
                 continue
 
-            indirizzo = item.get('address', '') or item.get('street', '') or citta
-            telefono  = item.get('phone', '') or item.get('phoneUnformatted', '')
-            sito      = item.get('website', '') or ''
-            # Rimuovi trailing slash e parametri tracking
+            indirizzo = item.get('full_address', '') or item.get('address', '') or citta
+            telefono  = item.get('phone', '') or ''
+            sito      = item.get('site', '') or item.get('website', '') or ''
             if sito:
                 sito = sito.split('?')[0].rstrip('/')
 
-            # Email: Apify a volte la include già
             email = item.get('email', '') or ''
             if email and not is_good_email(email):
                 email = ''
@@ -163,9 +141,9 @@ def parse_apify_results(items, settore, citta):
                 'sito': sito,
                 'email': email,
                 'email_trovata': bool(email),
-                'gmaps_url': item.get('url', ''),
-                'rating': item.get('totalScore', ''),
-                'reviews': item.get('reviewsCount', 0),
+                'gmaps_url': item.get('place_id', ''),
+                'rating': item.get('rating', ''),
+                'reviews': item.get('reviews', 0),
                 'scraped_at': datetime.now().isoformat()
             })
 
@@ -249,8 +227,8 @@ if __name__ == '__main__':
             print(f"❌ Errore lettura targets.json: {e}")
             settore, citta = 'ristoranti', 'Milano'
 
-    items   = run_apify_gmaps(settore, citta, args.n)
-    results = parse_apify_results(items, settore, citta)
+    items   = run_outscraper_gmaps(settore, citta, args.n)
+    results = parse_outscraper_results(items, settore, citta)
 
     if results and not args.no_email_search:
         results = find_missing_emails(results)
