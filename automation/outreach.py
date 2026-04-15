@@ -5,7 +5,7 @@ Gira ogni giorno via PM2. Legge prospect da JSON, genera email, esporta CSV.
 L'utente carica il CSV su Instantly una volta a settimana (Add Leads → Upload CSV).
 """
 
-import os, json, time, random, csv
+import os, json, time, random, csv, subprocess
 from datetime import datetime
 from pathlib import Path
 from anthropic import Anthropic
@@ -102,6 +102,22 @@ def parse_email(text):
             corpo_lines.append(line)
     return oggetto, '\n'.join(corpo_lines).strip()
 
+def _run_scraper():
+    """Lancia lo scraper per il prossimo target e aspetta che finisca"""
+    print("   🗺️  Lancio scraper per prossimo target...")
+    try:
+        result = subprocess.run(
+            ['python3', 'scraper.py', '--auto', '--n', '400'],
+            timeout=900,  # max 15 minuti
+            capture_output=False
+        )
+        if result.returncode != 0:
+            print("   ⚠️  Scraper terminato con errore")
+    except subprocess.TimeoutExpired:
+        print("   ⏱️  Scraper timeout — continuo con quello che c'è")
+    except Exception as e:
+        print(f"   ❌ Errore scraper: {e}")
+
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def run_outreach():
@@ -124,8 +140,14 @@ def run_outreach():
     print(f"📤 Da processare oggi: {min(DAILY_LIMIT, len(to_contact))}")
 
     if not to_contact:
-        print("⚠️  Nessun nuovo prospect — lancia run_scraper.sh")
-        return
+        print("⚠️  Nessun nuovo prospect — lancio scraper automaticamente...")
+        _run_scraper()
+        prospects  = load_prospects()
+        sent       = load_sent()
+        to_contact = [p for p in prospects if p.get('email') and p['email'] not in sent]
+        if not to_contact:
+            print("⚠️  Ancora nessun prospect dopo scraper, riprova domani")
+            return
 
     OUTREACH_DIR.mkdir(parents=True, exist_ok=True)
     timestamp  = datetime.now().strftime('%Y%m%d_%H%M')
@@ -190,6 +212,55 @@ def run_outreach():
             continue
 
         time.sleep(random.uniform(2, 5))
+
+    # Se non abbiamo raggiunto il limite, lancia scraper per il settore successivo
+    if processed < DAILY_LIMIT:
+        mancanti = DAILY_LIMIT - processed
+        print(f"\n⚡ Processati {processed}/{DAILY_LIMIT} — cerco altri {mancanti} prospect...")
+        _run_scraper()
+        # Ricarica prospect e continua
+        sent_aggiornato = load_sent()
+        nuovi = [p for p in load_prospects()
+                 if p.get('email') and p['email'] not in sent_aggiornato]
+        if nuovi:
+            print(f"   Trovati {len(nuovi)} nuovi prospect, genero altre email...")
+            for p in nuovi[:mancanti]:
+                nome    = p.get('nome', 'Azienda')
+                email   = p['email']
+                settore = p.get('settore', '')
+                citta   = p.get('citta', '')
+                sito    = p.get('sito', '')
+                print(f"\n📧 {nome} ({email})")
+                try:
+                    raw = generate_email(nome, settore, citta, sito)
+                    subj, body = parse_email(raw)
+                    if not subj or not body:
+                        errors += 1
+                        continue
+                    fu_raw = generate_followup(nome, settore, subj)
+                    fu_subj, fu_body = parse_email(fu_raw)
+                    if not fu_subj:
+                        fu_subj = f"Re: {subj}"
+                        fu_body = fu_raw
+                    print(f"   📌 {subj}")
+                    rows.append({
+                        'email': email, 'first_name': nome.split()[0] if nome else '',
+                        'last_name': ' '.join(nome.split()[1:]) if len(nome.split()) > 1 else '',
+                        'company_name': nome, 'city': citta, 'website': sito,
+                        'subject': subj, 'body': body,
+                        'followup_subject': fu_subj, 'followup_body': fu_body,
+                    })
+                    sent[email] = {
+                        'nome': nome, 'settore': settore, 'citta': citta,
+                        'oggetto': subj, 'generated_at': datetime.now().isoformat(),
+                        'status': 'ready_to_upload', 'csv': str(csv_path)
+                    }
+                    processed += 1
+                    print(f"   ✅ Pronto!")
+                except Exception as e:
+                    print(f"   ❌ {e}")
+                    errors += 1
+                time.sleep(random.uniform(2, 5))
 
     # Salva CSV per Instantly
     if rows:
