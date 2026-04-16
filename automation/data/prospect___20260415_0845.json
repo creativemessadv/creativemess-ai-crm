@@ -1,0 +1,16 @@
+[
+  {
+    "nome": "Bar Milano",
+    "settore": "bar",
+    "citta": "Milano",
+    "indirizzo": "15050 Alzano Scrivia AL",
+    "telefono": "",
+    "sito": "",
+    "email": "",
+    "email_trovata": false,
+    "gmaps_url": "ChIJm-jmwjoUh0cRT9Fne3HLDHs",
+    "rating": null,
+    "reviews": null,
+    "scraped_at": "2026-04-15T08:45:58.319721"
+  }
+]

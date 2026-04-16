@@ -1,0 +1,2360 @@
+{
+  "info@viapasteria.com": {
+    "nome": "Via Pasteria",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Via Pasteria: i tavoli vuoti costano",
+    "generated_at": "2026-04-15T08:03:10.085575",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@osteriaitaliana.eu": {
+    "nome": "Osteria italiana",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:03:28.434832",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@milanobistrot.it": {
+    "nome": "Milano Bistrot",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:01:01.834934",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "limmaginebistrot@gmail.com": {
+    "nome": "L'immagine Bistrot Ristorante",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il vostro bistrot merita più coperti",
+    "generated_at": "2026-04-15T08:04:29.914591",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "reservation@cantinemilano.it": {
+    "nome": "Cantine MILANO - WINE & RESTAURANT",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:01:35.770789",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@sancarloaldue.com": {
+    "nome": "Ristorante San Carlo",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il San Carlo merita più coperti da Google",
+    "generated_at": "2026-04-15T08:01:51.699594",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantegalleria.it": {
+    "nome": "Ristorante Galleria",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:02:05.777204",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@isoladeltesoro.net": {
+    "nome": "L'Isola del Tesoro",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:02:23.463832",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@theroofmilano.com": {
+    "nome": "The Roof Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "The Roof Milano merita più coperti dal web",
+    "generated_at": "2026-04-15T08:03:44.567714",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "bistrot@cantinadellavetra.it": {
+    "nome": "Cantina della Vetra",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano voi su Google?",
+    "generated_at": "2026-04-15T08:03:59.275108",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@trattorialatrebia.it": {
+    "nome": "Trattoria de la Trebia Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "La Trebia merita più coperti da Google",
+    "generated_at": "2026-04-15T08:04:14.181145",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@viagginelgusto.com": {
+    "nome": "Viaggi nel Gusto",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tuoi tavoli vuoti a Milano costano",
+    "generated_at": "2026-04-15T08:04:45.406030",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@trippamilano.it": {
+    "nome": "Trippa",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Trippa merita più coperti dal web",
+    "generated_at": "2026-04-15T08:05:00.564918",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "prenotazionicourmayeur@ilmarchese.it": {
+    "nome": "Il Marchese Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il Marchese merita più coperti da Google",
+    "generated_at": "2026-04-15T08:05:14.984136",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "mailto:info@ribotmilano.it": {
+    "nome": "Ribot",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Ribot: i tavoli vuoti li riempiamo noi",
+    "generated_at": "2026-04-15T08:05:30.898666",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "levinomilano@gmail.com": {
+    "nome": "Levino",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Levino, i tavoli vuoti costano caro",
+    "generated_at": "2026-04-15T08:05:46.614929",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@beefclubmilano.it": {
+    "nome": "Beef Club Milano - Miglior Ristorante di Carne alla Brace della città",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I vostri tagli meritano più coperti",
+    "generated_at": "2026-04-15T08:06:06.420226",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "prime@ristoranteprime.it": {
+    "nome": "Primè",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Primè merita più coperti da Google",
+    "generated_at": "2026-04-15T08:06:20.996973",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@mareamilano.it": {
+    "nome": "Marea Seafood & Beverage",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Marea, i tavoli vuoti costano caro",
+    "generated_at": "2026-04-15T08:06:36.295301",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "booking.roma@ristoranteassuntamadre.it": {
+    "nome": "Ristorante Assunta Madre",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I vostri tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:06:53.127071",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "28posti@gmail.com": {
+    "nome": "28 Posti",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "28 Posti merita più coperti dal web",
+    "generated_at": "2026-04-15T08:07:15.118489",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantedaoscar.it": {
+    "nome": "Ristorante Da Oscar (Porta Venezia)",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti di Porta Venezia",
+    "generated_at": "2026-04-15T08:07:31.200313",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@unpostoamilano.it": {
+    "nome": "Un posto a Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:07:47.360899",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "lagioia@lagioiasanmarco.it": {
+    "nome": "La Gioia San Marco",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:08:03.606390",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "milano@ristoranteveramente.it": {
+    "nome": "Veramente",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:08:22.325462",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "shabbygrill@outlook.it": {
+    "nome": "Shabby Grill",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Shabby Grill merita più coperti da Google",
+    "generated_at": "2026-04-15T08:08:37.863278",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@nabucco.it": {
+    "nome": "Ristorante Nabucco",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il Nabucco merita più coperti da Google",
+    "generated_at": "2026-04-15T08:08:55.270497",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@pastadautoremilano.it": {
+    "nome": "Pasta d’Autore",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano voi, vi trovano?",
+    "generated_at": "2026-04-15T08:09:10.408310",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@magnapars.it": {
+    "nome": "Da Noi In",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Da Noi In merita più coperti da Google",
+    "generated_at": "2026-04-15T08:09:27.521191",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "donnacaterinaristorante@gmail.com": {
+    "nome": "Donna Caterina Ristorante",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:09:43.191984",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantevistaduomo.it": {
+    "nome": "Ristorante Vista Duomo",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I turisti cercano voi, vi trovano?",
+    "generated_at": "2026-04-15T08:09:58.759706",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@altoristorante.it": {
+    "nome": "Alto Ristorante",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Alto Ristorante merita più coperti da Google",
+    "generated_at": "2026-04-15T08:10:14.666335",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@alcantinone.it": {
+    "nome": "Al Cantinone",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Al Cantinone merita più coperti da Google",
+    "generated_at": "2026-04-15T08:10:29.932152",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@gruppouna.it": {
+    "nome": "Il Giardino Bar & Restaurant",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:10:45.797885",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@mibabbo.it": {
+    "nome": "Trattoria Mibabbo",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Trattoria Mibabbo merita più coperti da Google",
+    "generated_at": "2026-04-15T08:11:00.413083",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "valentinolegend@hotmail.com": {
+    "nome": "Valentino Legend",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:11:16.136358",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "gruppodafortunata@gmail.com": {
+    "nome": "OSTERIA DA FORTUNATA MILANO NAVIGLI",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I Navigli cercano la vostra pasta su Google",
+    "generated_at": "2026-04-15T08:11:31.905530",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@panevinomilano.com": {
+    "nome": "Ristorante Pane e Vino Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:11:49.318575",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristoranteiltavolino.it": {
+    "nome": "Il Tavolino",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il Tavolino merita più coperti da Google",
+    "generated_at": "2026-04-15T08:12:03.601726",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@lalocandadelgattorosso.it": {
+    "nome": "La Locanda del Gatto Rosso",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:12:26.189430",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@thedomemilano.com": {
+    "nome": "The Dome | Rooftop & Restaurant",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il tuo rooftop merita più prenotazioni online",
+    "generated_at": "2026-04-15T08:12:42.474833",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "milano@terrazzacalabritto.it": {
+    "nome": "Terrazza Calabritto Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:12:59.206498",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "restaurant@galleriavikmilano.com": {
+    "nome": "Vik Pellico Otto Restaurant",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tuoi tavoli vuoti a Milano, riempiamoli",
+    "generated_at": "2026-04-15T08:13:16.835626",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "doncarlos@grandhoteletdemilan.it": {
+    "nome": "Ristorante Don Carlos",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Don Carlos, i tavoli vuoti costano",
+    "generated_at": "2026-04-15T08:13:30.035437",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "andryrestaurant@gmail.com": {
+    "nome": "Andry",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:13:45.018976",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@risoelatte.it": {
+    "nome": "Risoelatte Duomo",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Risoelatte, i tavoli vuoti costano caro",
+    "generated_at": "2026-04-15T08:14:01.241728",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@osteriadellecorti.it": {
+    "nome": "Osteria delle Corti",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:14:17.432843",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@andreaaprea.com": {
+    "nome": "Andrea Aprea | Ristorante",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:14:31.725141",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@osteriaconchetta.it": {
+    "nome": "Osteria Conchetta",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Osteria Conchetta merita più coperti da Google",
+    "generated_at": "2026-04-15T08:14:49.213713",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristoranteberton.com": {
+    "nome": "Ristorante Berton",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Berton: i tavoli vuoti si riempiono online",
+    "generated_at": "2026-04-15T08:15:06.331701",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "dot.chianti@gmail.com": {
+    "nome": "D.O.T. Chianti Street Food.",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il tuo street food merita più tavoli pieni",
+    "generated_at": "2026-04-15T08:15:22.057448",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantelamongolfiera.it": {
+    "nome": "La Mongolfiera",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "La Mongolfiera merita più coperti a sera",
+    "generated_at": "2026-04-15T08:15:36.886440",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "laposteriamilano@gmail.com": {
+    "nome": "La Posteria di Nonna Papera",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:15:51.561246",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "beefbarmilano@beefbar.com": {
+    "nome": "Beefbar",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Beefbar Milano merita più coperti da Google",
+    "generated_at": "2026-04-15T08:16:08.580968",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "ristorantedongio@gmail.com": {
+    "nome": "Dongiò",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Dongiò merita più coperti da Google",
+    "generated_at": "2026-04-15T08:16:23.932485",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@panigaccimilanobistrot.it": {
+    "nome": "Panigacci Milano Bistrot",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Panigacci Milano: più coperti da Google",
+    "generated_at": "2026-04-15T08:16:42.190722",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "rovello18@gmail.com": {
+    "nome": "Ristorante Rovello",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:16:57.203885",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@pastaevinoroma.it": {
+    "nome": "Come 'Na Vorta Pasta e Vino - Navigli",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I Navigli cercano voi su Google?",
+    "generated_at": "2026-04-15T08:17:12.307434",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "amministrazione@fishbar.it": {
+    "nome": "Fishbar de Milan | Ristorante di pesce Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tuoi tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:17:28.602666",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "barzacgourmet@gmail.com": {
+    "nome": "Barzac • Tradizione Piacentina",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I piacentini a Milano vi cercano online",
+    "generated_at": "2026-04-15T08:17:42.731491",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@algambero.com": {
+    "nome": "Osteria del Gambero Rosso",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:17:58.722919",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@frades.eu": {
+    "nome": "Frades Porto Cervo - Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Frades: più prenotazioni da Google stasera",
+    "generated_at": "2026-04-15T08:18:14.455910",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@tavernadelborgoantico.it": {
+    "nome": "Taverna del Borgo Antico",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:18:32.197405",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "milano@pizzeriasavo.it": {
+    "nome": "Savô Pizzeria Gourmet",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Savô merita più coperti da Google",
+    "generated_at": "2026-04-15T08:18:48.930070",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantecracco.it": {
+    "nome": "Ristorante Cracco",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti si riempiono su Google",
+    "generated_at": "2026-04-15T08:19:04.972941",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "cantinapiemontese@gmail.com": {
+    "nome": "Cantina Piemontese",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:19:21.653012",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "lacolonna10@libero.it": {
+    "nome": "La Colonna Trattoria milanese dal 1922",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi vi cercano, vi trovano?",
+    "generated_at": "2026-04-15T08:19:39.559995",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantereplay.it": {
+    "nome": "Ristorante replay",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il tuo ristorante merita più coperti da Google",
+    "generated_at": "2026-04-15T08:19:53.065043",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@rossobrera.com": {
+    "nome": "Rosso Brera",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Rosso Brera merita più coperti da Google",
+    "generated_at": "2026-04-15T08:20:07.692389",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "calubistrot@gmail.com": {
+    "nome": "Calù Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Calù, i tavoli vuoti costano caro",
+    "generated_at": "2026-04-15T08:20:25.824202",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantelalibera.com": {
+    "nome": "Ristorante La Libera",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:20:44.327639",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "ciao@hortorestaurant.com": {
+    "nome": "Horto Restaurant Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Horto merita più coperti dal web",
+    "generated_at": "2026-04-15T08:20:59.843149",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "candidatura@desantismilano.it": {
+    "nome": "De Santis / Milano Magenta",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I vostri panini meritano più coperti",
+    "generated_at": "2026-04-15T08:21:15.328492",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "ristoranteilmostoselvatico@yahoo.it": {
+    "nome": "Il Mosto Selvatico",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:21:30.832223",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantequattromori.it": {
+    "nome": "Quattro Mori",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:21:47.044600",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "webmarketing@obica.com": {
+    "nome": "Obicà Mozzarella Bar - Cusani",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Obicà, i vostri tavoli vuoti ci disturbano",
+    "generated_at": "2026-04-15T08:22:02.508605",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@hrcmilan.com": {
+    "nome": "Hard Rock Cafe Milan",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il vostro menu merita più coperti a Milano",
+    "generated_at": "2026-04-15T08:22:19.847875",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@rigolo.it": {
+    "nome": "Rigolo ristorante",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Rigolo merita più coperti da Google",
+    "generated_at": "2026-04-15T08:22:36.505922",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "milanrestaurantsbooking@outlook.it": {
+    "nome": "Mercurio Ristorante Milan Center",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Mercurio, i tavoli vuoti costano caro",
+    "generated_at": "2026-04-15T08:22:52.284878",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@gnoccofrittomilano.it": {
+    "nome": "Osteria del Gnocco Fritto",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano gnocco fritto online?",
+    "generated_at": "2026-04-15T08:23:07.608635",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "ristorantenuovarena@gmail.com": {
+    "nome": "Ristorante Nuova Arena",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:23:22.134187",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "prenotaosteriacasale@gmail.com": {
+    "nome": "Osteria Casale",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:23:39.346177",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@eatpanzer.com": {
+    "nome": "Panzer",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Panzer: più coperti da Google e social",
+    "generated_at": "2026-04-15T08:23:57.142170",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@sebastiancafemilano.com": {
+    "nome": "Sebastian Cafè Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Sebastian Cafè: i tavoli vuoti costano",
+    "generated_at": "2026-04-15T08:24:12.051387",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "loading@2x.gif": {
+    "nome": "A Santa Lucia",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:24:28.179834",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantedonlisander.com": {
+    "nome": "Don Lisander",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Don Lisander merita più coperti da Google",
+    "generated_at": "2026-04-15T08:24:43.156642",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "lavater@godsavethefood.it": {
+    "nome": "God Save The Food - Brera",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Più coperti a Brera partendo da Google",
+    "generated_at": "2026-04-15T08:25:01.040061",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@morellimilano.it": {
+    "nome": "Morelli Ristorante",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:25:15.698880",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "reservations@themanzoni.com": {
+    "nome": "The Manzoni",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "The Manzoni merita più coperti da Google",
+    "generated_at": "2026-04-15T08:25:29.678556",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "prenotazionimovida@gmail.com": {
+    "nome": "Movida Restaurant&CocktailBar",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Movida merita più coperti da Google",
+    "generated_at": "2026-04-15T08:25:45.504477",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@pausa.com": {
+    "nome": "Pausa Your Italian Break",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano voi su Google?",
+    "generated_at": "2026-04-15T08:26:00.121293",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@sogni.eu": {
+    "nome": "Sogni Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Sogni Milano merita più coperti dal web",
+    "generated_at": "2026-04-15T08:26:16.421675",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@vanbolandfeste.com": {
+    "nome": "Van Bol & Feste",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:26:33.479886",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@classico.bio": {
+    "nome": "CLASSICO trattoria & cocktail",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "CLASSICO merita più coperti dal web",
+    "generated_at": "2026-04-15T08:26:52.688353",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0800.csv"
+  },
+  "info@ristorantedonati.it": {
+    "nome": "Ristorante Donati",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:46:10.879399",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@serendepicomilano.it": {
+    "nome": "Serendepico",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Serendepico merita più coperti da Google",
+    "generated_at": "2026-04-15T08:46:26.761659",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@uccellina.biz": {
+    "nome": "L'Uccellina",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "L'Uccellina merita più coperti da Google",
+    "generated_at": "2026-04-15T08:46:41.546676",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "organicpizzaandfood@gmail.com": {
+    "nome": "Organic Pizza and Food",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I clienti cercano pizza a Milano, vi trovano?",
+    "generated_at": "2026-04-15T08:46:56.124348",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@nerinodieci.it": {
+    "nome": "Nerino Dieci Trattoria",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:47:12.312622",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@osteriamammarosa.it": {
+    "nome": "Osteria Mamma Rosa-Ristorante pesce Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I clienti cercano pesce a Milano, vi trovano?",
+    "generated_at": "2026-04-15T08:47:27.493227",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@santuffizio.com": {
+    "nome": "Anima Milano | Enrico Bartolini",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I vostri tavoli vuoti costano più del coperto",
+    "generated_at": "2026-04-15T08:47:44.753649",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@sinerestaurant.com": {
+    "nome": "Sine by Di Pinto",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Sine merita più coperti da Google",
+    "generated_at": "2026-04-15T08:48:04.168195",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@ristorante-rifugio.com": {
+    "nome": "Ristorante Rifugio, Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:48:28.140601",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "sadler@sadler.it": {
+    "nome": "Ristorante Sadler",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Sadler merita più coperti da Google",
+    "generated_at": "2026-04-15T08:48:47.369450",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@thefisherman.it": {
+    "nome": "The FisherMan Pasta",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano pasta di pesce online",
+    "generated_at": "2026-04-15T08:49:02.588585",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "thekitchen.milano@gmail.com​": {
+    "nome": "The Kitchen Milano",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:49:18.413020",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@ristorantelabrisa.it": {
+    "nome": "Ristorante la Brisa",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "La Brisa merita più coperti da Google",
+    "generated_at": "2026-04-15T08:49:34.493141",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@ilcapestrano.it": {
+    "nome": "Il Capestrano Ristorante Abruzzese",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano cucina abruzzese online",
+    "generated_at": "2026-04-15T08:49:54.345342",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@mudimsum.it": {
+    "nome": "MU dimsum",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I dim sum meritano più coperti a Milano",
+    "generated_at": "2026-04-15T08:50:11.882049",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@locandaallascala.it": {
+    "nome": "Locanda alla Scala",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:50:28.555675",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@osteriarnaldo.it": {
+    "nome": "Osteria Arnaldo",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:50:46.970836",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@gragraphic.it": {
+    "nome": "Paper Moon Giardino",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:51:03.829056",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@ilsalumaiodimontenapoleone.it": {
+    "nome": "Il Salumaio di Montenapoleone",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Il Salumaio merita più coperti da Google",
+    "generated_at": "2026-04-15T08:51:18.270043",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "atmosfera@atm.it": {
+    "nome": "ATMosfera",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "ATMosfera, il tram che merita più prenotazioni",
+    "generated_at": "2026-04-15T08:51:32.258766",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "amamimilano@gmail.com": {
+    "nome": "Amami Ristorante Pizzeria Caffè",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Amami merita più coperti da Google",
+    "generated_at": "2026-04-15T08:51:47.455462",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "prenotazioni@savinimilano.it%20": {
+    "nome": "Savini 1867",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Savini 1867 merita più coperti da Google",
+    "generated_at": "2026-04-15T08:52:02.784514",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "prenotazioni@corajerestaurant.com": {
+    "nome": "Coraje",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "Coraje merita più coperti da Google",
+    "generated_at": "2026-04-15T08:52:20.072463",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "bistrot@enotecadimare.it": {
+    "nome": "Enoteca di Mare-Bistrot",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano il tuo bistrot online?",
+    "generated_at": "2026-04-15T08:52:34.927380",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@latavernadegliarna.it": {
+    "nome": "La Taverna degli Arna",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "La Taverna degli Arna merita più coperti",
+    "generated_at": "2026-04-15T08:52:48.936386",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "osteriaal29milano@gmail.com": {
+    "nome": "Osteria Al 29",
+    "settore": "ristoranti",
+    "citta": "Milano",
+    "oggetto": "I tavoli vuoti del martedì sera",
+    "generated_at": "2026-04-15T08:53:05.082643",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0838.csv"
+  },
+  "info@terragelato.it": {
+    "nome": "Terra gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano gelato, vi trovano?",
+    "generated_at": "2026-04-15T09:14:34.443689",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "romana-romacoladirienzo@gelateriaromana.com": {
+    "nome": "Gelateria La Romana dal 1947",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita clienti tutto l'anno",
+    "generated_at": "2026-04-15T09:08:58.816026",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@ciaccolab.it": {
+    "nome": "Ciacco",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Il tuo gelato merita più clienti online",
+    "generated_at": "2026-04-15T09:09:14.418004",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@otaleg.com": {
+    "nome": "Otaleg Trastevere",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "I clienti cercano gelato, vi trovano?",
+    "generated_at": "2026-04-15T09:09:30.625486",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@alsettimogelo.it": {
+    "nome": "Al Settimo Gelo",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Al Settimo Gelo merita più clienti online",
+    "generated_at": "2026-04-15T09:09:47.210257",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@picogelato.it": {
+    "nome": "Pico Gelato - Flaminio",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Pico Gelato: più clienti prima dell'estate",
+    "generated_at": "2026-04-15T09:11:05.071313",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@freddogelato.it": {
+    "nome": "Freddo Gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Freddo Gelato: più clienti prima dell'estate",
+    "generated_at": "2026-04-15T09:10:33.664016",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "ask@verdepistacchiolab.it": {
+    "nome": "Verde Pistacchio",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita clienti tutto l'anno",
+    "generated_at": "2026-04-15T09:10:49.108012",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@dassiegelato.com": {
+    "nome": "Dassie Gelato - Milano",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Dassie Gelato: più clienti prima dell'estate",
+    "generated_at": "2026-04-15T09:11:36.958597",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@gelateriamomenti.it": {
+    "nome": "Gelateria Momenti - Via California, Milano",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "I tuoi gusti meritano più clienti online",
+    "generated_at": "2026-04-15T09:11:55.219225",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "gelateriaumberto@umberto1934.com": {
+    "nome": "Gelateria Umberto 1934 Milano",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita più clienti online",
+    "generated_at": "2026-04-15T09:12:12.815585",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@fiabedigelato.it": {
+    "nome": "Gelateria Fiabe di Gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita più clienti in zona",
+    "generated_at": "2026-04-15T09:12:31.392864",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@cerdiniquenardel.com": {
+    "nome": "Gelato e Champagne dal 1906 - Gluten Free",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La vostra gelateria merita più clienti online",
+    "generated_at": "2026-04-15T09:12:46.257346",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@iconicogelato.com": {
+    "nome": "Iconico Gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Il tuo gelato merita più clienti online",
+    "generated_at": "2026-04-15T09:15:34.576891",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "milano-coldilana@gelateriaromana.com": {
+    "nome": "Gelateria La Romana dal 1947",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La Romana merita più clienti da Google",
+    "generated_at": "2026-04-15T09:13:15.519972",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@noshgelato.com": {
+    "nome": "Nosh Gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Nosh Gelato: più clienti prima dell'estate",
+    "generated_at": "2026-04-15T09:13:31.587885",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "ilnegoziettodelgelato@gmail.com": {
+    "nome": "Il Negozietto del Gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Più clienti in gelateria quest'estate?",
+    "generated_at": "2026-04-15T09:13:48.735424",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "%20info@gruppoartico.com": {
+    "nome": "Artico Gelateria - Duomo",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita più clienti online",
+    "generated_at": "2026-04-15T09:14:18.617668",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@gelateriamarghera.it": {
+    "nome": "Gelateria Marghera",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita più clienti online",
+    "generated_at": "2026-04-15T09:14:47.793694",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@gelateriarigoletto.it": {
+    "nome": "Gelateria Rigoletto",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano gelato, vi trovano?",
+    "generated_at": "2026-04-15T09:15:03.031626",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "gelateria.borsieri@libero.it": {
+    "nome": "Gelateria Borsieri",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita più clienti in zona",
+    "generated_at": "2026-04-15T09:15:18.377872",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@lucagelaterie.com": {
+    "nome": "Luca - Il gelato di compagnia",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano gelato: ti trovano?",
+    "generated_at": "2026-04-15T09:15:53.391929",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "milano-buenosaires@gelateriaromana.com": {
+    "nome": "Gelateria La Romana dal 1947",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Il vostro gelato merita più clienti online",
+    "generated_at": "2026-04-15T09:16:08.947705",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@gusto17.com": {
+    "nome": "Gusto 17 - Arco della Pace, Milano",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Gusto 17 merita più clienti da Google",
+    "generated_at": "2026-04-15T09:18:00.418067",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@rivareno.com": {
+    "nome": "Rivareno Gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Il vostro gelato merita più clienti online",
+    "generated_at": "2026-04-15T09:17:43.752239",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@biancolatte.it": {
+    "nome": "Biancolatte",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "La tua pasticceria merita più clienti online",
+    "generated_at": "2026-04-15T09:29:53.259984",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@panzeramilano.com": {
+    "nome": "Panzera Milano Pasticceria e Bistrot",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:26:32.341201",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@icebound.it": {
+    "nome": "Ice Bound",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Ice Bound merita più clienti quest'estate",
+    "generated_at": "2026-04-15T09:17:28.675172",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "infos@caffet-compagnie.com": {
+    "nome": "Maison Caffet - Chocolatier Pâtissier - Milan",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Maison Caffet merita più clienti golosi",
+    "generated_at": "2026-04-15T09:18:16.391864",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "iltuogelato@prossimafermata.com": {
+    "nome": "Gelateria Prossima Fermata",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "La tua gelateria merita più clienti online",
+    "generated_at": "2026-04-15T09:18:30.231344",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "arancinmilano@gmail.com": {
+    "nome": "Frozen by Arancin Cannoli e Granite",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "I tuoi cannoli meritano più clienti online",
+    "generated_at": "2026-04-15T09:18:47.068553",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@enricorizzi.com": {
+    "nome": "Boutique - Enrico Rizzi Milano",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Il tuo gelato merita più clienti online",
+    "generated_at": "2026-04-15T09:19:04.496842",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@ilcannolo.com": {
+    "nome": "Il Cannolo Sua Eccellenza",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri cannoli meritano più clienti online",
+    "generated_at": "2026-04-15T09:30:09.474707",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@gayodin.it": {
+    "nome": "Gay Odin Milano Fabbrica di Cioccolato 1894",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Gay Odin merita il primo posto su Google",
+    "generated_at": "2026-04-15T09:19:35.339141",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@trescalini.it": {
+    "nome": "Tartufo - Ristorante Tre Scalini",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano il tuo tartufo online?",
+    "generated_at": "2026-04-15T09:19:52.261492",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "mag@gelatomag.it": {
+    "nome": "MAG - Mastri Artigiani del Gelato",
+    "settore": "gelaterie",
+    "citta": "Milano",
+    "oggetto": "Il vostro gelato merita più clienti online",
+    "generated_at": "2026-04-15T09:20:06.918804",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "pasticceriaspezia@gmail.com": {
+    "nome": "Pasticceria Spezia",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Le tue torte meritano più clienti online",
+    "generated_at": "2026-04-15T09:20:21.080691",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticceriacastelnuovo.it": {
+    "nome": "Pasticceria Castelnuovo",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:20:37.812592",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "migliavacca1958@gmail.com": {
+    "nome": "Migliavacca",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Migliavacca merita più clienti da Google",
+    "generated_at": "2026-04-15T09:20:54.206090",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticceriarovida.it": {
+    "nome": "Pasticceria Rovida",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "La vostra vetrina online merita di più",
+    "generated_at": "2026-04-15T09:21:09.660915",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@martesanamilano.com": {
+    "nome": "Pasticceria Martesana Milano Sant'Agostino",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Le vostre torte meritano più clienti online",
+    "generated_at": "2026-04-15T09:25:41.322201",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@idolcinamura.com": {
+    "nome": "#IDolciNamura APRTI",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:21:38.110518",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@fontedeldolce.it": {
+    "nome": "Fonte del Dolce",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano dolci: vi trovano?",
+    "generated_at": "2026-04-15T09:22:09.450063",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "adolfo@adolfostefanelli.it": {
+    "nome": "Pasticceria Adolfo Stefanelli",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "La vostra pasticceria merita clienti ogni giorno",
+    "generated_at": "2026-04-15T09:24:40.087395",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "pasticceria.luca.milano@gmail.com": {
+    "nome": "Pasticceria luca Milano",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:22:40.155964",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "angelapasticceria@yahoo.com": {
+    "nome": "Pasticceria Angela Milano",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:22:57.397102",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "navotti.pasticceria@libero.it": {
+    "nome": "Pasticceria Navotti Senza Glutine Milano",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I celiaci di Milano vi cercano online?",
+    "generated_at": "2026-04-15T09:23:14.783491",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@marotinmilano.it": {
+    "nome": "Marotin",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Marotin, i vostri dolci meritano più clienti",
+    "generated_at": "2026-04-15T09:23:29.710980",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@sbriciolami.com": {
+    "nome": "Sbriciolami - Se la vita è amara, tu mangia un dolce",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Sbriciolami merita più clienti golosi online",
+    "generated_at": "2026-04-15T09:23:44.097671",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "ranieri.mi@libero.it": {
+    "nome": "Pasticceria Ranieri Moscova 7",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:24:02.806819",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@marlapasticceria.it": {
+    "nome": "Marlà Pasticceria",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:24:53.896997",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticcerianepa.it": {
+    "nome": "Pasticceria Nepà 100% plant-based",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci vegani meritano più clienti",
+    "generated_at": "2026-04-15T09:25:10.657987",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@covamilano.com": {
+    "nome": "Cova Montenapoleone",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Cova merita più clienti dal digitale",
+    "generated_at": "2026-04-15T09:25:58.908958",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "pinodeluca6@gmail.com": {
+    "nome": "Pasticceria Caravaggio",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Le vostre torte meritano più clienti",
+    "generated_at": "2026-04-15T09:26:16.709284",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@cremeriabuonarroti.it": {
+    "nome": "Pasticceria Cremeria Buonarroti",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Le tue torte meritano più clienti online",
+    "generated_at": "2026-04-15T09:26:46.236534",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "milanolosanna@moschella.shop": {
+    "nome": "Pasticceria Moschella",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:27:00.876290",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticceriacucchi.it": {
+    "nome": "Pasticceria Cucchi",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:27:17.776679",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@gattullo.it": {
+    "nome": "Pasticceria Gattullo",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Gattullo merita più clienti da Google",
+    "generated_at": "2026-04-15T09:27:32.254495",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticceriaclea.it": {
+    "nome": "Clèa Pasticceria Culinaria",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Clèa merita più clienti da Google",
+    "generated_at": "2026-04-15T09:27:48.262332",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticceriamoriondo.com": {
+    "nome": "Pasticceria Moriondo",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:28:04.628469",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "hello@spuntiramisu.com": {
+    "nome": "Spun Tiramisu",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano tiramisù: vi trovano?",
+    "generated_at": "2026-04-15T09:28:19.854921",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@angolodeldessert.it": {
+    "nome": "L'Angolo del Dessert",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:28:35.714109",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "tiemipasticceria@gmail.com": {
+    "nome": "Tiemì",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Tiemì merita più di un sito Wix",
+    "generated_at": "2026-04-15T09:28:53.513175",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticceriasancarlo.it": {
+    "nome": "San Carlo",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "San Carlo merita più clienti da Google",
+    "generated_at": "2026-04-15T09:29:07.986134",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@giovannigalli.com": {
+    "nome": "Giovanni Galli",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "La tua pasticceria merita clienti ogni giorno",
+    "generated_at": "2026-04-15T09:34:07.561497",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticheri.it": {
+    "nome": "PastiChéri",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "PastiChéri merita più clienti da Google",
+    "generated_at": "2026-04-15T09:29:37.828319",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@luini.it": {
+    "nome": "Panzerotti Luini",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Luini, Milano vi cerca su Google?",
+    "generated_at": "2026-04-15T09:30:25.549417",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@pasticceriagelsomina.it": {
+    "nome": "Gelsomina",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:30:43.350880",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "shoponline@rinaldinipastry.com": {
+    "nome": "Rinaldini Store Milano",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:30:59.237693",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "marketing@giacomomilano.com": {
+    "nome": "Giacomo Pasticceria",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Le tue torte meritano più clienti online",
+    "generated_at": "2026-04-15T09:31:16.032883",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "officinazero@outlook.it": {
+    "nome": "Officina Zero",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Le tue torte meritano più clienti online",
+    "generated_at": "2026-04-15T09:31:31.591183",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@panettonevergani.it": {
+    "nome": "Vergani",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Vergani merita più clienti online a Milano",
+    "generated_at": "2026-04-15T09:32:00.052449",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "amministrazione@glufreebakery.it": {
+    "nome": "GluFree Bakery",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci senza glutine meritano più clienti",
+    "generated_at": "2026-04-15T09:32:13.159517",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "francescopanarellospa@cgn.legalmail.it": {
+    "nome": "Panarello",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Panarello merita più clienti da Google",
+    "generated_at": "2026-04-15T09:32:28.882685",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@caffecarlino.it": {
+    "nome": "Pasticceria Carlino - Milano",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "La tua vetrina online vale quanto quella in negozio?",
+    "generated_at": "2026-04-15T09:32:45.235024",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "gianluca.baroni@panetteriamercato.com": {
+    "nome": "Panetteria Mercato",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano i tuoi dolci online",
+    "generated_at": "2026-04-15T09:33:01.137950",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "pasticcorreggio@hotmail.it": {
+    "nome": "Pasticceria Correggio",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:33:20.502818",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "armagnimilano@gmail.com": {
+    "nome": "Pasticceria | Catering | Armagni Coffee & Bakery",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I dolci migliori meritano clienti migliori",
+    "generated_at": "2026-04-15T09:33:36.079962",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "gift@davittorio.com": {
+    "nome": "Da Vittorio Selection",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:33:51.980535",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@christiancorporation.it": {
+    "nome": "Christian",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:34:23.501866",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@californiabakery.it": {
+    "nome": "California Bakery",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I vostri dolci meritano più clienti online",
+    "generated_at": "2026-04-15T09:34:38.988899",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@doncola.com": {
+    "nome": "Don'Cola Siciliano di Nascita - Milano Brera",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Don'Cola merita più clienti da Google",
+    "generated_at": "2026-04-15T09:34:55.857300",
+    "status": "ready_to_upload",
+    "csv": "data/outreach/batch_20260415_0908.csv"
+  },
+  "info@zivapasticceria.it": {
+    "nome": "Ziva",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Ziva merita più clienti da Google",
+    "generated_at": "2026-04-16T06:16:18.878117",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@pasticheri.com": {
+    "nome": "PastiChéri",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "PastiChéri, i vostri dolci meritano più clienti",
+    "generated_at": "2026-04-16T06:16:34.389522",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@mignon2go.com": {
+    "nome": "BAR - PASTICCERIA - BISTROT MIGNON",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I clienti di Mignon vi cercano online?",
+    "generated_at": "2026-04-16T06:16:51.522503",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "help@partoo.fr": {
+    "nome": "Di Pinto’s Bakery",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I tuoi dolci meritano più clienti online",
+    "generated_at": "2026-04-16T06:17:05.666546",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@caffenapoli.com": {
+    "nome": "Caffè Napoli",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano pastiere online, vi trovano?",
+    "generated_at": "2026-04-16T06:17:22.020145",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "shop@guidogobino.it": {
+    "nome": "Guido Gobino",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Il cioccolato Gobino merita più clienti online",
+    "generated_at": "2026-04-16T06:17:39.791538",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "panificio.lissanaargonne@gmail.com": {
+    "nome": "Panificio Lissana",
+    "settore": "pasticcerie",
+    "citta": "Milano",
+    "oggetto": "Il tuo panettone merita più clienti online",
+    "generated_at": "2026-04-16T06:17:56.197340",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "business@bernabei.it": {
+    "nome": "Enoteca Bernabei Trastevere",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I tuoi vini meritano più clienti online",
+    "generated_at": "2026-04-16T06:18:12.847932",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@elvinatt.it": {
+    "nome": "Enoteca El Vinatt dal 1964",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "El Vinatt, i vostri vini meritano più clienti",
+    "generated_at": "2026-04-16T06:18:30.127500",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "bottega@arte-del-vino.it": {
+    "nome": "Bottega dell'Arte del Vino",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "La tua enoteca merita clienti ogni giorno",
+    "generated_at": "2026-04-16T06:18:45.606468",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@aandco.it": {
+    "nome": "A&Co Enoteca Milano",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "La vostra enoteca merita clienti migliori",
+    "generated_at": "2026-04-16T06:19:00.248436",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@nombradevin.it": {
+    "nome": "N'Ombra de Vin",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "La vostra enoteca merita più clienti online",
+    "generated_at": "2026-04-16T06:19:15.706629",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "enoteca@vini-sapori.it": {
+    "nome": "Vini & Sapori Enoteca",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "La tua enoteca merita clienti ogni sera",
+    "generated_at": "2026-04-16T06:19:33.173807",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@vinovinomilano.it": {
+    "nome": "Vino Vino dal 1921",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I vostri vini meritano clienti nuovi",
+    "generated_at": "2026-04-16T06:19:51.237808",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@decantami.com": {
+    "nome": "Enoteca Decantami",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I tuoi vini meritano più clienti online",
+    "generated_at": "2026-04-16T06:20:07.507478",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "wineroad@wineroad.it": {
+    "nome": "Wineroad Milano",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "La tua enoteca merita clienti ogni sera",
+    "generated_at": "2026-04-16T06:20:23.069896",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "assistenza@winelivery.com": {
+    "nome": "Winelivery Bar & Enoteca Milano Darsena",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I vostri vini meritano più clienti online",
+    "generated_at": "2026-04-16T06:20:37.096019",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "enotecavinomilano@gmail.com": {
+    "nome": "Vino",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "La tua enoteca merita clienti ogni sera",
+    "generated_at": "2026-04-16T06:20:54.329242",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@enotecacotti.it": {
+    "nome": "Enoteca Cotti dal 1952",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I vostri vini meritano più clienti online",
+    "generated_at": "2026-04-16T06:21:12.002343",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "accoglienza@enotecanaturale.it": {
+    "nome": "e/n enoteca naturale",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I vini naturali cercano chi li cerca",
+    "generated_at": "2026-04-16T06:21:26.915226",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@tridentecollection.com": {
+    "nome": "The Times Bar & Restaurant",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "Il tuo wine bar merita più coperti da Google",
+    "generated_at": "2026-04-16T06:21:43.598875",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "nico.nocesrl@legalmail.it": {
+    "nome": "Niconoce ®️ Enoteca con cucina",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I wine lover milanesi vi cercano online?",
+    "generated_at": "2026-04-16T06:21:57.965261",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@remedymilano.it": {
+    "nome": "Remedy Wine & Spirits Milano",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I wine lover vi cercano su Google?",
+    "generated_at": "2026-04-16T06:22:17.253564",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@cantinacarducci.it": {
+    "nome": "Cantina Carducci - Enoteca Wine Bar",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I wine lover vi cercano su Google?",
+    "generated_at": "2026-04-16T06:22:32.235358",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "servizioclienti@cardenzia.com": {
+    "nome": "Vineria Cardenzia #diversamente buoni",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "La vostra vineria merita più clienti online",
+    "generated_at": "2026-04-16T06:22:51.331611",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "le7viti@gmail.com": {
+    "nome": "Le 7 Viti - Vini Biologici e Naturali Sfusi ed in Bottiglia - Milano",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I vostri vini naturali meritano più clienti",
+    "generated_at": "2026-04-16T06:23:08.719306",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "infovinicola@gmail.com": {
+    "nome": "Vinicola - Enoteca con Vini Sfusi",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I vostri vini sfusi meritano più clienti",
+    "generated_at": "2026-04-16T06:23:24.731407",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "ancri.veritas@gmail.com": {
+    "nome": "Veritas Bistrot Enoteca",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "Il vino giusto merita il cliente giusto",
+    "generated_at": "2026-04-16T06:23:39.641465",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "rb.chinzi@gmail.com": {
+    "nome": "Ross & Bianch - Enoteca con cucina a Milano",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I milanesi cercano la vostra enoteca?",
+    "generated_at": "2026-04-16T06:23:58.430220",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "ilsecco@ilsecco.com": {
+    "nome": "Il Secco - Bollicine italiane",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "Le tue bollicine meritano più clienti online",
+    "generated_at": "2026-04-16T06:24:16.126618",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "vinoir@vinoir.com": {
+    "nome": "Vinoir",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "Vinoir, i vostri clienti cercano online?",
+    "generated_at": "2026-04-16T06:24:31.124403",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "placejoys.com@gmail.com": {
+    "nome": "Big Star Bar Diner",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I tuoi vini meritano più clienti online",
+    "generated_at": "2026-04-16T06:24:47.246503",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@ecletticomilano.com": {
+    "nome": "Bicerìn",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "Bicerìn: i clienti vi cercano su Google?",
+    "generated_at": "2026-04-16T06:25:04.320194",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@elbuscia.it": {
+    "nome": "El Buscia",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "El Buscia merita più clienti da Google",
+    "generated_at": "2026-04-16T06:25:18.546914",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "enoteca@wineoclock.it": {
+    "nome": "Wineoclock S. R. L.",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I vostri vini meritano più click",
+    "generated_at": "2026-04-16T06:25:33.990302",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "kilburnmilano@gmail.com": {
+    "nome": "Kilburn - Cocktail Bar",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "Kilburn merita più clienti dal web",
+    "generated_at": "2026-04-16T06:25:50.054578",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@officinamilano.eu": {
+    "nome": "Officina Milano",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I wine lover di Milano vi cercano online",
+    "generated_at": "2026-04-16T06:26:04.996925",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "caneva@wineria.it": {
+    "nome": "Wineria",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I wine lover milanesi vi cercano online?",
+    "generated_at": "2026-04-16T06:26:20.163150",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "prenotazioni@ilvinodromo.it": {
+    "nome": "Vinodromo",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "Vinodromo merita più clienti da Google",
+    "generated_at": "2026-04-16T06:26:36.429289",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@wavecocktailbar.it": {
+    "nome": "Wave Cocktail Bar",
+    "settore": "enoteche",
+    "citta": "Milano",
+    "oggetto": "I cocktail migliori che Milano non trova",
+    "generated_at": "2026-04-16T06:26:51.443656",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "imaestridellatavola@gmail.com": {
+    "nome": "Catering I Maestri Della Tavola Milano",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Il vostro catering merita più richieste online",
+    "generated_at": "2026-04-16T06:27:05.629309",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@milano-catering.com": {
+    "nome": "Milano Catering Fiere ed Eventi Aziendali",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri eventi meritano più richieste online",
+    "generated_at": "2026-04-16T06:27:23.198511",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@cheflivery.it": {
+    "nome": "Cheflivery ® Catering e Chef a domicilio",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Cheflivery: più prenotazioni dal web?",
+    "generated_at": "2026-04-16T06:27:36.571019",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@catering-matrimonio.it": {
+    "nome": "Catering Matrimonio Milano",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Le coppie vi cercano su Google?",
+    "generated_at": "2026-04-16T06:27:50.800345",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@chiu.eu": {
+    "nome": "Chiù Catering Milano",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Il vostro catering merita più richieste online",
+    "generated_at": "2026-04-16T06:28:05.440270",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@leventum.it": {
+    "nome": "Leventum",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Il vostro catering merita più richieste online",
+    "generated_at": "2026-04-16T06:28:19.926450",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@lacucinadimaluandco.it": {
+    "nome": "La Cucina di MaLù & Co. catering and delivery",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Il vostro catering merita più clienti online",
+    "generated_at": "2026-04-16T06:28:40.407160",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@mimosa.catering": {
+    "nome": "Mimosa Milano",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Il vostro catering merita più richieste online",
+    "generated_at": "2026-04-16T06:28:57.062036",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "eventi@foodmood.it": {
+    "nome": "Food Mood Catering Milano",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri piatti meritano più coperti",
+    "generated_at": "2026-04-16T06:29:12.807979",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@leliolanza.com": {
+    "nome": "Lelio Lanza - Fuochi inaspettati - Chef a domicilio",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I tuoi piatti meritano più prenotazioni",
+    "generated_at": "2026-04-16T06:29:29.920945",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@classeventi.it": {
+    "nome": "CLASS EVENTI",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri piatti meritano più coperti online",
+    "generated_at": "2026-04-16T06:29:45.802610",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@uapcatering.com": {
+    "nome": "UAP Catering & Banqueting Milano",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri eventi meritano più visibilità online",
+    "generated_at": "2026-04-16T06:30:00.744919",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "cateringmilanesi@gmail.com": {
+    "nome": "Eventi Catering Milanesi",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri piatti meritano più prenotazioni",
+    "generated_at": "2026-04-16T06:30:15.531967",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@cartabiancaeventi.it": {
+    "nome": "Cartabianca banqueting & eventi",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri eventi meritano più prenotazioni online",
+    "generated_at": "2026-04-16T06:30:29.761552",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "eventi@q3milano.it": {
+    "nome": "Q3 Milano - Corporate Events & Catering",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri eventi meritano più visibilità online",
+    "generated_at": "2026-04-16T06:30:47.722044",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@zerobriciole.com": {
+    "nome": "Zerobriciole",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Il vostro catering merita più coperti online",
+    "generated_at": "2026-04-16T06:31:03.510184",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@artevento.it": {
+    "nome": "Artevento Catering Experience",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I tuoi competitor su Google ti rubano eventi",
+    "generated_at": "2026-04-16T06:31:20.184505",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@barmanmilano.com": {
+    "nome": "Barman Milano Eventi SRL",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I vostri cocktail meritano più prenotazioni",
+    "generated_at": "2026-04-16T06:31:37.274713",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@areakitchen.it": {
+    "nome": "Area Kitchen Catering",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "Il vostro catering merita più richieste online",
+    "generated_at": "2026-04-16T06:31:53.865985",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  },
+  "info@elisascala.com": {
+    "nome": "Elisa Scala Personal Chef Milano - Bespoke events",
+    "settore": "catering",
+    "citta": "Milano",
+    "oggetto": "I tuoi eventi meritano un sito all'altezza",
+    "generated_at": "2026-04-16T06:32:12.495407",
+    "status": "uploaded",
+    "csv": "data/outreach/batch_20260416_0600.csv"
+  }
+}
