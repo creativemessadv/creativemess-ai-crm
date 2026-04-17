@@ -116,7 +116,7 @@ def upload_to_instantly(rows):
         try:
             r = requests.post(
                 'https://api.instantly.ai/api/v2/leads',
-                json={'campaign_id': INSTANTLY_CAMPAIGN_ID, 'leads': [lead]},
+                json={'campaign_id': INSTANTLY_CAMPAIGN_ID, **lead},
                 headers=headers, timeout=30
             )
             if r.status_code in (200, 201):
