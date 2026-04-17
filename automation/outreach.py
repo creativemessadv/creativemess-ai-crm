@@ -4,15 +4,41 @@ from datetime import datetime
 from pathlib import Path
 from anthropic import Anthropic
 
+import base64
 ANTHROPIC_KEY         = os.getenv('ANTHROPIC_API_KEY', '')
 INSTANTLY_KEY         = os.getenv('INSTANTLY_API_KEY', '')
 INSTANTLY_CAMPAIGN_ID = os.getenv('INSTANTLY_CAMPAIGN_ID', '')
+BREVO_KEY             = os.getenv('BREVO_API_KEY', '')
+ROBERTO_EMAIL         = os.getenv('ROBERTO_EMAIL', 'r.salvatori@creativemessadv.it')
 DAILY_LIMIT           = int(os.getenv('DAILY_LIMIT', '50'))
 DATA_DIR              = Path('data')
 SENT_LOG              = DATA_DIR / 'sent.json'
 OUTREACH_DIR          = DATA_DIR / 'outreach'
 
 client = Anthropic(api_key=ANTHROPIC_KEY)
+
+def send_csv_email(csv_path, n_lead):
+    if not BREVO_KEY:
+        print("   BREVO_KEY mancante — skip email CSV"); return
+    try:
+        from datetime import datetime
+        content = __import__('base64').b64encode(open(csv_path,'rb').read()).decode()
+        today = datetime.now().strftime('%d/%m/%Y')
+        payload = {
+            'sender': {'name': 'Sistema AI — Creative Mess', 'email': 'r.fontana@creativemessadv.it'},
+            'to': [{'email': ROBERTO_EMAIL}],
+            'subject': f'[CSV LEAD] {n_lead} email pronte da caricare — {today}',
+            'htmlContent': f'<div style="font-family:Arial,sans-serif;font-size:14px"><h3>CSV Lead del {today}</h3><p><strong>{n_lead} email generate</strong> da Chiara, pronte per Instantly.</p><p>Come caricare:<br>1. Scarica il file allegato<br>2. Vai su Instantly campagna Add Leads Import CSV<br>3. Mappa i campi (email, first_name, subject e body come Custom Variable)<br>4. <strong>Deseleziona</strong> Check for duplicates across all<br>5. Upload All</p></div>',
+            'attachment': [{'content': content, 'name': __import__('pathlib').Path(csv_path).name}]
+        }
+        r = __import__('requests').post('https://api.brevo.com/v3/smtp/email', json=payload,
+            headers={'api-key': BREVO_KEY, 'Content-Type': 'application/json'}, timeout=15)
+        if r.status_code in (200, 201):
+            print(f"   CSV inviato via email a {ROBERTO_EMAIL}")
+        else:
+            print(f"   Errore invio email CSV: {r.status_code}")
+    except Exception as e:
+        print(f"   Errore invio email CSV: {e}")
 
 CHIARA_PROMPT = """Sei Chiara Benedetti, specialista outreach di Creative Mess ADV, web agency italiana 100% AI-powered.
 Scrivi email cold brevi e personalizzate per acquisire clienti italiani.
