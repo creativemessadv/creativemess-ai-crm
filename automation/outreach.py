@@ -64,14 +64,14 @@ def generate_email(nome, settore, citta, sito=''):
     if sito:
         context += f"\nSito: {sito}"
     resp = client.messages.create(
-        model='claude-opus-4-6', max_tokens=400, system=CHIARA_PROMPT,
+        model='claude-haiku-4-5-20251001', max_tokens=400, system=CHIARA_PROMPT,
         messages=[{'role': 'user', 'content': context}]
     )
     return resp.content[0].text
 
 def generate_followup(nome, settore, oggetto_orig):
     resp = client.messages.create(
-        model='claude-opus-4-6', max_tokens=300, system=FOLLOWUP_PROMPT,
+        model='claude-haiku-4-5-20251001', max_tokens=300, system=FOLLOWUP_PROMPT,
         messages=[{'role': 'user', 'content':
             f"Settore: {settore}\nNome azienda: {nome}\nOggetto email precedente: {oggetto_orig}"}]
     )
