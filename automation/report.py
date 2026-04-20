@@ -21,7 +21,12 @@ Scrivi report operativi a Roberto Salvatori (Presidente).
 Stile: diretto, numeri precisi, niente giri di parole.
 Se ci sono problemi: dilli chiaramente e dai il prossimo passo esatto.
 Se tutto ok: confermalo e dai un insight utile.
-Scrivi in italiano, tono professionale ma diretto. Max 200 parole."""
+Scrivi in italiano, tono professionale ma diretto. Max 200 parole.
+
+IMPORTANTE: I processi cron (outreach-daily, scraper-daily, report-mattina, report-sera, briefing-settimanale)
+mostrano stato "OK (eseguito)" o "stopped" dopo aver girato — e NORMALE, non e un errore.
+Segnala problemi SOLO se exit_code != 0 o se ci sono errori nei log delle ultime 3 ore.
+Se i log dicono "Nessun errore nelle ultime 3 ore" significa che tutto funziona."""
 
 RICCARDO_WEEKLY = """Sei Riccardo Fontana, CEO di Creative Mess ADV.
 Scrivi il briefing strategico settimanale a Roberto Salvatori (Presidente).
@@ -33,6 +38,8 @@ Analizza i dati della settimana e dai:
 4. Riporta ESATTAMENTE la lista target che ti viene fornita, mantenendo i flag OK/ATTENZIONE/TODO. Mettila in fondo sotto il titolo MAPPA TARGET LOMBARDIA.
 Stile: CEO che fa briefing al board. Numeri, analisi, decisioni. Max 300 parole + mappa target."""
 
+CRON_JOBS = {'outreach-daily', 'scraper-daily', 'report-mattina', 'report-sera', 'briefing-settimanale'}
+
 def get_pm2_status():
     try:
         result = subprocess.run(['pm2', 'jlist'], capture_output=True, text=True, timeout=10)
@@ -43,20 +50,37 @@ def get_pm2_status():
             pm2_env = p.get('pm2_env', {})
             state = pm2_env.get('status', 'unknown')
             exits = pm2_env.get('exit_code', 0)
-            restarts = pm2_env.get('restart_time', 0)
-            status.append(f"{name}: {state} (uscite: {exits}, restart: {restarts})")
+            if name in CRON_JOBS:
+                label = 'OK (eseguito, in attesa prossimo cron)' if state == 'stopped' else state
+            else:
+                label = state
+            status.append(f"{name}: {label} (exit_code: {exits})")
         return '\n'.join(status) if status else 'Nessun processo PM2'
     except Exception as e:
         return f'Errore lettura PM2: {e}'
 
-def get_pm2_logs(lines=30):
+def get_pm2_logs(lines=60):
     try:
+        import re as _re
         result = subprocess.run(['pm2', 'logs', '--nostream', '--lines', str(lines)],
                                 capture_output=True, text=True, timeout=10)
         log = result.stdout + result.stderr
-        errors = [l for l in log.split('\n')
-                  if 'error' in l.lower() or 'errore' in l.lower() or 'traceback' in l.lower()]
-        return '\n'.join(errors[:10]) if errors else 'Nessun errore nei log'
+        now = datetime.now()
+        recent_errors = []
+        for l in log.split('\n'):
+            if not ('error' in l.lower() or 'errore' in l.lower() or 'traceback' in l.lower()):
+                continue
+            m = _re.search(r'\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}', l)
+            if m:
+                for fmt in ('%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M:%S'):
+                    try:
+                        ts = datetime.strptime(m.group(), fmt)
+                        if (now - ts).total_seconds() < 10800:
+                            recent_errors.append(l)
+                        break
+                    except Exception:
+                        continue
+        return '\n'.join(recent_errors[:10]) if recent_errors else 'Nessun errore nelle ultime 3 ore'
     except Exception as e:
         return f'Log non disponibili: {e}'
 
