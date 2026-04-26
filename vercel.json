@@ -8,7 +8,7 @@
   "routes": [
     { "src": "/api/ai", "dest": "/api/ai.js" },
     { "src": "/yaya/?$", "dest": "/yaya/index.html" },
-    { "src": "/yaya/(servizi|chi-siamo|contatti)/?$", "dest": "/yaya/$1.html" },
+    { "src": "/yaya/(servizi|gallery|chi-siamo|contatti)/?$", "dest": "/yaya/$1.html" },
     { "src": "/yaya/(.*)", "dest": "/yaya/$1" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
