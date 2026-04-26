@@ -619,13 +619,18 @@ async function atCreate(table, fields) {
 
 // ── AI CALL ───────────────────────────────────────────────────────────────────
 async function askAgent(agent, message, history = []) {
+  const cleanHistory = (Array.isArray(history) ? history : [])
+    .filter(m => m && (m.role === 'user' || m.role === 'assistant'))
+    .map(m => ({ role: m.role, content: typeof m.content === 'string' ? m.content.trim() : '' }))
+    .filter(m => m.content.length > 0);
   const r = await fetch('/api/ai', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ agent, message, history })
+    body: JSON.stringify({ agent, message: (message || '').trim(), history: cleanHistory })
   });
-  const d = await r.json();
-  if (!d.reply) throw new Error(d.error || 'Errore API');
+  let d = {};
+  try { d = await r.json(); } catch { /* ignore */ }
+  if (!r.ok || !d.reply) throw new Error(d.error || ('Errore API ' + r.status));
   return d.reply;
 }
 
@@ -644,10 +649,12 @@ async function sendCEO() {
   btn.disabled = true;
   msgs.innerHTML += '<div class="typing" id="ceo-typing">Riccardo sta analizzando...</div>';
   msgs.scrollTop = msgs.scrollHeight;
-  ceoHistory.push({role:'user', content:msg});
   try {
-    const reply = await askAgent('riccardo', msg, ceoHistory.slice(0,-1).slice(-10));
-    ceoHistory.push({role:'assistant', content:reply});
+    const reply = await askAgent('riccardo', msg, ceoHistory.slice(-10));
+    if (reply && reply.trim()) {
+      ceoHistory.push({role:'user', content:msg});
+      ceoHistory.push({role:'assistant', content:reply});
+    }
     document.getElementById('ceo-typing')?.remove();
     msgs.innerHTML += '<div class="cmsg-a"><div class="cb-a">' + escHtml(reply) + '</div><div class="ct">Riccardo · ' + t + '</div></div>';
   } catch (err) {
@@ -668,7 +675,9 @@ async function sendElena() {
   out.innerHTML = '<div style="color:var(--t3);font-size:11px;font-family:monospace">Elena sta calcolando...</div>';
   try {
     const reply = await askAgent('elena', msg, elenaHistory.slice(-6));
-    elenaHistory.push({role:'user', content:msg}, {role:'assistant', content:reply});
+    if (reply && reply.trim()) {
+      elenaHistory.push({role:'user', content:msg}, {role:'assistant', content:reply});
+    }
     out.innerHTML = '<div style="font-size:12px;line-height:1.6;color:var(--tx);white-space:pre-wrap">' + escHtml(reply) + '</div>';
   } catch (err) {
     out.innerHTML = '<div style="color:var(--dg);font-size:11px">' + err.message + '</div>';

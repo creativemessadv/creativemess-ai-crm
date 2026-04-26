@@ -124,26 +124,52 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { agent, message, history = [], task } = req.body || {};
-  if (!message) return res.status(400).json({ error: 'Message required' });
+  const userMessage = typeof message === 'string' ? message.trim() : '';
+  if (!userMessage) return res.status(400).json({ error: 'Message required' });
 
   const agentCfg = AGENTS[agent] || AGENTS.riccardo;
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configurata' });
 
+  const cleanHistory = Array.isArray(history)
+    ? history
+        .filter((m) => m && (m.role === 'user' || m.role === 'assistant'))
+        .map((m) => ({ role: m.role, content: typeof m.content === 'string' ? m.content.trim() : '' }))
+        .filter((m) => m.content.length > 0)
+    : [];
+
+  // Anthropic requires alternating user/assistant turns starting with user.
+  const normalized = [];
+  for (const m of cleanHistory) {
+    const last = normalized[normalized.length - 1];
+    if (!last && m.role !== 'user') continue;
+    if (last && last.role === m.role) { last.content += '\n\n' + m.content; continue; }
+    normalized.push({ ...m });
+  }
+  if (normalized.length && normalized[normalized.length - 1].role === 'user') normalized.pop();
+
   try {
     const client = new Anthropic({ apiKey });
     const systemPrompt = task ? `${agentCfg.prompt}\n\nTASK: ${task}` : agentCfg.prompt;
-    const messages = [...history, { role: 'user', content: message }];
+    const messages = [...normalized, { role: 'user', content: userMessage }];
 
     const response = await client.messages.create({
-      model: 'claude-opus-4-6',
+      model: 'claude-opus-4-7',
       max_tokens: 2048,
       system: systemPrompt,
       messages,
     });
 
-    res.json({ reply: response.content[0].text, agent: agentCfg.name });
+    const reply = (response.content || [])
+      .filter((b) => b && b.type === 'text' && typeof b.text === 'string')
+      .map((b) => b.text)
+      .join('\n')
+      .trim();
+
+    if (!reply) return res.status(502).json({ error: 'Risposta vuota dal modello' });
+    res.json({ reply, agent: agentCfg.name });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    const status = err && err.status ? err.status : 500;
+    res.status(status).json({ error: err.message || 'Errore Anthropic' });
   }
 };
