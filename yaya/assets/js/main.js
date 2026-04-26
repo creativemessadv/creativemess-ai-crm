@@ -37,44 +37,11 @@ if ("IntersectionObserver" in window && revealEls.length) {
   revealEls.forEach((el) => el.classList.add("visible"));
 }
 
-// Gallery: missing-image fallback, filtering, lightbox
+// Gallery: lightbox
 const galleryGrid = document.getElementById("gallery-grid");
 if (galleryGrid) {
   const items = Array.from(galleryGrid.querySelectorAll(".gallery-item"));
 
-  // Mostra il fallback elegante quando il file foto non esiste
-  items.forEach((item) => {
-    const img = item.querySelector("img");
-    if (!img) return;
-    const markMissing = () => item.classList.add("img-missing");
-    if (img.complete) {
-      if (!img.naturalWidth) markMissing();
-    } else {
-      img.addEventListener("error", markMissing);
-      img.addEventListener("load", () => {
-        if (!img.naturalWidth) markMissing();
-      });
-    }
-  });
-
-  // Filtri categoria
-  const filterBtns = document.querySelectorAll(".gf-btn");
-  const emptyMsg = document.getElementById("gallery-empty");
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter;
-      filterBtns.forEach((b) => b.classList.toggle("active", b === btn));
-      let visible = 0;
-      items.forEach((item) => {
-        const match = filter === "all" || item.dataset.category === filter;
-        item.classList.toggle("is-hidden", !match);
-        if (match) visible++;
-      });
-      if (emptyMsg) emptyMsg.hidden = visible > 0;
-    });
-  });
-
-  // Lightbox
   const lb = document.getElementById("lightbox");
   const lbImg = document.getElementById("lb-img");
   const lbCap = document.getElementById("lb-caption");
@@ -83,13 +50,10 @@ if (galleryGrid) {
   const lbNext = lb && lb.querySelector(".lb-next");
   let currentIndex = -1;
 
-  const visibleItems = () => items.filter((i) => !i.classList.contains("is-hidden") && !i.classList.contains("img-missing"));
-
   const openAt = (index) => {
-    const list = visibleItems();
-    if (!list.length || !lb) return;
-    currentIndex = ((index % list.length) + list.length) % list.length;
-    const item = list[currentIndex];
+    if (!items.length || !lb) return;
+    currentIndex = ((index % items.length) + items.length) % items.length;
+    const item = items[currentIndex];
     lbImg.src = item.getAttribute("href");
     lbImg.alt = item.querySelector("img").alt || "";
     lbCap.textContent = item.dataset.caption || "";
@@ -106,14 +70,10 @@ if (galleryGrid) {
     currentIndex = -1;
   };
 
-  items.forEach((item) => {
+  items.forEach((item, idx) => {
     item.addEventListener("click", (e) => {
-      // Solo se la foto esiste — altrimenti lascia il link inerte
-      if (item.classList.contains("img-missing")) { e.preventDefault(); return; }
       e.preventDefault();
-      const list = visibleItems();
-      const idx = list.indexOf(item);
-      if (idx >= 0) openAt(idx);
+      openAt(idx);
     });
   });
 
@@ -122,7 +82,7 @@ if (galleryGrid) {
   if (lbNext) lbNext.addEventListener("click", () => openAt(currentIndex + 1));
   if (lb) lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
   document.addEventListener("keydown", (e) => {
-    if (lb && lb.hidden) return;
+    if (!lb || lb.hidden) return;
     if (e.key === "Escape") closeLb();
     if (e.key === "ArrowLeft") openAt(currentIndex - 1);
     if (e.key === "ArrowRight") openAt(currentIndex + 1);
