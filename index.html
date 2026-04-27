@@ -644,10 +644,9 @@ async function sendCEO() {
   btn.disabled = true;
   msgs.innerHTML += '<div class="typing" id="ceo-typing">Riccardo sta analizzando...</div>';
   msgs.scrollTop = msgs.scrollHeight;
-  ceoHistory.push({role:'user', content:msg});
   try {
-    const reply = await askAgent('riccardo', msg, ceoHistory.slice(0,-1).slice(-10));
-    ceoHistory.push({role:'assistant', content:reply});
+    const reply = await askAgent('riccardo', msg, ceoHistory.slice(-10));
+    ceoHistory.push({role:'user', content:msg}, {role:'assistant', content:reply});
     document.getElementById('ceo-typing')?.remove();
     msgs.innerHTML += '<div class="cmsg-a"><div class="cb-a">' + escHtml(reply) + '</div><div class="ct">Riccardo · ' + t + '</div></div>';
   } catch (err) {

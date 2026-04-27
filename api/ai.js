@@ -124,16 +124,33 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { agent, message, history = [], task } = req.body || {};
-  if (!message) return res.status(400).json({ error: 'Message required' });
+  const trimmedMessage = typeof message === 'string' ? message.trim() : '';
+  if (!trimmedMessage) return res.status(400).json({ error: 'Message required' });
 
   const agentCfg = AGENTS[agent] || AGENTS.riccardo;
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configurata' });
 
+  const sanitizedHistory = (Array.isArray(history) ? history : [])
+    .map(m => {
+      if (!m || (m.role !== 'user' && m.role !== 'assistant')) return null;
+      const content = typeof m.content === 'string' ? m.content.trim() : '';
+      if (!content) return null;
+      return { role: m.role, content };
+    })
+    .filter(Boolean);
+
+  while (sanitizedHistory.length && sanitizedHistory[0].role !== 'user') {
+    sanitizedHistory.shift();
+  }
+  if (sanitizedHistory.length && sanitizedHistory[sanitizedHistory.length - 1].role === 'user') {
+    sanitizedHistory.pop();
+  }
+
   try {
     const client = new Anthropic({ apiKey });
     const systemPrompt = task ? `${agentCfg.prompt}\n\nTASK: ${task}` : agentCfg.prompt;
-    const messages = [...history, { role: 'user', content: message }];
+    const messages = [...sanitizedHistory, { role: 'user', content: trimmedMessage }];
 
     const response = await client.messages.create({
       model: 'claude-opus-4-6',
@@ -142,7 +159,15 @@ module.exports = async (req, res) => {
       messages,
     });
 
-    res.json({ reply: response.content[0].text, agent: agentCfg.name });
+    const reply = (response.content || [])
+      .filter(block => block && block.type === 'text' && typeof block.text === 'string')
+      .map(block => block.text)
+      .join('\n')
+      .trim();
+
+    if (!reply) return res.status(502).json({ error: 'Risposta vuota dal modello' });
+
+    res.json({ reply, agent: agentCfg.name });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
