@@ -1,0 +1,25 @@
+capital: 10000.0
+symbol: BTCUSDT
+timeframe: 1m
+
+strategy:
+  name: mean_reversion_rsi
+  params:
+    rsi_period: 14
+    rsi_oversold: 30
+    rsi_overbought: 70
+    take_profit_pct: 0.0015
+    stop_loss_pct: 0.0010
+
+execution:
+  fee_pct: 0.00075
+  slippage_pct: 0.0002
+
+risk:
+  risk_per_trade_pct: 0.005
+  max_concurrent_positions: 3
+  max_daily_loss_pct: 0.02
+  max_daily_trades: 1000
+
+reporting:
+  daily_target_eur: 200.0
