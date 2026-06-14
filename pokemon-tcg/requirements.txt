@@ -1,0 +1,6 @@
+# Dipendenze del modulo Pokémon TCG - Step 1 (Modulo Trend)
+# Tutte gratuite e open source.
+
+requests>=2.31      # chiamate HTTP all'API pokemontcg.io
+python-dotenv>=1.0  # caricamento delle chiavi API da file .env
+pytrends>=4.9       # accesso (non ufficiale) a Google Trends

@@ -1,0 +1,13 @@
+# File con chiavi segrete: mai su git
+.env
+
+# Database locale SQLite (dati generati a runtime)
+*.db
+
+# Report e bozze generati a runtime
+report/
+bozze/
+
+# Cache Python
+__pycache__/
+*.pyc
