@@ -2,179 +2,261 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Boardroom di Crisi — Creative Mess ADV</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060910;--s:#0d1117;--s2:#141b24;--bd:#1e2d3d;--ac:#00d4ff;--ac2:#7c3aed;--ac3:#10b981;--ac4:#f59e0b;--dg:#ef4444;--tx:#e2eaf4;--t2:#7a8fa6;--t3:#3d5166;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;height:100dvh;overflow:hidden;}
 a{color:inherit;text-decoration:none;}
-.topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:10;}
-.tbrand{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:.02em;}
-.tbrand span{color:var(--ac);}
-.tback{font-family:'DM Mono',monospace;font-size:10px;color:var(--t2);border:1px solid var(--bd);border-radius:6px;padding:5px 12px;transition:all .15s;}
-.tback:hover{color:var(--ac);border-color:var(--ac);}
-.wrap{flex:1;width:100%;max-width:1080px;margin:0 auto;padding:24px 20px 40px;display:flex;flex-direction:column;gap:16px;}
-.ph{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;}
-.psub{font-size:12px;color:var(--t2);margin-top:2px;line-height:1.5;}
-.disclaimer{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:10px 14px;font-size:11px;color:var(--t2);line-height:1.6;}
-.disclaimer b{color:var(--ac4);}
-.board{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
-@media(max-width:820px){.board{grid-template-columns:repeat(2,1fr);}}
-.adv{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:14px 12px;cursor:pointer;transition:all .15s;position:relative;}
-.adv:hover{border-color:var(--ac);background:rgba(0,212,255,.04);}
-.adv.speaking{border-color:var(--ac);box-shadow:0 0 24px rgba(0,212,255,.15);}
-.adv-icon{font-size:22px;margin-bottom:8px;}
-.adv-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px;}
-.adv-title{font-size:9px;color:var(--ac);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;}
-.adv-desc{font-size:9.5px;color:var(--t2);line-height:1.45;}
-.adv-tag{position:absolute;top:10px;right:10px;font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);border:1px solid var(--bd);border-radius:20px;padding:1px 6px;}
-.adv-hint{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--t3);margin-top:8px;}
-.transcript{background:var(--s);border:1px solid var(--bd);border-radius:10px 10px 0 0;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:320px;max-height:56vh;overflow-y:auto;}
-.empty{margin:auto;text-align:center;color:var(--t3);font-size:12px;line-height:1.7;max-width:460px;}
+
+/* ── Header stile chat di gruppo ── */
+.topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:10px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0;cursor:pointer;}
+.tb-back{font-size:20px;color:var(--ac);padding:4px 8px 4px 0;}
+.tb-avatar{width:38px;height:38px;border-radius:50%;background:var(--s2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.tb-info{flex:1;min-width:0;}
+.tb-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tb-sub{font-size:10.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tb-i{font-size:16px;color:var(--t3);padding:6px;}
+
+/* ── Scheda info gruppo ── */
+.sheet{position:fixed;inset:0;background:rgba(3,5,9,.7);backdrop-filter:blur(3px);z-index:50;display:none;align-items:flex-end;}
+.sheet.open{display:flex;}
+.sheet-card{background:var(--s);border-top:1px solid var(--bd);border-radius:18px 18px 0 0;width:100%;max-height:80dvh;overflow-y:auto;padding:20px 18px 30px;}
+.sheet-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:4px;}
+.sheet-sub{font-size:11px;color:var(--t2);margin-bottom:14px;line-height:1.5;}
+.sheet-note{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:9px 12px;font-size:10.5px;color:var(--t2);line-height:1.55;margin-bottom:14px;}
+.sheet-note b{color:var(--ac4);}
+.p-row{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start;}
+.p-row:last-child{border-bottom:none;}
+.p-av{width:38px;height:38px;border-radius:50%;background:var(--s2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.p-name{font-family:'Syne',sans-serif;font-size:12.5px;font-weight:700;}
+.p-desc{font-size:10.5px;color:var(--t2);line-height:1.5;margin-top:2px;}
+.sheet-close{margin-top:16px;width:100%;padding:12px;background:var(--s2);border:1px solid var(--bd);border-radius:10px;color:var(--t2);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;}
+
+/* ── Chat ── */
+.chat{flex:1;overflow-y:auto;padding:14px 12px 8px;display:flex;flex-direction:column;gap:3px;-webkit-overflow-scrolling:touch;}
+.notice{align-self:center;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);color:#d4b06a;border-radius:10px;padding:8px 13px;font-size:10px;line-height:1.5;text-align:center;max-width:340px;margin:6px 0 10px;}
+.day{align-self:center;background:var(--s2);color:var(--t3);border-radius:8px;padding:3px 10px;font-size:9.5px;font-family:'DM Mono',monospace;margin:8px 0;}
+.m{display:flex;gap:8px;max-width:88%;margin-top:8px;}
+.m.mine{align-self:flex-end;flex-direction:row-reverse;}
+.m.theirs{align-self:flex-start;}
+.m.compact{margin-top:2px;}
+.m-av{width:30px;height:30px;border-radius:50%;background:var(--s2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;align-self:flex-end;}
+.m.compact .m-av{visibility:hidden;}
+.bub{border-radius:14px;padding:8px 12px 7px;font-size:13.5px;line-height:1.55;position:relative;min-width:80px;}
+.m.theirs .bub{background:var(--s2);border:1px solid var(--bd);border-bottom-left-radius:4px;cursor:pointer;}
+.m.mine .bub{background:#0b4a5c;border:1px solid #0e6078;border-bottom-right-radius:4px;}
+.m.mod-m .bub{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.35);cursor:default;}
+.b-name{font-family:'Syne',sans-serif;font-size:10.5px;font-weight:700;margin-bottom:3px;}
+.b-target{font-size:9px;color:rgba(226,234,244,.65);font-family:'DM Mono',monospace;margin-bottom:2px;}
+.b-text{white-space:pre-wrap;word-wrap:break-word;}
+.b-time{font-size:8.5px;color:var(--t3);text-align:right;margin-top:3px;font-family:'DM Mono',monospace;}
+.typing-row{display:flex;gap:8px;align-self:flex-start;margin-top:8px;align-items:flex-end;}
+.typing-bub{background:var(--s2);border:1px solid var(--bd);border-radius:14px;border-bottom-left-radius:4px;padding:10px 14px;font-size:11px;color:var(--t2);}
+.dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--t2);margin-right:3px;animation:blink 1.2s infinite;}
+.dots span:nth-child(2){animation-delay:.2s;}
+.dots span:nth-child(3){animation-delay:.4s;margin-right:0;}
+@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.errbub{align-self:stretch;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);border-radius:10px;padding:10px 13px;font-size:11.5px;line-height:1.55;margin-top:8px;}
+.errbub b{color:var(--dg);}
+.empty{margin:auto;text-align:center;color:var(--t3);font-size:12px;line-height:1.7;max-width:300px;}
 .empty b{color:var(--t2);}
-.msg{max-width:85%;}
-.msg.user{align-self:flex-end;}
-.msg-head{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;margin-bottom:4px;display:flex;gap:8px;align-items:baseline;}
-.msg.user .msg-head{justify-content:flex-end;color:var(--ac);}
-.msg-role{font-family:'DM Mono',monospace;font-size:8.5px;font-weight:400;color:var(--t3);letter-spacing:.05em;text-transform:uppercase;}
-.msg-body{border-radius:12px;padding:11px 14px;font-size:13px;line-height:1.65;white-space:pre-wrap;}
-.msg.user .msg-body{background:var(--ac);color:var(--bg);border-radius:12px 12px 2px 12px;}
-.msg.adv-msg .msg-body{background:var(--s2);border:1px solid var(--bd);border-radius:12px 12px 12px 2px;}
-.msg.mod .msg-body{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.3);}
-.msg.mod .msg-head{color:#a78bfa;}
-.typing{align-self:flex-start;background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;font-size:11px;color:var(--t3);font-family:'DM Mono',monospace;}
-.errcard{align-self:stretch;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.6;color:var(--tx);}
-.errcard b{color:var(--dg);}
-.errcard .hint{margin-top:6px;font-size:11px;color:var(--t2);}
-.inputbox{border:1px solid var(--bd);border-top:none;background:var(--s2);border-radius:0 0 10px 10px;padding:12px;display:flex;flex-direction:column;gap:10px;}
-.starter-row{display:flex;gap:6px;flex-wrap:wrap;}
-.starter{font-size:10px;color:var(--t2);border:1px solid var(--bd);border-radius:20px;padding:4px 11px;cursor:pointer;transition:all .15s;background:var(--s);}
-.starter:hover{color:var(--ac);border-color:var(--ac);}
-.input-row{display:flex;gap:8px;}
-textarea{flex:1;background:var(--s);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;color:var(--tx);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;resize:vertical;min-height:64px;}
-textarea:focus{border-color:var(--ac);}
-.btn-col{display:flex;flex-direction:column;gap:6px;}
-button{border:none;border-radius:8px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;padding:9px 16px;transition:opacity .15s;}
-button:disabled{opacity:.35;cursor:not-allowed;}
-.b-main{background:var(--ac);color:var(--bg);}
-.b-mod{background:var(--ac2);color:#fff;}
-.b-ghost{background:transparent;border:1px solid var(--bd);color:var(--t2);}
-.b-ghost:hover:not(:disabled){color:var(--dg);border-color:var(--dg);}
-button:hover:not(:disabled){opacity:.85;}
-.statusline{font-family:'DM Mono',monospace;font-size:9.5px;color:var(--t3);display:flex;justify-content:space-between;align-items:center;}
-.err{color:var(--dg);}
+.empty-icon{font-size:34px;margin-bottom:10px;}
+
+/* ── Composer ── */
+.composer{background:var(--s);border-top:1px solid var(--bd);padding:8px 10px calc(10px + env(safe-area-inset-bottom));flex-shrink:0;}
+.starters{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.starters::-webkit-scrollbar{display:none;}
+.starter{flex-shrink:0;font-size:10.5px;color:var(--t2);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;cursor:pointer;background:var(--s2);}
+.to-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;align-items:center;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.to-row::-webkit-scrollbar{display:none;}
+.to-label{font-size:9px;color:var(--t3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;flex-shrink:0;}
+.chip{flex-shrink:0;display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--t2);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;cursor:pointer;background:var(--s2);transition:all .15s;}
+.chip.sel{background:rgba(0,212,255,.12);border-color:var(--ac);color:var(--ac);}
+.chip.mod-chip.sel{background:rgba(124,58,237,.15);border-color:var(--ac2);color:#a78bfa;}
+.input-row{display:flex;gap:8px;align-items:flex-end;}
+.ta-wrap{flex:1;background:var(--s2);border:1px solid var(--bd);border-radius:22px;padding:4px 6px 4px 16px;display:flex;align-items:flex-end;}
+textarea{flex:1;background:transparent;border:none;color:var(--tx);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;resize:none;max-height:110px;padding:7px 0;line-height:1.4;}
+.send{width:44px;height:44px;border-radius:50%;background:var(--ac);border:none;color:var(--bg);font-size:18px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:opacity .15s;}
+.send:disabled{opacity:.35;}
+.send.mod-send{background:var(--ac2);color:#fff;}
+.status{font-size:9.5px;color:var(--t3);font-family:'DM Mono',monospace;padding-top:6px;text-align:center;min-height:14px;}
+.status.err{color:var(--dg);}
+.reset-link{color:var(--t3);text-decoration:underline;cursor:pointer;}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="tbrand">CREATIVE MESS <span>ADV</span> — Boardroom di Crisi</div>
-  <a class="tback" href="/">&larr; Dashboard</a>
+
+<div class="topbar" onclick="toggleSheet(true)">
+  <a class="tb-back" href="/" onclick="event.stopPropagation()">&#8249;</a>
+  <div class="tb-avatar">🏛️</div>
+  <div class="tb-info">
+    <div class="tb-name">Boardroom di Crisi</div>
+    <div class="tb-sub" id="subline">Tu, Marchionne, Cook, Su, Mulally, Nadella — tocca per info</div>
+  </div>
+  <div class="tb-i">ⓘ</div>
 </div>
 
-<div class="wrap">
-  <div>
-    <div class="ph">🏛️ Riunione di crisi — il tuo advisory board</div>
-    <div class="psub">Esponi la situazione al tavolo. I 5 advisor intervengono uno dopo l'altro, ognuno leggendo gli interventi precedenti: una vera riunione condivisa. Alla fine il Moderatore trasforma tutto in un piano operativo per settembre, ottobre e novembre.</div>
+<div class="sheet" id="sheet" onclick="if(event.target===this)toggleSheet(false)">
+  <div class="sheet-card">
+    <div class="sheet-title">🏛️ Boardroom di Crisi</div>
+    <div class="sheet-sub">Gruppo · 6 partecipanti · Il tuo advisory board per i 90 giorni decisivi</div>
+    <div class="sheet-note"><b>⚠ Nota:</b> gli advisor sono <b>simulazioni AI</b> ispirate ai metodi di gestione pubblicamente noti di manager reali. Non sono le persone reali. Per debiti, banche e fisco verifica sempre con un commercialista o un esperto di crisi d'impresa abilitato.</div>
+    <div id="plist"></div>
+    <button class="sheet-close" onclick="toggleSheet(false)">Chiudi</button>
   </div>
+</div>
 
-  <div class="disclaimer"><b>⚠ Nota:</b> questi advisor sono <b>simulazioni AI</b> ispirate ai metodi di gestione pubblicamente noti di manager reali (turnaround Fiat, Apple, AMD, Ford, Microsoft). Non sono le persone reali e non parlano a loro nome. Per debiti, banche e fisco, verifica sempre le mosse con un commercialista o un advisor della crisi d'impresa abilitato.</div>
-
-  <div class="board" id="board"></div>
-
-  <div class="transcript" id="transcript">
-    <div class="empty" id="empty">
-      <b>La sala è pronta.</b><br>
-      Descrivi la situazione: quanti debiti e verso chi, scadenze, clienti attivi, costi fissi mensili, quanto incassi al mese.<br><br>
-      Più numeri dai al tavolo, più le risposte saranno chirurgiche.<br>
-      Poi premi <b>▶ Giro di tavolo</b> per far parlare tutti e 5, oppure clicca un singolo advisor.
-    </div>
+<div class="chat" id="chat">
+  <div class="notice">🔒 Riunione riservata, salvata solo su questo dispositivo. Gli advisor sono simulazioni AI — tocca l'intestazione per i dettagli.</div>
+  <div class="empty" id="empty">
+    <div class="empty-icon">🏛️</div>
+    <b>Il tavolo è riunito.</b><br>
+    Scrivi come in una chat: scegli sotto se parlare a <b>tutti</b> o a un advisor solo.<br><br>
+    Più numeri dai (debiti, scadenze, clienti, costi fissi), più le risposte saranno chirurgiche.
   </div>
+</div>
 
-  <div class="inputbox">
-    <div class="starter-row" id="starters"></div>
-    <div class="input-row">
-      <textarea id="input" placeholder="Parla al tavolo... (es: Ho €80k di debiti tra fornitori e fisco, 4 clienti attivi da €600/mese, costi fissi €3.500/mese...)"></textarea>
-      <div class="btn-col">
-        <button class="b-main" id="btnRound">▶ Giro di tavolo</button>
-        <button class="b-mod" id="btnMod">📋 Sintesi &amp; Piano</button>
-        <button class="b-ghost" id="btnReset">Nuova riunione</button>
-      </div>
-    </div>
-    <div class="statusline"><span id="status">Riunione salvata automaticamente su questo dispositivo.</span><span id="count"></span></div>
+<div class="composer">
+  <div class="starters" id="starters"></div>
+  <div class="to-row" id="toRow"><span class="to-label">A:</span></div>
+  <div class="input-row">
+    <div class="ta-wrap"><textarea id="input" rows="1" placeholder="Scrivi al tavolo..."></textarea></div>
+    <button class="send" id="btnSend" onclick="onSend()">➤</button>
   </div>
+  <div class="status" id="status"></div>
 </div>
 
 <script>
 var ADVISORS = [
-  { id: 'marchionne', icon: '🔧', name: 'Advisor "Marchionne"', title: 'Turnaround & Debito', desc: 'Metodo Sergio Marchionne (Fiat 2004): decisioni brutali e rapide, ristrutturazione del debito, tagli immediati.' },
-  { id: 'cook',       icon: '⚙️', name: 'Advisor "Cook"',       title: 'Operazioni & Cassa', desc: 'Metodo Tim Cook (Apple): disciplina di cassa maniacale, margini prima dei ricavi, mille no per ogni si.' },
-  { id: 'su',         icon: '🎯', name: 'Advisor "Su"',         title: 'Focus & Rilancio', desc: 'Metodo Lisa Su (AMD 2014): con zero risorse si scommette tutto su UNA cosa fatta benissimo.' },
-  { id: 'mulally',    icon: '📊', name: 'Advisor "Mulally"',    title: 'Piano & Esecuzione', desc: 'Metodo Alan Mulally (Ford): un piano unico, revisione settimanale dei numeri, trasparenza totale.' },
-  { id: 'nadella',    icon: '🚀', name: 'Advisor "Nadella"',    title: 'Strategia & Alleanze', desc: 'Metodo Satya Nadella (Microsoft): riposizionamento, partnership che portano clienti, onda AI.' }
+  { id: 'marchionne', icon: '🔧', short: 'Marchionne', color: '#f59e0b', desc: 'Metodo Sergio Marchionne (Fiat 2004): ristrutturazione debiti, tagli, negoziazione con creditori, fisco e banche.' },
+  { id: 'cook',       icon: '⚙️', short: 'Cook',       color: '#00d4ff', desc: 'Metodo Tim Cook (Apple): disciplina di cassa, margini, incassare prima e piu velocemente.' },
+  { id: 'su',         icon: '🎯', short: 'Su',         color: '#10b981', desc: 'Metodo Lisa Su (AMD 2014): con zero risorse si punta tutto su UNA cosa fatta benissimo.' },
+  { id: 'mulally',    icon: '📊', short: 'Mulally',    color: '#f472b6', desc: 'Metodo Alan Mulally (Ford): un piano unico dei 90 giorni, revisione settimanale dei numeri.' },
+  { id: 'nadella',    icon: '🚀', short: 'Nadella',    color: '#a78bfa', desc: 'Metodo Satya Nadella (Microsoft): riposizionamento, partnership che portano clienti, onda AI.' }
 ];
+var MOD = { id: 'moderatore', icon: '📋', short: 'Moderatore', color: '#c4b5fd', desc: 'Legge tutta la riunione e produce: decisioni, disaccordi, piano 90 giorni, azioni della settimana.' };
 
 var STARTERS = [
-  { label: '💶 Fotografia della crisi', text: 'Vi espongo la situazione completa: debiti totali e verso chi (fornitori, banche, fisco), scadenze piu urgenti, clienti attivi e quanto pagano, costi fissi mensili, cassa disponibile oggi: ' },
-  { label: '🔥 Cassa subito (30 giorni)', text: 'Ho bisogno di generare cassa entro 30 giorni per pagare le scadenze piu urgenti. Con i servizi che offro (siti web, SEO, ads, social), qual e il modo piu veloce di incassare senza investire nulla?' },
-  { label: '🏦 Debiti e creditori', text: 'Come gestisco i creditori nei prossimi 90 giorni? Ho debiti verso fornitori, fisco e banche. In che ordine li affronto, cosa negozio e cosa dico a ciascuno?' },
-  { label: '✂️ Cosa taglio, cosa tengo', text: 'Aiutatemi a decidere cosa tagliare subito e cosa tenere: quali costi, quali servizi, quali clienti stanno affondando l\'azienda e quali possono salvarla.' }
+  { label: '💶 Fotografia della crisi', text: 'Vi espongo la situazione completa: debiti totali e verso chi, scadenze piu urgenti, clienti attivi e quanto pagano, costi fissi mensili, cassa disponibile oggi: ' },
+  { label: '🔥 Cassa subito', text: 'Ho bisogno di generare cassa entro 30 giorni. Con i miei servizi (siti, SEO, ads, social), qual e il modo piu veloce di incassare senza investire nulla?' },
+  { label: '🏦 Debiti e creditori', text: 'Come gestisco i creditori nei prossimi 90 giorni? In che ordine li affronto, cosa negozio e cosa dico a ciascuno?' },
+  { label: '✂️ Cosa taglio', text: 'Aiutatemi a decidere cosa tagliare subito e cosa tenere: costi, servizi e clienti.' }
 ];
 
 var API = '/api/boardroom';
 var LS_KEY = 'boardroom_transcript_v1';
 var transcript = [];
 var busy = false;
+var target = 'all'; // 'all' | advisor id | 'moderatore'
+var lastPainted = null;
 
-var elT = document.getElementById('transcript');
+var elChat = document.getElementById('chat');
 var elEmpty = document.getElementById('empty');
 var elInput = document.getElementById('input');
 var elStatus = document.getElementById('status');
-var elCount = document.getElementById('count');
+var elSend = document.getElementById('btnSend');
 
-function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-
-function renderBoard(){
-  var b = document.getElementById('board');
-  b.innerHTML = ADVISORS.map(function(a){
-    return '<div class="adv" id="adv-' + a.id + '" onclick="askOne(\'' + a.id + '\')">' +
-      '<div class="adv-tag">SIM AI</div>' +
-      '<div class="adv-icon">' + a.icon + '</div>' +
-      '<div class="adv-name">' + a.name + '</div>' +
-      '<div class="adv-title">' + a.title + '</div>' +
-      '<div class="adv-desc">' + a.desc + '</div>' +
-      '<div class="adv-hint">click → intervento singolo</div>' +
-    '</div>';
-  }).join('');
+function esc(s){ var d = document.createElement('div'); d.textContent = (s == null ? '' : String(s)); return d.innerHTML; }
+function metaByName(name){
+  var all = ADVISORS.concat([MOD]);
+  for (var i = 0; i < all.length; i++) {
+    if (name && name.indexOf(all[i].short) !== -1) return all[i];
+  }
+  return null;
+}
+function nowTime(){
+  var d = new Date();
+  return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
 }
 
+/* ── Scheda info ── */
+function toggleSheet(open){ document.getElementById('sheet').classList.toggle('open', open); }
+document.getElementById('plist').innerHTML =
+  '<div class="p-row"><div class="p-av">👤</div><div><div class="p-name">Tu — Roberto (Presidente)</div><div class="p-desc">Porti i numeri veri e prendi le decisioni finali.</div></div></div>' +
+  ADVISORS.concat([MOD]).map(function(a){
+    return '<div class="p-row"><div class="p-av">' + a.icon + '</div><div>' +
+      '<div class="p-name" style="color:' + a.color + '">' + (a.id === 'moderatore' ? '' : 'Advisor ') + '"' + a.short + '" <span style="font-family:DM Mono,monospace;font-size:8px;color:var(--t3);border:1px solid var(--bd);border-radius:20px;padding:1px 6px;vertical-align:middle;">SIM AI</span></div>' +
+      '<div class="p-desc">' + a.desc + '</div></div></div>';
+  }).join('');
+
+/* ── Destinatari ── */
+function renderToRow(){
+  var row = document.getElementById('toRow');
+  var chips = '<span class="to-label">A:</span>';
+  chips += '<div class="chip' + (target === 'all' ? ' sel' : '') + '" onclick="setTarget(\'all\')">👥 Tutti</div>';
+  ADVISORS.forEach(function(a){
+    chips += '<div class="chip' + (target === a.id ? ' sel' : '') + '" onclick="setTarget(\'' + a.id + '\')">' + a.icon + ' ' + a.short + '</div>';
+  });
+  chips += '<div class="chip mod-chip' + (target === 'moderatore' ? ' sel' : '') + '" onclick="setTarget(\'moderatore\')">📋 Sintesi &amp; Piano</div>';
+  row.innerHTML = chips;
+  if (target === 'all') { elInput.placeholder = 'Scrivi a tutto il tavolo...'; }
+  else if (target === 'moderatore') { elInput.placeholder = 'Nota per il Moderatore (facoltativa)...'; }
+  else {
+    var m = ADVISORS.find(function(a){ return a.id === target; });
+    elInput.placeholder = 'Scrivi a ' + m.short + '...';
+  }
+  elSend.classList.toggle('mod-send', target === 'moderatore');
+}
+function setTarget(t){ target = t; renderToRow(); }
+
+/* ── Starters ── */
 function renderStarters(){
   var s = document.getElementById('starters');
+  if (transcript.length) { s.style.display = 'none'; return; }
+  s.style.display = 'flex';
   s.innerHTML = STARTERS.map(function(st, i){
     return '<div class="starter" onclick="useStarter(' + i + ')">' + st.label + '</div>';
   }).join('');
 }
+function useStarter(i){ elInput.value = STARTERS[i].text; elInput.focus(); autosize(); }
 
-function useStarter(i){ elInput.value = STARTERS[i].text; elInput.focus(); }
+/* ── Messaggi ── */
+function paintMsg(entry){
+  elEmpty.style.display = 'none';
+  var isUser = entry.kind === 'user';
+  var isMod = entry.kind === 'mod';
+  var meta = isUser ? null : metaByName(entry.speaker);
+  var icon = isUser ? '👤' : (meta ? meta.icon : '🏛️');
+  var color = meta ? meta.color : 'var(--ac)';
+  var shortName = isUser ? 'Tu' : (meta ? (isMod ? 'Moderatore' : meta.short) : entry.speaker);
+
+  var compact = lastPainted && lastPainted.kind === entry.kind && lastPainted.speaker === entry.speaker;
+  var div = document.createElement('div');
+  div.className = 'm ' + (isUser ? 'mine' : 'theirs') + (isMod ? ' mod-m' : '') + (compact ? ' compact' : '');
+
+  var inner = '';
+  if (!isUser) inner += '<div class="b-name" style="color:' + color + '">' + esc(shortName) + '</div>';
+  if (isUser && entry.to && entry.to !== 'all') {
+    var tm = entry.to === 'moderatore' ? MOD : ADVISORS.find(function(a){ return a.id === entry.to; });
+    if (tm) inner += '<div class="b-target">→ a ' + tm.icon + ' ' + tm.short + '</div>';
+  }
+  inner += '<div class="b-text">' + esc(entry.text) + '</div>';
+  inner += '<div class="b-time">' + esc(entry.time || '') + '</div>';
+
+  div.innerHTML = '<div class="m-av">' + icon + '</div><div class="bub">' + inner + '</div>';
+
+  if (!isUser && !isMod && meta) {
+    div.querySelector('.bub').onclick = function(){
+      setTarget(meta.id);
+      elInput.focus();
+    };
+  }
+  elChat.appendChild(div);
+  lastPainted = entry;
+  scrollDown();
+}
+function scrollDown(){ elChat.scrollTop = elChat.scrollHeight; }
 
 function addMsg(entry){
+  entry.time = entry.time || nowTime();
   transcript.push(entry);
   save();
   paintMsg(entry);
-}
-
-function paintMsg(entry){
-  elEmpty.style.display = 'none';
-  var cls = entry.kind === 'user' ? 'user' : (entry.kind === 'mod' ? 'mod' : 'adv-msg');
-  var div = document.createElement('div');
-  div.className = 'msg ' + cls;
-  var role = entry.role ? '<span class="msg-role">' + esc(entry.role) + '</span>' : '';
-  div.innerHTML = '<div class="msg-head">' + esc(entry.speaker) + role + '</div>' +
-                  '<div class="msg-body">' + esc(entry.text) + '</div>';
-  elT.appendChild(div);
-  elT.scrollTop = elT.scrollHeight;
-  elCount.textContent = transcript.length + ' interventi';
+  renderStarters();
 }
 
 function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(transcript)); } catch(e){} }
@@ -187,64 +269,43 @@ function load(){
       transcript.forEach(paintMsg);
     }
   } catch(e){ transcript = []; }
-}
-
-function setBusy(v, label){
-  busy = v;
-  ['btnRound','btnMod','btnReset'].forEach(function(id){ document.getElementById(id).disabled = v; });
-  elStatus.textContent = v ? (label || 'Il tavolo sta lavorando...') : 'Riunione salvata automaticamente su questo dispositivo.';
-  elStatus.classList.remove('err');
-}
-
-function showTyping(name){
-  var t = document.createElement('div');
-  t.className = 'typing';
-  t.id = 'typing';
-  t.textContent = name + ' sta scrivendo...';
-  elT.appendChild(t);
-  elT.scrollTop = elT.scrollHeight;
-}
-function hideTyping(){ var t = document.getElementById('typing'); if (t) t.remove(); }
-
-function highlight(id, on){
-  var el = document.getElementById('adv-' + id);
-  if (el) el.classList.toggle('speaking', !!on);
-}
-
-function pushUserIfAny(){
-  var txt = elInput.value.trim();
-  if (txt) {
-    var last = transcript[transcript.length - 1];
-    if (!(last && last.kind === 'user' && last.text === txt)) {
-      addMsg({ kind: 'user', speaker: 'Roberto (Presidente)', text: txt });
-    }
-    elInput.value = '';
-  }
-  return transcript.length > 0;
+  renderStarters();
 }
 
 function showError(who, msg){
   var div = document.createElement('div');
-  div.className = 'errcard';
+  div.className = 'errbub';
   var hint = '';
-  if (/ANTHROPIC_API_KEY/i.test(msg)) {
-    hint = 'Vai su vercel.com &rarr; progetto creativemess-ai &rarr; Settings &rarr; Environment Variables &rarr; aggiungi ANTHROPIC_API_KEY (la crei su console.anthropic.com) &rarr; poi Deployments &rarr; Redeploy.';
-  } else if (/credit|billing|quota/i.test(msg)) {
-    hint = 'Sembra un problema di credito sull\'account API Anthropic: controlla su console.anthropic.com &rarr; Billing.';
-  } else if (/not_found|model/i.test(msg)) {
-    hint = 'Il modello AI indicato non e disponibile per il tuo account API.';
-  }
-  div.innerHTML = '<b>&#9888; ' + esc(who) + ' non ha potuto rispondere.</b><br>' + esc(msg) +
-    (hint ? '<div class="hint">' + hint + '</div>' : '');
-  elEmpty.style.display = 'none';
-  elT.appendChild(div);
-  elT.scrollTop = elT.scrollHeight;
+  if (/ANTHROPIC_API_KEY/i.test(msg)) hint = 'Su vercel.com: Settings → Environment Variables → ANTHROPIC_API_KEY, poi Redeploy.';
+  else if (/credit|billing|quota/i.test(msg)) hint = 'Controlla il credito API su console.anthropic.com → Billing.';
+  div.innerHTML = '<b>⚠ ' + esc(who) + ' non ha risposto.</b> ' + esc(msg) + (hint ? '<br><span style="color:var(--t2);font-size:10.5px;">' + hint + '</span>' : '');
+  elChat.appendChild(div);
+  scrollDown();
 }
 
+/* ── Typing ── */
+function showTyping(meta){
+  hideTyping();
+  var t = document.createElement('div');
+  t.className = 'typing-row';
+  t.id = 'typing';
+  t.innerHTML = '<div class="m-av">' + meta.icon + '</div><div class="typing-bub"><span style="color:' + meta.color + ';font-weight:600;">' + esc(meta.short) + '</span> sta scrivendo <span class="dots"><span></span><span></span><span></span></span></div>';
+  elChat.appendChild(t);
+  scrollDown();
+}
+function hideTyping(){ var t = document.getElementById('typing'); if (t) t.remove(); }
+
+/* ── API ── */
 function apiTranscript(){
-  return transcript.map(function(t){ return { speaker: t.speaker, text: t.text }; });
+  return transcript.map(function(t){
+    var sp = t.speaker;
+    if (t.kind === 'user' && t.to && t.to !== 'all') {
+      var tm = t.to === 'moderatore' ? MOD : ADVISORS.find(function(a){ return a.id === t.to; });
+      if (tm) sp = sp + ' (rivolto ad Advisor "' + tm.short + '")';
+    }
+    return { speaker: sp, text: t.text };
+  });
 }
-
 function callAdvisor(id){
   return fetch(API, {
     method: 'POST',
@@ -254,88 +315,112 @@ function callAdvisor(id){
     return r.text().then(function(raw){
       var data;
       try { data = JSON.parse(raw); }
-      catch(e){ throw new Error('Il server ha risposto in modo inatteso (HTTP ' + r.status + '): ' + raw.slice(0, 180)); }
+      catch(e){ throw new Error('Il server ha risposto in modo inatteso (HTTP ' + r.status + ').'); }
       if (data.error) throw new Error(data.error);
       if (!r.ok) throw new Error('Errore HTTP ' + r.status);
-      if (!data.reply || !String(data.reply).trim()) throw new Error('Intervento vuoto dal modello. Riprova tra qualche secondo.');
+      if (!data.reply || !String(data.reply).trim()) throw new Error('Intervento vuoto. Riprova tra qualche secondo.');
       return data;
     });
   });
 }
-
 function speak(id, kind){
-  var meta = ADVISORS.find(function(a){ return a.id === id; });
-  var displayName = meta ? meta.name : 'Moderatore';
-  highlight(id, true);
-  showTyping(displayName);
+  var meta = id === 'moderatore' ? MOD : ADVISORS.find(function(a){ return a.id === id; });
+  showTyping(meta);
   return callAdvisor(id).then(function(data){
-    hideTyping(); highlight(id, false);
-    addMsg({ kind: kind || 'adv', speaker: data.advisor, role: data.title, text: data.reply });
+    hideTyping();
+    addMsg({ kind: kind || 'adv', speaker: data.advisor, text: data.reply });
   }).catch(function(err){
-    hideTyping(); highlight(id, false);
-    showError(displayName, err.message);
-    elStatus.textContent = 'Errore (' + displayName + '): ' + err.message;
-    elStatus.classList.add('err');
+    hideTyping();
+    showError(meta.short, err.message);
     throw err;
   });
 }
 
-function askOne(id){
+/* ── Invio ── */
+function setBusy(v, label){
+  busy = v;
+  elSend.disabled = v;
+  elStatus.textContent = v ? (label || '') : '';
+  elStatus.classList.remove('err');
+}
+function pushUserIfAny(){
+  var txt = elInput.value.trim();
+  if (txt) {
+    var last = transcript[transcript.length - 1];
+    if (!(last && last.kind === 'user' && last.text === txt)) {
+      addMsg({ kind: 'user', speaker: 'Roberto (Presidente)', text: txt, to: target });
+    }
+    elInput.value = '';
+    autosize();
+  }
+  return transcript.length > 0;
+}
+function onSend(){
   if (busy) return;
+  var hadText = !!elInput.value.trim();
   if (!pushUserIfAny()) { elStatus.textContent = 'Scrivi prima qualcosa al tavolo.'; return; }
-  setBusy(true, 'Intervento in corso...');
-  speak(id).catch(function(){}).finally(function(){ setBusy(false); });
+  if (!hadText && target !== 'moderatore') { elStatus.textContent = 'Scrivi un messaggio prima di inviare.'; return; }
+
+  if (target === 'all') {
+    setBusy(true);
+    var pause = function(ms){ return new Promise(function(ok){ setTimeout(ok, ms); }); };
+    var chain = Promise.resolve();
+    var failed = 0;
+    ADVISORS.forEach(function(a, i){
+      chain = chain.then(function(){
+        elStatus.textContent = 'Giro di tavolo ' + (i + 1) + '/5';
+        return (i > 0 ? pause(4000) : Promise.resolve())
+          .then(function(){ return speak(a.id); })
+          .catch(function(){ failed++; });
+      });
+    });
+    chain.finally(function(){
+      setBusy(false);
+      if (failed > 0) {
+        elStatus.textContent = failed + ' advisor non hanno risposto: tocca il loro nome qui sopra e reinvia.';
+        elStatus.classList.add('err');
+      }
+    });
+  } else if (target === 'moderatore') {
+    setBusy(true, 'Il Moderatore prepara sintesi e piano...');
+    speak('moderatore', 'mod').catch(function(){}).finally(function(){ setBusy(false); });
+  } else {
+    setBusy(true);
+    speak(target).catch(function(){}).finally(function(){ setBusy(false); });
+  }
 }
 
-document.getElementById('btnRound').onclick = function(){
+/* ── Reset ── */
+function resetMeeting(){
   if (busy) return;
-  if (!pushUserIfAny()) { elStatus.textContent = 'Scrivi prima qualcosa al tavolo.'; return; }
-  setBusy(true, 'Giro di tavolo in corso (5 interventi, ~3 minuti)...');
-  var pause = function(ms){ return new Promise(function(ok){ setTimeout(ok, ms); }); };
-  var chain = Promise.resolve();
-  var failed = 0;
-  ADVISORS.forEach(function(a, i){
-    chain = chain.then(function(){
-      elStatus.textContent = 'Giro di tavolo: ' + (i + 1) + '/5 — ' + a.name;
-      elStatus.classList.remove('err');
-      // pausa tra un advisor e l'altro per non saturare i limiti API
-      return (i > 0 ? pause(4000) : Promise.resolve())
-        .then(function(){ return speak(a.id); })
-        .catch(function(){ failed++; }); // un advisor in errore non blocca i successivi
-    });
-  });
-  chain.finally(function(){
-    setBusy(false);
-    if (failed > 0) {
-      elStatus.textContent = failed + ' advisor non hanno risposto: puoi farli intervenire singolarmente toccando la loro card.';
-      elStatus.classList.add('err');
-    }
-  });
-};
-
-document.getElementById('btnMod').onclick = function(){
-  if (busy) return;
-  pushUserIfAny();
-  if (!transcript.length) { elStatus.textContent = 'La riunione e ancora vuota.'; return; }
-  setBusy(true, 'Il Moderatore sta preparando sintesi e piano...');
-  speak('moderatore', 'mod').catch(function(){}).finally(function(){ setBusy(false); });
-};
-
-document.getElementById('btnReset').onclick = function(){
-  if (busy) return;
-  if (transcript.length && !confirm('Chiudere questa riunione e cancellare il verbale?')) return;
+  if (transcript.length && !confirm('Chiudere questa riunione e cancellare la chat?')) return;
   transcript = [];
+  lastPainted = null;
   save();
-  elT.querySelectorAll('.msg').forEach(function(m){ m.remove(); });
+  elChat.querySelectorAll('.m, .errbub, .day').forEach(function(m){ m.remove(); });
   elEmpty.style.display = '';
-  elCount.textContent = '';
-};
+  renderStarters();
+}
+elStatus.innerHTML = '';
+setInterval(function(){
+  if (!busy && !elStatus.classList.contains('err') && !elStatus.textContent.trim()) {
+    elStatus.innerHTML = transcript.length
+      ? '<span class="reset-link" onclick="resetMeeting()">Nuova riunione</span>'
+      : '';
+  }
+}, 800);
 
+/* ── Textarea autosize + invio ── */
+function autosize(){
+  elInput.style.height = 'auto';
+  elInput.style.height = Math.min(elInput.scrollHeight, 110) + 'px';
+}
+elInput.addEventListener('input', autosize);
 elInput.addEventListener('keydown', function(e){
-  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) document.getElementById('btnRound').click();
+  if (e.key === 'Enter' && !e.shiftKey && (e.metaKey || e.ctrlKey)) { e.preventDefault(); onSend(); }
 });
 
-renderBoard();
+renderToRow();
 renderStarters();
 load();
 </script>
