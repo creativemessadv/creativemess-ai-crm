@@ -1,5 +1,3 @@
-const Anthropic = require('@anthropic-ai/sdk');
-
 const CTX = `Lavori per Creative Mess ADV, web agency italiana 100% AI-powered con sede a Milano.
 L'agenzia è diretta da Roberto Salvatori (Presidente & Account Manager).
 Obiettivo aziendale: €400.000 di fatturato nei prossimi 9 mesi.
@@ -128,21 +126,38 @@ module.exports = async (req, res) => {
 
   const agentCfg = AGENTS[agent] || AGENTS.riccardo;
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configurata' });
+  if (!apiKey) {
+    return res.status(500).json({
+      error: 'ANTHROPIC_API_KEY non configurata. Su Vercel: Settings > Environment Variables > aggiungi ANTHROPIC_API_KEY, poi Redeploy.',
+    });
+  }
 
   try {
-    const client = new Anthropic({ apiKey });
     const systemPrompt = task ? `${agentCfg.prompt}\n\nTASK: ${task}` : agentCfg.prompt;
     const messages = [...history, { role: 'user', content: message }];
 
-    const response = await client.messages.create({
-      model: 'claude-opus-4-6',
-      max_tokens: 2048,
-      system: systemPrompt,
-      messages,
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-5',
+        max_tokens: 2048,
+        system: systemPrompt,
+        messages,
+      }),
     });
 
-    res.json({ reply: response.content[0].text, agent: agentCfg.name });
+    const data = await r.json();
+    if (!r.ok) {
+      const msg = (data && data.error && data.error.message) || `Errore API Anthropic (HTTP ${r.status})`;
+      return res.status(502).json({ error: msg });
+    }
+
+    res.json({ reply: data.content[0].text, agent: agentCfg.name });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

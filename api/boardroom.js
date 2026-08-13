@@ -1,5 +1,3 @@
-const Anthropic = require('@anthropic-ai/sdk');
-
 const CTX = `CONTESTO RIUNIONE — BOARDROOM DI CRISI
 Azienda: Creative Mess ADV, web agency italiana con sede a Milano, guidata da Roberto Salvatori.
 Situazione: crisi aziendale gravissima. Molti debiti, zero liquidita da investire.
@@ -116,27 +114,44 @@ module.exports = async (req, res) => {
   if (!transcript.length) return res.status(400).json({ error: 'Verbale vuoto' });
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'ANTHROPIC_API_KEY non configurata' });
+  if (!apiKey) {
+    return res.status(500).json({
+      error: 'ANTHROPIC_API_KEY non configurata. Su Vercel: Settings > Environment Variables > aggiungi ANTHROPIC_API_KEY, poi Redeploy.',
+    });
+  }
 
   const minutes = transcript
     .map((t) => `[${t.speaker}]\n${t.text}`)
     .join('\n\n---\n\n');
 
   try {
-    const client = new Anthropic({ apiKey });
-    const response = await client.messages.create({
-      model: 'claude-opus-4-6',
-      max_tokens: 1500,
-      system: cfg.prompt,
-      messages: [
-        {
-          role: 'user',
-          content: `VERBALE DELLA RIUNIONE FINO A QUESTO MOMENTO:\n\n${minutes}\n\n---\n\nOra tocca a te, ${cfg.name}. Il tuo intervento:`,
-        },
-      ],
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-5',
+        max_tokens: 1500,
+        system: cfg.prompt,
+        messages: [
+          {
+            role: 'user',
+            content: `VERBALE DELLA RIUNIONE FINO A QUESTO MOMENTO:\n\n${minutes}\n\n---\n\nOra tocca a te, ${cfg.name}. Il tuo intervento:`,
+          },
+        ],
+      }),
     });
 
-    res.json({ reply: response.content[0].text, advisor: cfg.name, title: cfg.title });
+    const data = await r.json();
+    if (!r.ok) {
+      const msg = (data && data.error && data.error.message) || `Errore API Anthropic (HTTP ${r.status})`;
+      return res.status(502).json({ error: msg });
+    }
+
+    res.json({ reply: data.content[0].text, advisor: cfg.name, title: cfg.title });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
