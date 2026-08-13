@@ -157,8 +157,22 @@ module.exports = async (req, res) => {
       return res.status(502).json({ error: msg });
     }
 
-    res.json({ reply: data.content[0].text, agent: agentCfg.name });
+    const text = (data.content || [])
+      .filter((b) => b.type === 'text' && b.text)
+      .map((b) => b.text)
+      .join('\n\n')
+      .trim();
+
+    if (!text) {
+      return res.status(502).json({
+        error: `Il modello ha restituito una risposta vuota (stop_reason: ${data.stop_reason || 'n/d'}). Riprova tra qualche secondo.`,
+      });
+    }
+
+    res.json({ reply: text, agent: agentCfg.name });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
+module.exports.config = { maxDuration: 60 };

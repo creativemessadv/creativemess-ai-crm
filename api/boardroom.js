@@ -124,35 +124,59 @@ module.exports = async (req, res) => {
     .map((t) => `[${t.speaker}]\n${t.text}`)
     .join('\n\n---\n\n');
 
-  try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
+  const body = JSON.stringify({
+    model: 'claude-sonnet-5',
+    max_tokens: 1200,
+    system: cfg.prompt,
+    messages: [
+      {
+        role: 'user',
+        content: `VERBALE DELLA RIUNIONE FINO A QUESTO MOMENTO:\n\n${minutes}\n\n---\n\nOra tocca a te, ${cfg.name}. Il tuo intervento:`,
       },
-      body: JSON.stringify({
-        model: 'claude-sonnet-5',
-        max_tokens: 1500,
-        system: cfg.prompt,
-        messages: [
-          {
-            role: 'user',
-            content: `VERBALE DELLA RIUNIONE FINO A QUESTO MOMENTO:\n\n${minutes}\n\n---\n\nOra tocca a te, ${cfg.name}. Il tuo intervento:`,
-          },
-        ],
-      }),
-    });
+    ],
+  });
 
-    const data = await r.json();
-    if (!r.ok) {
-      const msg = (data && data.error && data.error.message) || `Errore API Anthropic (HTTP ${r.status})`;
-      return res.status(502).json({ error: msg });
+  const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
+
+  try {
+    let data;
+    let lastErr = 'Errore sconosciuto';
+    for (let attempt = 0; attempt < 3; attempt++) {
+      if (attempt > 0) await sleep(attempt === 1 ? 3000 : 8000);
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+        },
+        body,
+      });
+      data = await r.json();
+      if (r.ok) break;
+      lastErr = (data && data.error && data.error.message) || `Errore API Anthropic (HTTP ${r.status})`;
+      // 429 = rate limit, 529 = sovraccarico: vale la pena riprovare; altri errori no
+      if (r.status !== 429 && r.status !== 529) return res.status(502).json({ error: lastErr });
+      data = null;
+    }
+    if (!data) return res.status(502).json({ error: lastErr });
+
+    const text = (data.content || [])
+      .filter((b) => b.type === 'text' && b.text)
+      .map((b) => b.text)
+      .join('\n\n')
+      .trim();
+
+    if (!text) {
+      return res.status(502).json({
+        error: `Il modello ha restituito una risposta vuota (stop_reason: ${data.stop_reason || 'n/d'}). Riprova tra qualche secondo.`,
+      });
     }
 
-    res.json({ reply: data.content[0].text, advisor: cfg.name, title: cfg.title });
+    res.json({ reply: text, advisor: cfg.name, title: cfg.title });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
+module.exports.config = { maxDuration: 60 };

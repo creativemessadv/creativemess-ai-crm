@@ -181,7 +181,11 @@ function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(transcript));
 function load(){
   try {
     var raw = localStorage.getItem(LS_KEY);
-    if (raw) { transcript = JSON.parse(raw) || []; transcript.forEach(paintMsg); }
+    if (raw) {
+      transcript = (JSON.parse(raw) || []).filter(function(t){ return t && t.text && String(t.text).trim(); });
+      save();
+      transcript.forEach(paintMsg);
+    }
   } catch(e){ transcript = []; }
 }
 
@@ -253,6 +257,7 @@ function callAdvisor(id){
       catch(e){ throw new Error('Il server ha risposto in modo inatteso (HTTP ' + r.status + '): ' + raw.slice(0, 180)); }
       if (data.error) throw new Error(data.error);
       if (!r.ok) throw new Error('Errore HTTP ' + r.status);
+      if (!data.reply || !String(data.reply).trim()) throw new Error('Intervento vuoto dal modello. Riprova tra qualche secondo.');
       return data;
     });
   });
@@ -285,15 +290,27 @@ function askOne(id){
 document.getElementById('btnRound').onclick = function(){
   if (busy) return;
   if (!pushUserIfAny()) { elStatus.textContent = 'Scrivi prima qualcosa al tavolo.'; return; }
-  setBusy(true, 'Giro di tavolo in corso (5 interventi, ~2 minuti)...');
+  setBusy(true, 'Giro di tavolo in corso (5 interventi, ~3 minuti)...');
+  var pause = function(ms){ return new Promise(function(ok){ setTimeout(ok, ms); }); };
   var chain = Promise.resolve();
+  var failed = 0;
   ADVISORS.forEach(function(a, i){
     chain = chain.then(function(){
       elStatus.textContent = 'Giro di tavolo: ' + (i + 1) + '/5 — ' + a.name;
-      return speak(a.id);
+      elStatus.classList.remove('err');
+      // pausa tra un advisor e l'altro per non saturare i limiti API
+      return (i > 0 ? pause(4000) : Promise.resolve())
+        .then(function(){ return speak(a.id); })
+        .catch(function(){ failed++; }); // un advisor in errore non blocca i successivi
     });
   });
-  chain.catch(function(){}).finally(function(){ setBusy(false); });
+  chain.finally(function(){
+    setBusy(false);
+    if (failed > 0) {
+      elStatus.textContent = failed + ' advisor non hanno risposto: puoi farli intervenire singolarmente toccando la loro card.';
+      elStatus.classList.add('err');
+    }
+  });
 };
 
 document.getElementById('btnMod').onclick = function(){
