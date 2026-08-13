@@ -6,7 +6,15 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/boardroom.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "boardroom.html",
       "use": "@vercel/static"
     }
   ],
@@ -14,6 +22,14 @@
     {
       "src": "/api/ai",
       "dest": "/api/ai.js"
+    },
+    {
+      "src": "/api/boardroom",
+      "dest": "/api/boardroom.js"
+    },
+    {
+      "src": "/boardroom",
+      "dest": "/boardroom.html"
     },
     {
       "src": "/(.*)",
