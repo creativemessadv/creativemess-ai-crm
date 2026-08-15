@@ -157,13 +157,13 @@ async function runTarget(chatId, target) {
     await sendText(chatId, '🏛️ Giro di tavolo: i 5 advisor intervengono uno dopo l\'altro...');
     let ok = 0;
     for (const id of ROUND_ORDER) {
-      if (await speakOne(chatId, id, transcript, 800)) ok++;
+      if (await speakOne(chatId, id, transcript, 2000)) ok++;
     }
     if (ok === ROUND_ORDER.length) {
       await sendText(chatId, 'Giro di tavolo completato ✅ — quando vuoi il piano scritto, manda /sintesi');
     }
   } else {
-    await speakOne(chatId, target, transcript, target === 'moderatore' ? 1500 : 1200);
+    await speakOne(chatId, target, transcript, target === 'moderatore' || target === 'riccardo' ? 4000 : 2500);
   }
 }
 
@@ -300,7 +300,7 @@ module.exports = async (req, res) => {
     const transcript = await loadTranscript(chatId);
     transcript.push({ speaker: 'Roberto (Presidente)', text });
     await saveTranscript(chatId, transcript);
-    await speakOne(chatId, 'riccardo', transcript, 1200);
+    await speakOne(chatId, 'riccardo', transcript, 4000);
     return res.json({ ok: true });
   } catch (err) {
     // rispondi comunque 200: se Telegram riceve errore, rimanda lo stesso update in loop
