@@ -86,26 +86,29 @@ function stripMd(s) {
 const T_KEY = (chatId) => `tg:transcript:${chatId}`;
 const OWNER_KEY = 'tg:owner';
 
-const HELP = `🏛️ BOARDROOM DI CRISI
+const HELP = `👔 RICCARDO — CEO DI CREATIVE MESS ADV
 
-Sono il tavolo dei tuoi 5 advisor AI (simulazioni ispirate ai metodi di Marchionne, Cook, Su, Mulally e Nadella) piu un Moderatore.
+Scrivi un messaggio normale e ti risponde direttamente Riccardo, il CEO AI con mandato di turnaround: decide, prioritizza per impatto sulla cassa e ti dice cosa fare oggi.
 
-Come si usa:
-• Scrivi un messaggio normale -> ti chiedo con dei pulsanti a chi mandarlo (tutti, uno solo, o Moderatore)
+Quando serve il tavolo completo, c'e la Boardroom di Crisi (5 advisor AI ispirati ai metodi di Marchionne, Cook, Su, Mulally e Nadella, piu un Moderatore):
+• /tavolo + testo -> scegli con i pulsanti a chi mandarlo
 • /giro -> giro di tavolo: rispondono tutti e 5 in sequenza
 • /sintesi -> il Moderatore produce decisioni + piano 90 giorni
-• /marchionne /cook /su /mulally /nadella + testo -> parli direttamente con uno
+• /riccardo /marchionne /cook /su /mulally /nadella + testo -> parli direttamente con uno
 • /verbale -> quanti interventi ha la riunione in corso
 • /reset -> chiude la riunione e cancella il verbale
 
-⚠️ Gli advisor sono simulazioni AI, non le persone reali. Per debiti, fisco e banche verifica sempre con un commercialista abilitato.
+⚠️ Riccardo e gli advisor sono AI, non persone reali. Per debiti, fisco e banche verifica sempre con un commercialista abilitato.
 
-Consiglio: apri con i numeri veri (debiti, scadenze, clienti attivi, costi fissi, cassa). Piu numeri dai, piu il tavolo e chirurgico.`;
+Consiglio: apri con i numeri veri (debiti, scadenze, clienti attivi, costi fissi, cassa). Piu numeri dai, piu le risposte sono chirurgiche.`;
 
 function targetKeyboard() {
   return {
     inline_keyboard: [
-      [{ text: '👥 Tutto il tavolo', callback_data: 'go:all' }],
+      [
+        { text: '👔 Riccardo (CEO)', callback_data: 'go:riccardo' },
+        { text: '👥 Tutto il tavolo', callback_data: 'go:all' },
+      ],
       [
         { text: '🔧 Marchionne', callback_data: 'go:marchionne' },
         { text: '⚙️ Cook', callback_data: 'go:cook' },
@@ -251,6 +254,19 @@ module.exports = async (req, res) => {
         await sendText(chatId, `Riunione in corso: ${t.length} interventi nel verbale.` + (hasRedis() ? '' : '\n(memoria temporanea: configura Upstash per non perdere il verbale)'));
         return res.json({ ok: true });
       }
+      if (cmd === 'tavolo') {
+        const t = await loadTranscript(chatId);
+        if (rest) {
+          t.push({ speaker: 'Roberto (Presidente)', text: rest });
+          await saveTranscript(chatId, t);
+        }
+        if (!t.length) {
+          await sendText(chatId, 'La riunione e ancora vuota: scrivi /tavolo seguito dalla situazione.');
+          return res.json({ ok: true });
+        }
+        await tg('sendMessage', { chat_id: chatId, text: 'A chi lo mando?', reply_markup: targetKeyboard() });
+        return res.json({ ok: true });
+      }
       if (cmd === 'giro' || cmd === 'tutti') {
         if (rest) {
           const t = await loadTranscript(chatId);
@@ -280,15 +296,11 @@ module.exports = async (req, res) => {
       return res.json({ ok: true });
     }
 
-    // Messaggio normale: salva nel verbale e chiedi il destinatario
+    // Messaggio normale: risponde direttamente Riccardo, il CEO
     const transcript = await loadTranscript(chatId);
     transcript.push({ speaker: 'Roberto (Presidente)', text });
     await saveTranscript(chatId, transcript);
-    await tg('sendMessage', {
-      chat_id: chatId,
-      text: 'A chi lo mando?',
-      reply_markup: targetKeyboard(),
-    });
+    await speakOne(chatId, 'riccardo', transcript, 1200);
     return res.json({ ok: true });
   } catch (err) {
     // rispondi comunque 200: se Telegram riceve errore, rimanda lo stesso update in loop
