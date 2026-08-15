@@ -16,6 +16,11 @@
       "config": { "includeFiles": ["PIANO-90-GIORNI.md"] }
     },
     {
+      "src": "api/war.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["CM-WAR-STATO.md"] }
+    },
+    {
       "src": "index.html",
       "use": "@vercel/static"
     },
@@ -36,6 +41,10 @@
     {
       "src": "/api/telegram",
       "dest": "/api/telegram.js"
+    },
+    {
+      "src": "/api/war",
+      "dest": "/api/war.js"
     },
     {
       "src": "/boardroom",
