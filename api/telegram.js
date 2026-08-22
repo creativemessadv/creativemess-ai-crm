@@ -11,7 +11,7 @@
 // crea un database Redis su upstash.com e aggiungi su Vercel
 // UPSTASH_REDIS_REST_URL e UPSTASH_REDIS_REST_TOKEN.
 
-const { ADVISORS, ROUND_ORDER, callAdvisor } = require('../lib/advisors');
+const { ADVISORS, ROUND_ORDER, callAdvisor, smartOrder } = require('../lib/advisors');
 
 const MAX_ENTRIES = 40; // interventi tenuti nel verbale inviato al modello
 
@@ -156,7 +156,10 @@ async function runTarget(chatId, target) {
   if (target === 'all') {
     await sendText(chatId, '🏛️ Giro di tavolo: i 5 advisor intervengono uno dopo l\'altro...');
     let ok = 0;
-    for (const id of ROUND_ORDER) {
+    // chi e chiamato per nome nell'ultimo messaggio di Roberto apre il giro
+    const lastUser = transcript.slice().reverse().find((t) => t.speaker && t.speaker.indexOf('Roberto') === 0);
+    const order = smartOrder(lastUser ? lastUser.text : '', ROUND_ORDER);
+    for (const id of order) {
       if (await speakOne(chatId, id, transcript, 2000)) ok++;
     }
     if (ok === ROUND_ORDER.length) {

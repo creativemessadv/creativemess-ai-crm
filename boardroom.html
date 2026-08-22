@@ -106,6 +106,10 @@ button{font-family:inherit;}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 .seat.tgt .seat-av{border-color:var(--sc,var(--blue));}
 .seat.tgt .seat-name{color:var(--sc,var(--blue));}
+.seat-add .seat-av{border:2px dashed rgba(0,0,0,.18);background:transparent;box-shadow:none;color:var(--t3);font-size:22px;font-weight:300;}
+.seat-add .seat-name{color:var(--t3);}
+.seat-add:hover .seat-av{border-color:var(--blue);color:var(--blue);}
+.inv-btn{margin-left:auto;padding:8px 16px;border-radius:100px;border:none;background:var(--blue);color:#fff;font-size:13px;font-weight:500;cursor:pointer;flex-shrink:0;}
 .table-surface{margin:14px auto 0;width:min(78%,560px);height:26px;border-radius:50%;background:linear-gradient(180deg,#e8e8ed,#dcdce1);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.10);}
 .table-label{font-size:9.5px;letter-spacing:.28em;color:#8e8e93;text-transform:uppercase;font-weight:600;white-space:nowrap;overflow:hidden;max-width:88%;text-overflow:ellipsis;}
 
@@ -274,6 +278,16 @@ textarea{flex:1;background:transparent;border:none;color:var(--tx);font-family:i
     </div>
     <div class="status" id="status"></div>
   </div></div>
+</div>
+
+<!-- ═════════ SHEET INVITA ═════════ -->
+<div class="sheet" id="inviteSheet" onclick="if(event.target===this)toggleInvite(false)">
+  <div class="sheet-card">
+    <div class="sheet-title">Invita al tavolo</div>
+    <div class="sheet-sub">Chi entra ora legge tutto il verbale: si porta dietro il discorso già fatto.</div>
+    <div id="invList"></div>
+    <button class="sheet-close" onclick="toggleInvite(false)">Chiudi</button>
+  </div>
 </div>
 
 <!-- ═════════ SHEET INFO ═════════ -->
@@ -473,14 +487,45 @@ function leaveRoom(){
   showView('lobby');
 }
 function renderSeats(){
-  document.getElementById('seats').innerHTML = meeting.participants.map(function(id){
+  var html = meeting.participants.map(function(id){
     var a = advById(id);
     return '<div class="seat" id="seat-' + id + '" style="--sc:' + a.color + '" onclick="seatTap(\'' + id + '\')">' +
       '<div class="seat-av">' + a.icon + '</div>' +
       '<div class="seat-name">' + a.short + '</div>' +
     '</div>';
   }).join('');
+  if (meeting.participants.length < ADVISORS.length) {
+    html += '<div class="seat seat-add" onclick="toggleInvite(true)">' +
+      '<div class="seat-av">+</div><div class="seat-name">Invita</div></div>';
+  }
+  document.getElementById('seats').innerHTML = html;
   markTargetSeats();
+}
+
+/* ══ Invita al tavolo ══ */
+function toggleInvite(open){
+  if (open) renderInviteList();
+  document.getElementById('inviteSheet').classList.toggle('open', open);
+}
+function renderInviteList(){
+  var missing = ADVISORS.filter(function(a){ return meeting.participants.indexOf(a.id) === -1; });
+  document.getElementById('invList').innerHTML = missing.map(function(a){
+    return '<div class="p-row"><div class="p-av">' + a.icon + '</div><div style="flex:1">' +
+      '<div class="p-name" style="color:' + a.color + '">' + a.short + '</div>' +
+      '<div class="p-desc">' + a.role + '</div></div>' +
+      '<button class="inv-btn" onclick="addToMeeting(\'' + a.id + '\')">Aggiungi</button></div>';
+  }).join('') || '<div class="p-desc" style="padding:14px 0;">Sono già tutti al tavolo.</div>';
+}
+function addToMeeting(id){
+  if (meeting.participants.indexOf(id) !== -1) return;
+  meeting.participants.push(id);
+  meeting.updated = Date.now();
+  saveStore();
+  renderSeats();
+  renderToRow();
+  document.getElementById('roomSub').textContent = meeting.participants.length + ' advisor al tavolo';
+  var missing = ADVISORS.filter(function(a){ return meeting.participants.indexOf(a.id) === -1; });
+  if (!missing.length) toggleInvite(false); else renderInviteList();
 }
 function seatTap(id){ setTarget(id); elInput.focus(); }
 function markTargetSeats(){
@@ -649,15 +694,36 @@ function pushUserIfAny(){
   }
   return meeting.transcript.length > 0;
 }
+// Chi e chiamato per nome apre il giro; gli altri seguono e commentano.
+// "Su" e anche una preposizione: per lui servono virgola/due punti dopo il nome o "advisor Su".
+function smartOrder(text, ids){
+  var base = ['marchionne','cook','su','mulally','nadella'].filter(function(id){ return ids.indexOf(id) !== -1; });
+  if (!text) return base;
+  var hits = [];
+  base.forEach(function(id){
+    var short = id.charAt(0).toUpperCase() + id.slice(1);
+    var re = id === 'su'
+      ? /(^|[\s("])Su\s*[,:;]|[Aa]dvisor\s+Su\b/
+      : new RegExp('(^|[\\s(,.;:!?"\'—–-])' + short + '\\b');
+    var m = re.exec(text);
+    if (m) hits.push({ id: id, at: m.index });
+  });
+  if (!hits.length) return base;
+  hits.sort(function(a, b){ return a.at - b.at; });
+  var named = hits.map(function(h){ return h.id; });
+  return named.concat(base.filter(function(id){ return named.indexOf(id) === -1; }));
+}
+
 function onSend(){
   if (busy || !meeting) return;
-  var hadText = !!elInput.value.trim();
+  var msgText = elInput.value.trim();
+  var hadText = !!msgText;
   if (!pushUserIfAny()) { elStatus.textContent = 'Apri tu la riunione: scrivi qualcosa alla sala.'; return; }
   if (!hadText && target !== 'moderatore') { elStatus.textContent = 'Scrivi un messaggio prima di inviare.'; return; }
 
   if (target === 'all') {
     setBusy(true);
-    var order = meeting.participants;
+    var order = smartOrder(msgText, meeting.participants);
     var pause = function(ms){ return new Promise(function(ok){ setTimeout(ok, ms); }); };
     var chain = Promise.resolve();
     var failed = 0;
