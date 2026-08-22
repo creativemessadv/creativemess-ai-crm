@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { advisor, transcript = [] } = req.body || {};
+  const { advisor, transcript = [], memory = '' } = req.body || {};
   const cfg = ADVISORS[advisor];
   if (!cfg) return res.status(400).json({ error: 'Advisor sconosciuto' });
   if (!transcript.length) return res.status(400).json({ error: 'Verbale vuoto' });
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const reply = await callAdvisor(apiKey, advisor, transcript);
+    const reply = await callAdvisor(apiKey, advisor, transcript, 1200, typeof memory === 'string' ? memory : '');
     res.json({ reply, advisor: cfg.name, title: cfg.title });
   } catch (err) {
     res.status(502).json({ error: err.message });

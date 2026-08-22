@@ -294,7 +294,7 @@ textarea{flex:1;background:transparent;border:none;color:var(--tx);font-family:i
 <div class="sheet" id="sheet" onclick="if(event.target===this)toggleSheet(false)">
   <div class="sheet-card">
     <div class="sheet-title">Il tuo advisory board</div>
-    <div class="sheet-sub">Cinque advisor più un Moderatore, a disposizione per i 90 giorni decisivi.</div>
+    <div class="sheet-sub">Cinque advisor più un Moderatore, a disposizione per i 90 giorni decisivi. Sono menti persistenti: ognuno ricorda le riunioni passate a cui ha partecipato, in qualsiasi sala.</div>
     <div class="sheet-note"><b>Nota —</b> gli advisor sono <b>simulazioni AI</b> ispirate ai metodi di gestione pubblicamente noti di manager reali. Non sono le persone reali e non parlano a loro nome. Per debiti, banche e fisco verifica sempre con un professionista abilitato.</div>
     <div id="plist"></div>
     <button class="sheet-close" onclick="toggleSheet(false)">Chiudi</button>
@@ -642,11 +642,44 @@ function apiTranscript(){
     return { speaker: sp, text: t.text };
   });
 }
+// Memoria persistente: ogni advisor ricorda le riunioni passate a cui ha
+// partecipato (il Moderatore le ricorda tutte). Dalla piu recente, entro un
+// budget di caratteri per non appesantire le chiamate.
+function buildMemory(advisorId){
+  if (!meeting) return '';
+  var past = store.meetings.filter(function(m){
+    if (m.id === meeting.id) return false;
+    if (!m.transcript || !m.transcript.length) return false;
+    return advisorId === 'moderatore' || (m.participants || []).indexOf(advisorId) !== -1;
+  }).sort(function(a, b){ return b.updated - a.updated; });
+  var budget = 12000;
+  var out = [];
+  for (var i = 0; i < past.length && budget > 400; i++) {
+    var m = past[i];
+    var head = '── Riunione "' + m.title + '" (' + dateLabel(m.updated) + ') ──';
+    var lines = [];
+    var used = head.length;
+    var cap = Math.min(4000, budget);
+    for (var j = m.transcript.length - 1; j >= 0 && used < cap; j--) {
+      var t = m.transcript[j];
+      var txt = String(t.text || '');
+      if (txt.length > 500) txt = txt.slice(0, 500) + '…';
+      var line = '[' + t.speaker + '] ' + txt;
+      lines.unshift(line);
+      used += line.length + 1;
+    }
+    var block = head + '\n' + lines.join('\n');
+    out.push(block);
+    budget -= block.length;
+  }
+  return out.join('\n\n');
+}
+
 function callAdvisor(id){
   return fetch(API, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ advisor: id, transcript: apiTranscript() })
+    body: JSON.stringify({ advisor: id, transcript: apiTranscript(), memory: buildMemory(id) })
   }).then(function(r){
     return r.text().then(function(raw){
       var data;
