@@ -7,11 +7,18 @@
     },
     {
       "src": "api/boardroom.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["PIANO-90-GIORNI.md"] }
     },
     {
       "src": "api/telegram.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["PIANO-90-GIORNI.md"] }
+    },
+    {
+      "src": "api/war.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["CM-WAR-STATO.md"] }
     },
     {
       "src": "index.html",
@@ -34,6 +41,10 @@
     {
       "src": "/api/telegram",
       "dest": "/api/telegram.js"
+    },
+    {
+      "src": "/api/war",
+      "dest": "/api/war.js"
     },
     {
       "src": "/boardroom",
