@@ -634,7 +634,8 @@ function hideTyping(){ var t = document.getElementById('typing'); if (t) t.remov
 
 /* ══ API ══ */
 function apiTranscript(){
-  return meeting.transcript.map(function(t){
+  // le riunioni lunghe costano: al modello bastano gli ultimi 30 interventi
+  return meeting.transcript.slice(-30).map(function(t){
     var sp = t.speaker;
     if (t.kind === 'user' && t.to && t.to !== 'all') {
       var tm = advById(t.to);
@@ -653,7 +654,7 @@ function buildMemory(advisorId){
     if (!m.transcript || !m.transcript.length) return false;
     return advisorId === 'moderatore' || (m.participants || []).indexOf(advisorId) !== -1;
   }).sort(function(a, b){ return b.updated - a.updated; });
-  var budget = 12000;
+  var budget = 8000;
   var out = [];
   for (var i = 0; i < past.length && budget > 400; i++) {
     var m = past[i];
@@ -751,9 +752,8 @@ function smartOrder(text, ids){
 function onSend(){
   if (busy || !meeting) return;
   var msgText = elInput.value.trim();
-  var hadText = !!msgText;
   if (!pushUserIfAny()) { elStatus.textContent = 'Apri tu la riunione: scrivi qualcosa alla sala.'; return; }
-  if (!hadText && target !== 'moderatore') { elStatus.textContent = 'Scrivi un messaggio prima di inviare.'; return; }
+  // invio senza testo a riunione avviata = "dai la parola" al destinatario selezionato
 
   if (target === 'all') {
     setBusy(true);
