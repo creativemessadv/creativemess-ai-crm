@@ -738,7 +738,7 @@ function smartOrder(text, ids){
   base.forEach(function(id){
     var short = id.charAt(0).toUpperCase() + id.slice(1);
     var re = id === 'su'
-      ? /(^|[\s("])Su\s*[,:;]|[Aa]dvisor\s+Su\b/
+      ? /(^|[\s("])Su\s*[,:;]|[a-zàèéìòù]\s+Su\b|[Aa]dvisor\s+Su\b|(^|[.!?]\s+)Su\s+(esponi|espone|spiega|apri|apre|parla|inizia|comincia|racconta|presenta|prosegui|continua|riparti|riparte)\b/
       : new RegExp('(^|[\\s(,.;:!?"\'—–-])' + short + '\\b');
     var m = re.exec(text);
     if (m) hits.push({ id: id, at: m.index });
