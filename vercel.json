@@ -21,6 +21,14 @@
       "config": { "includeFiles": ["CM-WAR-STATO.md"] }
     },
     {
+      "src": "api/whatsapp.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/agents.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "index.html",
       "use": "@vercel/static"
     },
@@ -47,6 +55,14 @@
       "dest": "/api/war.js"
     },
     {
+      "src": "/api/whatsapp",
+      "dest": "/api/whatsapp.js"
+    },
+    {
+      "src": "/api/agents",
+      "dest": "/api/agents.js"
+    },
+    {
       "src": "/boardroom",
       "dest": "/boardroom.html",
       "headers": { "Cache-Control": "no-store, must-revalidate" }
@@ -56,5 +72,8 @@
       "dest": "/index.html",
       "headers": { "Cache-Control": "no-store, must-revalidate" }
     }
+  ],
+  "crons": [
+    { "path": "/api/agents?run=daily", "schedule": "50 6 * * *" }
   ]
 }

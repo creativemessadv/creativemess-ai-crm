@@ -144,6 +144,32 @@ select.finput{cursor:pointer;}
 .mf{padding:14px 22px;border-top:1px solid var(--bd);display:flex;gap:8px;justify-content:flex-end;}
 .loading{text-align:center;padding:40px;font-family:'DM Mono',monospace;font-size:11px;color:var(--t3);}
 .empty{text-align:center;padding:48px;color:var(--t3);font-size:12px;}
+.lm-tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap;}
+.lm-tab{padding:8px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:var(--s);color:var(--t2);font-family:'DM Sans',sans-serif;}
+.lm-tab:hover{border-color:var(--ac);color:var(--ac);}
+.lm-tab.active{background:var(--ac);color:var(--bg);border-color:var(--ac);}
+.lm-pane{display:none;}.lm-pane.active{display:block;}
+.lm-cfg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.lm-split{display:grid;grid-template-columns:320px 1fr;gap:12px;}
+.lm-list{max-height:calc(100vh - 330px);overflow-y:auto;}
+.lm-item{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;}
+.lm-item:hover,.lm-item.sel{background:rgba(0,212,255,.05);}
+.lm-item-top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:3px;}
+.lm-name{font-size:12px;font-weight:600;color:var(--tx);}
+.lm-last{font-size:10px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lm-chat{display:flex;flex-direction:column;height:calc(100vh - 330px);}
+.lm-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;}
+.lm-m{max-width:78%;padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.5;white-space:pre-wrap;}
+.lm-m.user{align-self:flex-start;background:var(--s2);border:1px solid var(--bd);color:var(--tx);}
+.lm-m.assistant{align-self:flex-end;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:var(--tx);}
+.lm-m.human{align-self:flex-end;background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.25);color:var(--tx);}
+.lm-who{font-size:9px;color:var(--t3);margin-bottom:2px;font-family:'DM Mono',monospace;}
+.lm-profile{padding:10px 14px;border-bottom:1px solid var(--bd);font-size:11px;color:var(--t2);line-height:1.6;}
+.lm-send{display:flex;gap:8px;padding:10px;border-top:1px solid var(--bd);}
+.lm-card{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+.lm-card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;}
+.lm-var{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;line-height:1.6;white-space:pre-wrap;}
+.lm-actions{display:flex;gap:8px;margin-top:10px;}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px;}
 </style>
 </head>
@@ -187,6 +213,7 @@ select.finput{cursor:pointer;}
     <div class="ss">Acquisizione</div>
     <div class="si" onclick="showPage('prospect',this)"><span class="si-icon">🎯</span>Prospect</div>
     <div class="si" onclick="showPage('pipeline',this)"><span class="si-icon">📊</span>Pipeline</div>
+    <div class="si" onclick="showPage('leadmachine',this)"><span class="si-icon">📲</span>Macchina Lead</div>
     <div class="ss">Clienti</div>
     <div class="si" onclick="showPage('clients',this)"><span class="si-icon">🤝</span>Clienti</div>
     <div class="si" onclick="showPage('quotes',this)"><span class="si-icon">📄</span>Preventivi</div>
@@ -442,6 +469,66 @@ select.finput{cursor:pointer;}
   </div>
 </div>
 
+<!-- MACCHINA LEAD (Meta Ads → WhatsApp → CRM) -->
+<div class="page" id="page-leadmachine">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+    <div class="ph" style="margin-bottom:0">📲 Macchina Lead</div>
+    <button class="btn btn-ghost" onclick="lmLoad()">↻ Aggiorna</button>
+  </div>
+  <div style="font-size:12px;color:var(--t2);margin-bottom:12px;">Annunci Meta → WhatsApp → qualificazione → pipeline. Gli agenti che spendono o pubblicano propongono: approvi tu.</div>
+  <div class="lm-cfg" id="lm-cfg"></div>
+  <div class="stats-row">
+    <div class="sc"><div class="sc-label">Conversazioni</div><div class="sc-val" id="lm-s-conv">—</div><div class="sc-sub">WhatsApp</div></div>
+    <div class="sc"><div class="sc-label">Lead Caldi</div><div class="sc-val" id="lm-s-hot" style="color:var(--dg)">—</div><div class="sc-sub">pronti per la call</div></div>
+    <div class="sc"><div class="sc-label">Da Approvare</div><div class="sc-val" id="lm-s-pend" style="color:var(--ac4)">—</div><div class="sc-sub">proposte agenti</div></div>
+    <div class="sc"><div class="sc-label">€ / Lead Qualificato</div><div class="sc-val" id="lm-s-cpq" style="color:var(--ac3)">—</div><div class="sc-sub">ultimi 7 giorni</div></div>
+  </div>
+  <div class="lm-tabs">
+    <div class="lm-tab active" data-lm="conv" onclick="lmTab('conv')">💬 Conversazioni</div>
+    <div class="lm-tab" data-lm="prop" onclick="lmTab('prop')">✅ Proposte</div>
+    <div class="lm-tab" data-lm="report" onclick="lmTab('report')">📊 Analista</div>
+    <div class="lm-tab" data-lm="creative" onclick="lmTab('creative')">🎨 Creativo</div>
+    <div class="lm-tab" data-lm="agents" onclick="lmTab('agents')">🤖 Agenti</div>
+  </div>
+
+  <div class="lm-pane active" id="lm-pane-conv">
+    <div class="lm-split">
+      <div class="panel" style="margin-bottom:0">
+        <div class="ph2"><div class="pt">Chat</div><input class="finput" style="width:140px;padding:5px 10px;font-size:11px;margin-bottom:0" placeholder="🔍 Cerca..." oninput="lmFilter(this.value)"></div>
+        <div class="lm-list" id="lm-list"><div class="loading">Caricamento</div></div>
+      </div>
+      <div class="panel" style="margin-bottom:0"><div class="lm-chat" id="lm-chat"><div class="empty">Seleziona una conversazione</div></div></div>
+    </div>
+  </div>
+
+  <div class="lm-pane" id="lm-pane-prop"><div id="lm-props"><div class="loading">Caricamento</div></div></div>
+
+  <div class="lm-pane" id="lm-pane-report">
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <button class="btn btn-primary" onclick="lmRun('analista')">📊 Esegui Analista</button>
+      <button class="btn btn-ghost" onclick="lmRun('mediabuyer')">📢 Media buyer: proponi azioni</button>
+    </div>
+    <div id="lm-report"><div class="empty">Nessun report ancora. Il cron lo genera ogni mattina, oppure clicca "Esegui Analista".</div></div>
+  </div>
+
+  <div class="lm-pane" id="lm-pane-creative">
+    <div class="gen-form">
+      <div class="form-row">
+        <div><label class="flabel">Offerta da promuovere</label><input class="finput" id="lm-c-offer" placeholder="Es. Sito vetrina in 15 giorni da €1.500"></div>
+        <div><label class="flabel">Target</label><input class="finput" id="lm-c-target" placeholder="Es. ristoranti e bar a Milano"></div>
+      </div>
+      <div class="form-row">
+        <div><label class="flabel">Note</label><input class="finput" id="lm-c-notes" placeholder="Es. puntare sulla velocita, niente prezzo nel titolo"></div>
+        <div><label class="flabel">Varianti</label><select class="finput" id="lm-c-count"><option>3</option><option>2</option><option>4</option><option>5</option></select></div>
+      </div>
+      <button class="btn btn-primary" onclick="lmCreative()">🎨 Genera varianti</button>
+    </div>
+    <div class="gen-out" id="lm-c-out"><div style="color:var(--t3);font-size:12px;">Le varianti finiscono in "Proposte" per l'approvazione.</div></div>
+  </div>
+
+  <div class="lm-pane" id="lm-pane-agents"><div class="team-grid" id="lm-agents"></div></div>
+</div>
+
 <!-- CONFIG -->
 <div class="page" id="page-config">
   <div class="ph">⚙️ Configurazione</div>
@@ -452,6 +539,8 @@ select.finput{cursor:pointer;}
     <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--bd)">Revenue</div>
     <div style="margin-bottom:20px"><label class="flabel">Revenue Attuale € (aggiorna manualmente)</label><input class="finput" id="cfg-rev" type="number" placeholder="0"></div>
     <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--bd)">Accesso</div>
+    <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--bd)">Macchina Lead</div>
+    <div style="margin-bottom:20px"><label class="flabel">Chiave API agenti (CRM_API_KEY su Vercel)</label><input class="finput" id="cfg-crmkey" type="password" placeholder="la stessa impostata su Vercel"></div>
     <div style="margin-bottom:20px"><label class="flabel">Nuova Password CEO</label><input class="finput" id="cfg-pass" type="password" placeholder="••••••••"></div>
     <button class="btn btn-primary" onclick="saveConfig()">Salva Configurazione</button>
   </div></div>
@@ -528,6 +617,8 @@ function saveConfig() {
   if (tok) { AT_TOKEN = tok; localStorage.setItem('at_token', tok); }
   if (base) localStorage.setItem('at_base', base);
   if (pass) localStorage.setItem('ceo_pass', pass);
+  const crmKey = document.getElementById('cfg-crmkey').value;
+  if (crmKey) localStorage.setItem('crm_key', crmKey);
   if (!isNaN(rev)) { localStorage.setItem('cfg_rev', rev); CEX_REVENUE = rev; updateRevBar(rev); }
   showNotif('✅ Configurazione salvata');
 }
@@ -543,8 +634,10 @@ function showPage(id, el) {
   if (id === 'clients') loadClients();
   if (id === 'quotes') loadQuotes();
   if (id === 'revenue') { updateRevBar(CEX_REVENUE); renderMonthlyTargets(); }
+  if (id === 'leadmachine') lmLoad();
   if (id === 'config') {
     document.getElementById('at-token').value = AT_TOKEN;
+    document.getElementById('cfg-crmkey').value = localStorage.getItem('crm_key') || '';
     document.getElementById('cfg-rev').value = CEX_REVENUE;
   }
 }
@@ -885,6 +978,189 @@ function filterTable(id, v) {
   document.querySelectorAll('#' + id + ' tbody tr').forEach(r => {
     r.style.display = r.textContent.toLowerCase().includes(v.toLowerCase()) ? '' : 'none';
   });
+}
+
+// ── MACCHINA LEAD ─────────────────────────────────────────────────────────────
+let LM = { convs: [], proposals: [], report: null, sel: null };
+const LM_STAGE = {caldo:'br', tiepido:'bo', in_qualifica:'bb', nuovo:'bx', freddo:'bx', non_target:'bx'};
+const LM_PSTATUS = {pending:['bo','da approvare'], approved:['bg','approvata'], approved_manual:['bb','approvata — esegui a mano'], executed:['bg','eseguita su Meta'], rejected:['bx','rifiutata'], error:['br','errore']};
+const lmEur = n => n == null ? '—' : '€' + Number(n).toLocaleString('it-IT', {maximumFractionDigits:2});
+const lmPhone = p => String(p || '').replace(/\D/g, '');
+const lmId = p => String(p || '').replace(/[^a-z0-9]/gi, '');
+const lmTime = ts => ts ? new Date(ts).toLocaleString('it-IT', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'}) : '';
+
+async function lmApi(method, query, body) {
+  const key = localStorage.getItem('crm_key') || '';
+  const r = await fetch('/api/agents' + (query || ''), {
+    method,
+    headers: Object.assign({'x-crm-key': key}, body ? {'Content-Type': 'application/json'} : {}),
+    body: body ? JSON.stringify(body) : undefined
+  });
+  let d = {};
+  try { d = await r.json(); } catch {}
+  if (!r.ok) throw new Error(d.error || ('Errore HTTP ' + r.status));
+  return d;
+}
+
+function lmTab(id) {
+  document.querySelectorAll('.lm-tab').forEach(t => t.classList.toggle('active', t.dataset.lm === id));
+  document.querySelectorAll('.lm-pane').forEach(p => p.classList.toggle('active', p.id === 'lm-pane-' + id));
+}
+
+async function lmLoad() {
+  try {
+    const d = await lmApi('GET', '?view=overview');
+    LM.convs = d.convs || []; LM.proposals = d.proposals || []; LM.report = d.report;
+    const c = d.config || {};
+    const flag = (ok, label) => '<span class="badge ' + (ok ? 'bg' : 'br') + '">' + (ok ? '✓ ' : '✗ ') + label + '</span>';
+    document.getElementById('lm-cfg').innerHTML = flag(c.ai,'AI') + flag(c.whatsapp,'WhatsApp') + flag(c.redis,'Memoria permanente') +
+      flag(c.metaAds,'Meta Ads') + '<span class="badge ' + (c.metaWrite ? 'bo' : 'bx') + '">' + (c.metaWrite ? 'Esecuzione su Meta attiva' : 'Solo proposte (esecuzione manuale)') + '</span>' +
+      flag(c.airtable,'Airtable') + flag(c.telegram,'Avvisi Telegram');
+    document.getElementById('lm-agents').innerHTML = (d.agents || []).map(a =>
+      '<div class="agent-card"><div class="ac-top"><span class="ac-icon">' + a.icon + '</span><div class="ac-dot"></div></div><div class="ac-name">' + escHtml(a.name) + '</div><div class="ac-spec">' + escHtml(a.spec) + '</div></div>').join('');
+    lmStats(); lmRenderList(); lmRenderProps(); lmRenderReport();
+    if (LM.sel) lmOpen(LM.sel);
+  } catch (e) {
+    document.getElementById('lm-list').innerHTML = '<div class="empty">' + escHtml(e.message) + '</div>';
+    document.getElementById('lm-props').innerHTML = '';
+    showNotif('⚠️ ' + e.message, false);
+  }
+}
+
+function lmStats() {
+  document.getElementById('lm-s-conv').textContent = LM.convs.length;
+  document.getElementById('lm-s-hot').textContent = LM.convs.filter(c => c.stage === 'caldo').length;
+  document.getElementById('lm-s-pend').textContent = LM.proposals.filter(p => p.status === 'pending').length;
+  document.getElementById('lm-s-cpq').textContent = LM.report ? lmEur(LM.report.totals.costPerQualified) : '—';
+}
+
+function lmRenderList() {
+  const el = document.getElementById('lm-list');
+  if (!LM.convs.length) { el.innerHTML = '<div class="empty">Nessuna conversazione. Arrivano qui dagli annunci Click-to-WhatsApp.</div>'; return; }
+  el.innerHTML = LM.convs.map(c => {
+    const ph = lmPhone(c.phone);
+    return '<div class="lm-item' + (LM.sel === ph ? ' sel' : '') + '" data-phone="' + ph + '" onclick="lmOpen(\'' + ph + '\')">' +
+      '<div class="lm-item-top"><span class="lm-name">' + escHtml(c.name || ('+' + ph)) + '</span><span class="badge ' + (LM_STAGE[c.stage] || 'bx') + '">' + escHtml(c.stage) + ' · ' + (c.score || 0) + '</span></div>' +
+      '<div class="lm-last">' + (c.status === 'human' ? '🙋 ' : c.status === 'stop' ? '⛔ ' : '🤖 ') + escHtml(c.lastText) + '</div>' +
+      '<div class="lm-last">' + escHtml(c.servizio || '') + (c.adHeadline ? ' · 📢 ' + escHtml(c.adHeadline) : '') + ' · ' + lmTime(c.updatedAt) + '</div></div>';
+  }).join('');
+}
+
+function lmFilter(v) {
+  v = v.toLowerCase();
+  document.querySelectorAll('#lm-list .lm-item').forEach(r => { r.style.display = r.textContent.toLowerCase().includes(v) ? '' : 'none'; });
+}
+
+async function lmOpen(phone) {
+  LM.sel = lmPhone(phone);
+  document.querySelectorAll('#lm-list .lm-item').forEach(r => r.classList.toggle('sel', r.dataset.phone === LM.sel));
+  const box = document.getElementById('lm-chat');
+  try {
+    const { conv } = await lmApi('GET', '?view=conv&phone=' + LM.sel);
+    const p = conv.profile || {};
+    const who = {user: conv.name || 'Cliente', assistant: '🤖 Venditore AI', human: '🙋 Roberto'};
+    const fields = [['Azienda', p.azienda], ['Settore', p.settore], ['Città', p.citta], ['Servizio', p.servizio], ['Budget', p.budget], ['Tempi', p.tempi], ['Decisore', p.decisore], ['Call', p.disponibilitaCall], ['Email', p.email]]
+      .filter(f => f[1]).map(f => '<b>' + f[0] + ':</b> ' + escHtml(f[1])).join(' · ');
+    const toggle = conv.status === 'bot'
+      ? '<button class="btn btn-ghost" onclick="lmStatus(\'' + LM.sel + '\',\'human\')">🙋 Prendo io</button>'
+      : '<button class="btn btn-ghost" onclick="lmStatus(\'' + LM.sel + '\',\'bot\')">🤖 Ridai al bot</button>';
+    box.innerHTML =
+      '<div class="ph2"><div class="pt">' + escHtml(conv.name || '') + ' +' + LM.sel + ' <span class="badge ' + (LM_STAGE[conv.stage] || 'bx') + '">' + escHtml(conv.stage) + ' · ' + conv.score + '/100</span></div>' + toggle + '</div>' +
+      '<div class="lm-profile">' + (p.sintesi ? escHtml(p.sintesi) + '<br>' : '') + (fields || 'Scheda ancora vuota') +
+      (conv.referral ? '<br>📢 Annuncio ' + escHtml(conv.referral.adId || '') + (conv.referral.headline ? ' — ' + escHtml(conv.referral.headline) : '') : '') +
+      (conv.lastError ? '<br><span style="color:var(--dg)">⚠️ ' + escHtml(conv.lastError) + '</span>' : '') + '</div>' +
+      '<div class="lm-msgs" id="lm-msgs">' + conv.messages.map(m =>
+        '<div class="lm-m ' + m.role + '"><div class="lm-who">' + escHtml(who[m.role] || m.role) + ' · ' + lmTime(m.ts) + '</div>' + escHtml(m.text) + '</div>').join('') + '</div>' +
+      '<div class="lm-send"><input class="finput" id="lm-text" style="margin-bottom:0" placeholder="Scrivi come Roberto (il bot si ferma su questa chat)..." onkeydown="if(event.key===\'Enter\')lmSend()"><button class="btn btn-primary" onclick="lmSend()">Invia</button></div>';
+    const msgs = document.getElementById('lm-msgs'); msgs.scrollTop = msgs.scrollHeight;
+  } catch (e) { box.innerHTML = '<div class="empty">' + escHtml(e.message) + '</div>'; }
+}
+
+async function lmSend() {
+  const input = document.getElementById('lm-text');
+  const text = input.value.trim();
+  if (!text || !LM.sel) return;
+  input.disabled = true;
+  try { await lmApi('POST', '', {action:'send', phone: LM.sel, text}); input.value = ''; await lmOpen(LM.sel); }
+  catch (e) { showNotif('⚠️ ' + e.message, false); }
+  input.disabled = false;
+}
+
+async function lmStatus(phone, status) {
+  try { await lmApi('POST', '', {action:'status', phone, status}); showNotif(status === 'bot' ? '🤖 Chat ridata al bot' : '🙋 Chat in mano tua: il bot tace'); await lmLoad(); }
+  catch (e) { showNotif('⚠️ ' + e.message, false); }
+}
+
+function lmRenderProps() {
+  const el = document.getElementById('lm-props');
+  if (!LM.proposals.length) { el.innerHTML = '<div class="empty">Nessuna proposta. Media buyer e Creativo le mettono qui per la tua approvazione.</div>'; return; }
+  el.innerHTML = LM.proposals.map(p => {
+    const st = LM_PSTATUS[p.status] || ['bx', p.status];
+    let title, bodyHtml = '';
+    if (p.type === 'creative') {
+      title = '🎨 Creativo — ' + escHtml(p.offer) + (p.target ? ' · ' + escHtml(p.target) : '');
+      bodyHtml = (p.variants || []).map((v, i) => '<div class="lm-var"><b>Variante ' + (i + 1) + ' — ' + escHtml(v.angle) + '</b>\n' +
+        '<b>Testo:</b> ' + escHtml(v.primaryText) + '\n<b>Titolo:</b> ' + escHtml(v.headline) + (v.description ? '\n<b>Descrizione:</b> ' + escHtml(v.description) : '') +
+        '\n<b>Messaggio WhatsApp precompilato:</b> ' + escHtml(v.prefilledMessage) + '\n<b>Immagine:</b> ' + escHtml(v.imageConcept) + '</div>').join('');
+    } else if (p.action === 'budget') {
+      title = '📢 Budget adset ' + escHtml(p.objectName || p.objectId) + ': ' + lmEur(p.fromBudget) + ' → ' + lmEur(p.toBudget) + '/giorno';
+    } else {
+      title = '📢 Pausa annuncio ' + escHtml(p.objectName || p.objectId);
+    }
+    const id = lmId(p.id);
+    return '<div class="lm-card"><div class="lm-card-top"><div class="pt">' + title + '</div><span class="badge ' + st[0] + '">' + st[1] + '</span></div>' +
+      (p.reason ? '<div style="font-size:12px;color:var(--t2)">' + escHtml(p.reason) + '</div>' : '') + bodyHtml +
+      (p.error ? '<div class="gen-error">' + escHtml(p.error) + '</div>' : '') +
+      '<div class="ct">' + lmTime(p.createdAt) + (p.objectId ? ' · ID ' + escHtml(p.objectId) : '') + '</div>' +
+      (p.status === 'pending' ? '<div class="lm-actions"><button class="btn btn-primary" onclick="lmDecide(\'' + id + '\',\'approve\')">✓ Approva</button><button class="btn btn-ghost" onclick="lmDecide(\'' + id + '\',\'reject\')">✕ Rifiuta</button></div>' : '') +
+      '</div>';
+  }).join('');
+}
+
+async function lmDecide(id, decision) {
+  try {
+    const { proposal } = await lmApi('POST', '', {action:'decide', id, decision});
+    const st = LM_PSTATUS[proposal.status] || ['', proposal.status];
+    showNotif((proposal.status === 'error' ? '⚠️ ' : '✅ ') + 'Proposta ' + st[1], proposal.status !== 'error');
+    await lmLoad();
+  } catch (e) { showNotif('⚠️ ' + e.message, false); }
+}
+
+function lmRenderReport() {
+  const el = document.getElementById('lm-report');
+  const r = LM.report;
+  if (!r) return;
+  const t = r.totals || {};
+  el.innerHTML =
+    '<div class="panel"><div class="ph2"><div class="pt">Ultimi 7 giorni · fonte ' + escHtml(r.source) + ' · ' + lmTime(r.ts) + '</div></div>' +
+    '<div style="padding:14px 16px;font-size:12px;color:var(--t2)">Spesa <b>' + lmEur(t.spend) + '</b> · Lead <b>' + t.leads + '</b> · Qualificati <b>' + t.qualified + '</b> · Caldi <b>' + t.hot + '</b> · €/lead <b>' + lmEur(t.cpl) + '</b> · €/qualificato <b>' + lmEur(t.costPerQualified) + '</b>' +
+    (r.metaError ? '<div class="gen-error" style="margin-top:6px">Meta: ' + escHtml(r.metaError) + '</div>' : '') + '</div>' +
+    '<table><thead><tr><th>Annuncio</th><th>Spesa</th><th>CTR</th><th>Freq.</th><th>Conv. Meta</th><th>Lead</th><th>Qualif.</th><th>Caldi</th><th>€/lead</th><th>€/qualif.</th></tr></thead><tbody>' +
+    (r.rows || []).map(x => '<tr><td class="pr">' + escHtml(x.adName || x.adId) + '<div class="kmeta">' + escHtml(x.adsetName || '') + '</div></td><td>' + lmEur(x.spend) + '</td><td>' + (x.ctr != null ? x.ctr + '%' : '—') + '</td><td>' + (x.frequency != null ? x.frequency : '—') + '</td><td>' + (x.metaConversations != null ? x.metaConversations : '—') + '</td><td>' + x.leads + '</td><td>' + x.qualified + '</td><td>' + x.hot + '</td><td>' + lmEur(x.cpl) + '</td><td style="color:var(--ac3)">' + lmEur(x.costPerQualified) + '</td></tr>').join('') +
+    '</tbody></table></div>' +
+    '<div class="panel"><div class="ph2"><div class="pt">📊 Analisi</div></div><div class="gen-result" style="padding:14px 16px">' + escHtml(r.analysis || '') + '</div></div>';
+}
+
+async function lmRun(action) {
+  showNotif(action === 'analista' ? '📊 L\'Analista sta lavorando...' : '📢 Il Media buyer sta valutando...');
+  try {
+    const d = await lmApi('POST', '', {action});
+    if (action === 'mediabuyer') showNotif('📢 ' + (d.proposals || []).length + ' proposte' + (d.note ? ' — ' + d.note : ''));
+    await lmLoad();
+    if (action === 'mediabuyer' && (d.proposals || []).length) lmTab('prop');
+  } catch (e) { showNotif('⚠️ ' + e.message, false); }
+}
+
+async function lmCreative() {
+  const offer = document.getElementById('lm-c-offer').value.trim();
+  if (!offer) { showNotif('⚠️ Scrivi l\'offerta da promuovere', false); return; }
+  const out = document.getElementById('lm-c-out');
+  out.innerHTML = '<div class="gen-loading">🎨 Il Creativo sta scrivendo...</div>';
+  try {
+    await lmApi('POST', '', {action:'creativo', offer, target: document.getElementById('lm-c-target').value, notes: document.getElementById('lm-c-notes').value, count: parseInt(document.getElementById('lm-c-count').value, 10)});
+    out.innerHTML = '<div style="color:var(--ac3);font-size:12px;">✅ Varianti pronte: le trovi in "Proposte".</div>';
+    await lmLoad(); lmTab('prop');
+  } catch (e) { out.innerHTML = '<div class="gen-error">' + escHtml(e.message) + '</div>'; }
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
